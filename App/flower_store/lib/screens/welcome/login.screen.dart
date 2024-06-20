@@ -1,3 +1,4 @@
+import 'package:flower_store/constants/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,15 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFFFFEED0),
-              Color(0xFFFFC2A2),
-              Color(0xFFFC967F),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-        )),
+          gradient: gradientBackground
+        ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -44,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(
@@ -60,8 +55,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         FormBuilderValidators.email(),
                       ]),
                       decoration: InputDecoration(
-                          label: Title(
-                              color: Colors.grey, child: const Text('Email'))),
+                        label: Title(
+                        color: Colors.grey, child: const Text('Email')),
+                        border: const OutlineInputBorder()
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
