@@ -21,79 +21,114 @@ class _RegisterScreenState extends State<RegisterScreen> {
         decoration: const BoxDecoration(
           gradient: gradientBackground
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 100),
-            ),
-            const SizedBox(
-              width: double.infinity,
-              child: Text(
-                'Đăng Ký',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 100),
+                  ),
+                  const SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  FormBuilder(
+                    key: _registerForm,
+                    child: Column(
+                      children: getRegisterForm()
+                    )
+                  ),
+                ],
               ),
             ),
-            const SizedBox(
-              height: 40,
-            ),
-            FormBuilder(
-                key: _registerForm,
-                child: Column(
-                  children: getRegisterForm()
-                )),
-          ],
+          ),
         ),
-        )
       ),
     );
   }
 
   List<Widget> getRegisterForm() {
     return [
-      FormBuilderTextField(
-        name: 'email',
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
-        ]),
-        decoration: genericInputDecoration(label: 'Your Name')
+      genericFieldContainer(
+        field: FormBuilderTextField(
+          name: 'name',
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(),
+          ]),
+          decoration: genericInputDecoration(label: 'Your Name', prefixIcon: Icons.person_2_outlined)
+        ),
+      ),
+      genericFieldContainer(
+        field: FormBuilderTextField(
+          name: 'email',
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(),
+            FormBuilderValidators.email(),
+          ]),
+          decoration: genericInputDecoration(label: 'Email', prefixIcon: Icons.email_outlined)
+        )
+      ),
+      genericFieldContainer(
+        field: FormBuilderTextField(
+          name: 'phone',
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(),
+            FormBuilderValidators.maxLength(12),
+            FormBuilderValidators.minLength(10),
+            FormBuilderValidators.numeric()
+          ]),
+          decoration: genericInputDecoration(label: 'Phone Number', prefixIcon: Icons.phone_android_outlined)
+        )
+      ),
+      genericFieldContainer(
+        field: FormBuilderTextField(
+          name: 'password',
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(),
+            FormBuilderValidators.minLength(6)
+          ]),
+          obscureText: true,
+          enableSuggestions: false,
+          autocorrect: false,
+          decoration: genericInputDecoration(label: 'Password', prefixIcon: Icons.password_outlined),
+        ),
       ),
       const SizedBox(height: 20),
-      FormBuilderTextField(
-        name: 'email',
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
-          FormBuilderValidators.email(),
-        ]),
-        decoration: genericInputDecoration(label: 'Email')
-      ),
-      const SizedBox(height: 20),
-      FormBuilderTextField(
-        name: 'password',
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
-        ]),
-        decoration: genericInputDecoration(label: 'Password')
-      ),
       MaterialButton(
-        color: Theme.of(context).colorScheme.secondary,
+        color: const Color(0xFFFFEED0),
+        minWidth: double.infinity,
+        padding: const EdgeInsets.all(15),
+        shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(color: Colors.transparent)
+        ),
+        elevation: 10,
+        focusElevation: 5,
         onPressed: () {
           // Validate and save the form values
           _registerForm.currentState?.saveAndValidate();
           debugPrint(_registerForm.currentState?.value.toString());
-
-          // On another side, can access all field values without saving form with instantValues
-          _registerForm.currentState?.validate();
-          debugPrint(_registerForm.currentState?.instantValue.toString());
         },
-        child: const Text('Login'),
-      )
+        child: const Text(
+          'Sign Up',
+          style: TextStyle(
+            fontSize: 25,
+          ),
+        ),
+      ),
     ];
   }
 }
