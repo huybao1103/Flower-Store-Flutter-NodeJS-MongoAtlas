@@ -7,7 +7,8 @@ const Color tdGrey = Color(0xFF717171);
 
 const Color tdBGColor = Color(0xFFEEEFF5);
 
-
+const Color iconColor = Color(0xFFF56789);
+const Color headerBrandNameColor = Color(0xFF967BB6);
 const LinearGradient gradientBackground = LinearGradient(
   colors: [
     Color(0xFFF0F0F0),
@@ -18,4 +19,10 @@ const LinearGradient gradientBackground = LinearGradient(
   ],
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
+);
+
+const LinearGradient commonBackground = LinearGradient(
+  colors: [
+    Color(0xFFF0F0F0),
+  ],
 );
