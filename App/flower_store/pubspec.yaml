@@ -36,6 +36,8 @@ dependencies:
   form_builder_validators: ^10.0.1
   control_style: ^0.1.0
   flutter_svg: ^2.0.10+1
+  intl: ^0.19.0
+  date_picker_plus: ^3.0.2
 
 dev_dependencies:
   flutter_test:
@@ -54,3 +56,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo_shop.png
+    - assets/fonts/Inter-Medium.ttf
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter-Medium.ttf
+          
+
+ 
