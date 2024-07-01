@@ -67,7 +67,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SvgPicture.asset(
-                      'assets/vectors/setting_icon.svg',
+                      'assets/vectors/setting.svg',
                       //color: Colors.white,
                       height: 40,
                       width: 40,
