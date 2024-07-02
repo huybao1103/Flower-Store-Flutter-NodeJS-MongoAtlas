@@ -1,3 +1,4 @@
+import 'package:flower_store/screens/cart/paymentmethod.screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -191,7 +192,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
             SizedBox(height: 16),
             Center(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PaymentMethodPage(),
+                                  ),
+                                );
+                              },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,
                   padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
