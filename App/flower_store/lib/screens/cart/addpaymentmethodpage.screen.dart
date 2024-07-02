@@ -1,3 +1,4 @@
+import 'package:flower_store/screens/cart/paymentmethod.screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -33,10 +34,17 @@ class _AddPaymentMethodPageState extends State<AddPaymentMethodPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Payment Method'),
+        title: const Text('Payment Method'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const PaymentMethodPage(),
+                                  ),
+                                );
+                              },
         ),
       ),
       body: SingleChildScrollView(
@@ -44,14 +52,14 @@ class _AddPaymentMethodPageState extends State<AddPaymentMethodPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Credit Card',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
@@ -78,7 +86,7 @@ class _AddPaymentMethodPageState extends State<AddPaymentMethodPage> {
                       children: [
                         Text(
                           paymentCards[0]['type'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -86,31 +94,31 @@ class _AddPaymentMethodPageState extends State<AddPaymentMethodPage> {
                         ),
                         Text(
                           paymentCards[0]['number'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Colors.white,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       paymentCards[0]['holderName'],
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
                       ),
                     ),
                     Text(
                       'Expired: ${paymentCards[0]['expiryDate']}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
                       ),
                     ),
                     Text(
                       'CVV: ${paymentCards[0]['cvv']}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
                       ),
@@ -119,7 +127,7 @@ class _AddPaymentMethodPageState extends State<AddPaymentMethodPage> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: _cardNumberController,
               decoration: InputDecoration(
@@ -127,11 +135,11 @@ class _AddPaymentMethodPageState extends State<AddPaymentMethodPage> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                prefixIcon: Icon(Icons.credit_card),
+                prefixIcon: const Icon(Icons.credit_card),
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               children: [
                 Expanded(
@@ -142,12 +150,12 @@ class _AddPaymentMethodPageState extends State<AddPaymentMethodPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      prefixIcon: Icon(Icons.calendar_today),
+                      prefixIcon: const Icon(Icons.calendar_today),
                     ),
                     keyboardType: TextInputType.datetime,
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: TextField(
                     controller: _cvvController,
@@ -156,7 +164,7 @@ class _AddPaymentMethodPageState extends State<AddPaymentMethodPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: const Icon(Icons.lock),
                     ),
                     keyboardType: TextInputType.number,
                     obscureText: true,
@@ -164,7 +172,7 @@ class _AddPaymentMethodPageState extends State<AddPaymentMethodPage> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: _cardHolderNameController,
               decoration: InputDecoration(
@@ -174,15 +182,22 @@ class _AddPaymentMethodPageState extends State<AddPaymentMethodPage> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Center(
               child: ElevatedButton(
-                onPressed: _addNewPaymentMethod,
+                onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PaymentMethodPage(),
+                                  ),
+                                );
+                              },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,
-                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 ),
-                child: Text(
+                child: const Text(
                   'Add New Payment',
                   style: TextStyle(color: Colors.white),
                 ),

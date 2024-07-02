@@ -1,3 +1,4 @@
+import 'package:flower_store/screens/cart/addpaymentmethodpage.screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -48,7 +49,14 @@ class _OrderSuccessfulPageState extends State<OrderSuccessfulPage> {
             ),
             SizedBox(height: 32),
             ElevatedButton(
-              onPressed: _continueShopping,
+              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddPaymentMethodPage(),
+                                  ),
+                                );
+                              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.purple,
                 padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),

@@ -38,7 +38,14 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
         title: Text('Checkout'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const CheckoutPage(),
+                                  ),
+                                );
+                              },
         ),
       ),
       body: SingleChildScrollView(
