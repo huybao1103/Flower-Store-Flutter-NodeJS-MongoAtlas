@@ -1,3 +1,6 @@
+import 'package:flower_store/screens/cart/addpaymentmethodpage.screen.dart';
+import 'package:flower_store/screens/cart/checkout.screen.dart';
+import 'package:flower_store/screens/cart/ordersuccessful.screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -108,7 +111,14 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                               ),
                             ),
                             TextButton(
-                              onPressed: _editCard,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddPaymentMethodPage(),
+                                  ),
+                                );
+                              },
                               child: Text(
                                 'Edit',
                                 style: TextStyle(color: Colors.white),
@@ -141,7 +151,14 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
             SizedBox(height: 16),
             Center(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => OrderSuccessfulPage(),
+                                  ),
+                                );
+                              },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xff967BB6),
                   padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
