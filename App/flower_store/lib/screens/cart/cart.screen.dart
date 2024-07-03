@@ -115,8 +115,7 @@ class _CartPageState extends State<CartPage> {
                                   items[index]['image'],
                                   width: 150,
                                   height: 150,
-                                  fit: BoxFit
-                                      .cover, // Điều chỉnh hình ảnh sao cho phù hợp với kích thước
+                                  fit: BoxFit.cover, // Điều chỉnh hình ảnh sao cho phù hợp với kích thước
                                 ),
                               ),
                             ),
@@ -131,7 +130,7 @@ class _CartPageState extends State<CartPage> {
                                   ),
                                   const SizedBox(height: 8.0),
                                   Text(
-                                    '\$${items[index]['price']}',
+                                    '\$${items[index]['price'] * items[index]['quantity']}',
                                     style: const TextStyle(fontSize: 16.0),
                                   ),
                                   const SizedBox(height: 8.0),
