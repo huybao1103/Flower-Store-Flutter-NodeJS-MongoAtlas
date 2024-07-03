@@ -1,4 +1,5 @@
 import 'package:flower_store/constants/colors.dart';
+import 'package:flower_store/screens/store_product_page/all_product.screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -89,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
         field: FormBuilderTextField(
           name: 'email',
           validator: FormBuilderValidators.compose([
-            FormBuilderValidators.required(),
+            // FormBuilderValidators.required(),
             FormBuilderValidators.email(),
           ]),
           decoration: genericInputDecoration(label: 'Email')
@@ -99,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
         field: FormBuilderTextField(
           name: 'password',
           validator: FormBuilderValidators.compose([
-            FormBuilderValidators.required(),
+            // FormBuilderValidators.required(),
           ]),
           obscureText: true,
           enableSuggestions: false,
@@ -137,6 +138,10 @@ class _LoginScreenState extends State<LoginScreen> {
           // Validate and save the form values
           _loginForm.currentState?.saveAndValidate();
           debugPrint(_loginForm.currentState?.value.toString());
+
+          Navigator
+          .of(context)
+          .push(MaterialPageRoute(builder: (context) => const AllProductScreen()));
         },
         child: const Text(
           'Login',
