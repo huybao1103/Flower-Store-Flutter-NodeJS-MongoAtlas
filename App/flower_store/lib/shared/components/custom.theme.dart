@@ -10,6 +10,6 @@ final ThemeData customDarkTheme = ThemeData.dark().copyWith(
 final ThemeData customLightTheme = ThemeData.light().copyWith(
   brightness: Brightness.light,
   cardColor: const Color(0xffFFFFFF),
-  scaffoldBackgroundColor: const Color(0xffF4F4F4),
+  scaffoldBackgroundColor: const Color(0xffEAEAEA),
   appBarTheme: const AppBarTheme(color: Color(0xffFF85A1)),
 );
