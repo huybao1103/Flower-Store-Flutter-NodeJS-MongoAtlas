@@ -25,8 +25,8 @@ class _OrderSuccessfulPageState extends State<OrderSuccessfulPage> {
           children: [
             Expanded(
               child: Center(
-                child: Image.network(
-                  'https://cdn.discordapp.com/attachments/1190508294448631948/1257714297447124992/image.png?ex=66856937&is=668417b7&hm=954ecc32ffed9ac9b6edb80137db0e4ac10f3709f6bd9df6e157d53be1cc7c2d&', // Replace with your image URL
+                child: Image.asset(
+                  'assets/images/order_successful.png', // Replace with your image URL
                   height: 400,
                 ),
               ),
