@@ -65,9 +65,9 @@ ListTile commonListItem({
 }
 
 class CustomDrawer extends StatefulWidget {
-  double width;
-  MenuItem menuItem;
-  CustomDrawer({ super.key, required this.width, required this.menuItem });
+  final double width;
+  final MenuItem menuItem;
+  const CustomDrawer({ super.key, required this.width, required this.menuItem });
 
   @override
   State<CustomDrawer> createState() => _CustomDrawerState();

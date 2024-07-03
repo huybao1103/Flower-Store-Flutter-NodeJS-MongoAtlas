@@ -1,10 +1,7 @@
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/screens/store_product_page/all_product.screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 import '../../shared/components/input_decoration.dart';
