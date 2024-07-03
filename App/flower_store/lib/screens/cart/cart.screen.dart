@@ -12,29 +12,25 @@ class _CartPageState extends State<CartPage> {
       'name': 'Item Name',
       'price': 50,
       'quantity': 1,
-      'image':
-          'https://cdn.discordapp.com/attachments/1190508294448631948/1257260958007558164/image.png?ex=6683c303&is=66827183&hm=fcccc43843a58fce39fd57573fda3a78d27252e33f23c2a49ebdad0764490146&'
+      'image': 'assets/images/cart_item.jpg'
     },
     {
       'name': 'Item Name',
       'price': 50,
       'quantity': 1,
-      'image':
-          'https://cdn.discordapp.com/attachments/1190508294448631948/1257260958007558164/image.png?ex=6683c303&is=66827183&hm=fcccc43843a58fce39fd57573fda3a78d27252e33f23c2a49ebdad0764490146&'
+      'image': 'assets/images/cart_item.jpg'
     },
     {
       'name': 'Item Name',
       'price': 50,
       'quantity': 1,
-      'image':
-          'https://cdn.discordapp.com/attachments/1190508294448631948/1257260958007558164/image.png?ex=6683c303&is=66827183&hm=fcccc43843a58fce39fd57573fda3a78d27252e33f23c2a49ebdad0764490146&'
+      'image': 'assets/images/cart_item.jpg'
     },
     {
       'name': 'adasdasdas',
       'price': 50,
       'quantity': 1,
-      'image':
-          'https://cdn.discordapp.com/attachments/1190508294448631948/1257260958007558164/image.png?ex=6683c303&is=66827183&hm=fcccc43843a58fce39fd57573fda3a78d27252e33f23c2a49ebdad0764490146&'
+      'image': 'assets/images/cart_item.jpg'
     },
   ];
 
@@ -115,7 +111,7 @@ class _CartPageState extends State<CartPage> {
                                   topLeft: Radius.circular(10),
                                   bottomLeft: Radius.circular(10),
                                 ),
-                                child: Image.network(
+                                child: Image.asset(
                                   items[index]['image'],
                                   width: 150,
                                   height: 150,
