@@ -111,7 +111,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
           ),
           child: Column(
             children: [
-              mainPageHeader(_scaffoldKey),
+              mainPageHeader(_scaffoldKey, context),
               Padding(
                 padding: const EdgeInsets.only(bottom: 15.0),
                 child: genericFieldContainer(
