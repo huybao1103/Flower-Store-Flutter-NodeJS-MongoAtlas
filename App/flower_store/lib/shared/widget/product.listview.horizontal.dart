@@ -7,7 +7,8 @@ class ProductListview extends StatelessWidget {
   final List<Product> products;
   final String title;
   Widget? navigator;
-  ProductListview({super.key, required this.products, required this.title, this.navigator}) ;
+  late bool? seeAll = true;
+  ProductListview({super.key, required this.products, required this.title, this.navigator, this.seeAll});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class ProductListview extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              TextButton(
+              seeAll != null && seeAll == true ? TextButton(
                 onPressed: () {
                   if(navigator != null) {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => navigator!));
@@ -36,7 +37,8 @@ class ProductListview extends StatelessWidget {
                   'See all',
                   style: TextStyle(color: Colors.black),
                 ),
-              ),
+              )
+              : const SizedBox.shrink(),
             ],
           ),
         ),
@@ -44,12 +46,12 @@ class ProductListview extends StatelessWidget {
           height: 250,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             itemCount: products.length,
             itemBuilder: (context, index) {
               return Container(
                 width: 180, 
-                margin: EdgeInsets.symmetric(horizontal: 4.0),
+                margin: const EdgeInsets.symmetric(horizontal: 4.0),
                 child: ProductCard(product: products[index]),
               );
             },
