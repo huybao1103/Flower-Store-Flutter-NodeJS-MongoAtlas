@@ -1,7 +1,8 @@
+import 'package:flower_store/assets/custom_icon.dart';
 import 'package:flower_store/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-Row mainPageHeader() {
+Row mainPageHeader(GlobalKey<ScaffoldState> scaffoldKey) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -10,7 +11,7 @@ Row mainPageHeader() {
           RotatedBox(
             quarterTurns: 1,
             child: IconButton(
-              onPressed: () {}, 
+              onPressed: () { scaffoldKey.currentState?.openDrawer(); }, 
               icon: const Icon(
                 Icons.bar_chart_rounded,
                 color: iconColor,
@@ -29,17 +30,17 @@ Row mainPageHeader() {
           IconButton(
             onPressed: () {}, 
             icon: const Icon(
-              Icons.notifications,
+              CustomIcon.custom_notification,
               color: iconColor,
-              size: 30,
+              size: 24,
             )
           ),
           IconButton(
             onPressed: () {}, 
             icon: const Icon(
-              Icons.person,
+              CustomIcon.custom_user,
               color: iconColor,
-              size: 30,
+              size: 24,
             )
           ),
         ],

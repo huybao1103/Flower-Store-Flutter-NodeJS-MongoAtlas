@@ -1,36 +1,20 @@
-import 'package:flower_store/screens/main/profile.screen.dart';
-import 'package:flower_store/shared/components/custom_Theme.dart';
+import 'package:flower_store/screens/welcome/login.screen.dart';
+import 'package:flower_store/screens/welcome/register.screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool isDarkMode = false;
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: customLightTheme,
-      darkTheme: customDarkTheme,
-      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home: ProfileScreen(
-        isDarkMode: isDarkMode,
-        onThemeChanged: (bool value) {
-          setState(() {
-            isDarkMode = value;
-          });
-        },
-      ),
+      home: LoginScreen(),
     );
   }
 }
