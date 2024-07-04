@@ -1,9 +1,5 @@
-import 'package:flower_store/screens/setting/setting.screen.dart'; //hide customLightTheme, customDarkTheme;
-import 'package:flower_store/screens/favorite.screen.dart';
-import 'package:flower_store/screens/store.main.screen.dart';
+//hide customLightTheme, customDarkTheme;
 import 'package:flower_store/screens/welcome/login.screen.dart';
-import 'package:flower_store/screens/welcome/register.screen.dart';
-import 'package:flower_store/shared/components/custom_theme.dart';
 import 'package:flutter/material.dart';
 import '../../shared/components/custom.theme.dart';
 
