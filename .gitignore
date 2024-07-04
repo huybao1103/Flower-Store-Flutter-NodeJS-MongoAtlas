@@ -1,3 +1,7 @@
 
 /Api/node_modules
 Api/package-lock.json
+App/flower_store/pubspec.lock
+App/flower_store/windows
+App/flower_store/linux
+App/flower_store/macos

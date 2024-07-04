@@ -1,4 +1,9 @@
 import 'package:flower_store/screens/setting/setting.screen.dart'; //hide customLightTheme, customDarkTheme;
+import 'package:flower_store/screens/favorite.screen.dart';
+import 'package:flower_store/screens/store.main.screen.dart';
+import 'package:flower_store/screens/welcome/login.screen.dart';
+import 'package:flower_store/screens/welcome/register.screen.dart';
+import 'package:flower_store/shared/components/custom_theme.dart';
 import 'package:flutter/material.dart';
 import '../../shared/components/custom.theme.dart';
 
@@ -10,12 +15,12 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   bool isDarkMode = false;
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,14 +28,7 @@ class _MyAppState extends State<MyApp> {
       theme: customLightTheme,
       darkTheme: customDarkTheme,
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home: SettingScreen(
-        isDarkMode: isDarkMode,
-        onThemeChanged: (bool value) {
-          setState(() {
-            isDarkMode = value;
-          });
-        },
-      ),
+      home: const LoginScreen()
     );
   }
 }
