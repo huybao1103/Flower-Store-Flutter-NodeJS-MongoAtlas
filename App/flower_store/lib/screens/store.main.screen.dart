@@ -4,6 +4,7 @@ import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/menu.model.dart';
 import 'package:flower_store/models/product.dart';
 import 'package:flower_store/screens/favorite.screen.dart';
+import 'package:flower_store/screens/main/profile.screen.dart';
 import 'package:flower_store/shared/components/custom_drawer.dart';
 import 'package:flower_store/shared/components/main_page_header.dart';
 import 'package:flower_store/shared/widget/carousel.dart';
@@ -139,6 +140,7 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
           commonListItem(
             text: " Account",
             prefixIcon: Icons.person,
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfileScreen())),
           ),
           commonListItem(
             text: " Purchase History",

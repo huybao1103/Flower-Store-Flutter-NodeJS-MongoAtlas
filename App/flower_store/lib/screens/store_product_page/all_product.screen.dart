@@ -1,6 +1,7 @@
 
 import 'package:flower_store/models/menu.model.dart';
 import 'package:flower_store/models/product.dart';
+import 'package:flower_store/screens/main/profile.screen.dart';
 import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flower_store/shared/components/custom_drawer.dart';
 import 'package:flower_store/shared/components/input_decoration.dart';
@@ -155,6 +156,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
           commonListItem(
             text: " Account", 
             prefixIcon: Icons.person,
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfileScreen())),
           ),
           commonListItem(
             text: " Purchase History", 
