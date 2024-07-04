@@ -1,5 +1,6 @@
 // lib/widgets/product_card.dart
 import 'package:flower_store/models/product.dart';
+import 'package:flower_store/screens/store_product_page/product_display.screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -48,7 +49,7 @@ class ProductCard extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: GestureDetector(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => navigator!));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDisplayScreen(product: product,)));
                 },
                 child: Text(
                   product.name,
