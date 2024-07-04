@@ -71,7 +71,7 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
       name: 'Herves Love',
       price: 56,
       imageUrl:
-'https://product.hstatic.net/200000846175/product/_052e215d0bf4937c855e88d6d4b3e092-min_4ee2c7cf7ae24d67b1b46156d8b96f8c_bd89a4bf469c4db7833f9c3a51f8252e_1024x1024.jpg',
+          'https://product.hstatic.net/200000846175/product/_052e215d0bf4937c855e88d6d4b3e092-min_4ee2c7cf7ae24d67b1b46156d8b96f8c_bd89a4bf469c4db7833f9c3a51f8252e_1024x1024.jpg',
       isFavorite: false,
     ),
     Product(
@@ -93,7 +93,7 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
         ),
         child: Column(
           children: [
-            mainPageHeader(_scaffoldKey), // Header cố định
+            mainPageHeader(_scaffoldKey, context),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(

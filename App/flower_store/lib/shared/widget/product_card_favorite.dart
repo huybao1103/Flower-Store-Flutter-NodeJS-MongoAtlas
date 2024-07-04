@@ -52,6 +52,8 @@ class ProductCard extends StatelessWidget {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDisplayScreen(product: product,)));
                 },
                 child: Text(
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   product.name,
                   style: TextStyle(
                     fontSize: 16.0,
