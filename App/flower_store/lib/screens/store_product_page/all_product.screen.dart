@@ -107,7 +107,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
           color: Color(0xFFF0F0F0)
         ),
         child: Padding(padding: const EdgeInsets.only(
-            left: 16, right: 16, top: 24
+            left: 16, right: 16
           ),
           child: Column(
             children: [
