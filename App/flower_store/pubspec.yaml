@@ -57,6 +57,10 @@ flutter:
     fonts:
     - asset: assets/fonts/Roboto-Medium.ttf
 
+  - family: Inter
+    fonts:
+      - asset: assets/fonts/Inter-Medium.ttf
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -66,8 +70,3 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/Inter-Medium.ttf
-
-  fonts:
-    - family: Inter
-      fonts:
-        - asset: assets/fonts/Inter-Medium.ttf
