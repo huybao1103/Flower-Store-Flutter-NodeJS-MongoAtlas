@@ -1,5 +1,6 @@
 import 'package:flower_store/assets/custom_icon.dart';
 import 'package:flower_store/constants/colors.dart';
+import 'package:flower_store/screens/main/profile.screen.dart';
 import 'package:flutter/material.dart';
 
 Padding mainPageHeader(GlobalKey<ScaffoldState> scaffoldKey, BuildContext context) {
@@ -38,7 +39,7 @@ Padding mainPageHeader(GlobalKey<ScaffoldState> scaffoldKey, BuildContext contex
               )
             ),
             IconButton(
-              onPressed: () {}, 
+              onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfileScreen())); }, 
               icon: const Icon(
                 CustomIcon.custom_user,
                 color: iconColor,
