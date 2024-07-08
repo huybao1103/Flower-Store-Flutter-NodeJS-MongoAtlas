@@ -37,6 +37,7 @@ dependencies:
   control_style: ^0.1.0
   carousel_slider: ^4.2.1
   flutter_svg: ^2.0.10+1
+  google_fonts: ^6.2.1
   curved_navigation_bar: ^1.0.6
   intl: ^0.19.0
   date_picker_plus: ^3.0.2
@@ -76,4 +77,5 @@ flutter:
     - assets/vectors/setting.svg
     - assets/fonts/Rubik-Medium.ttf
     - assets/images/
+    - assets/icons/back_icon.svg
     - assets/fonts/Inter-Medium.ttf
