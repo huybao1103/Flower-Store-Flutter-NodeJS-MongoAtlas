@@ -1,13 +1,18 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flower_store/screens/cart/cart.screen.dart';
+import 'package:flower_store/screens/main/profile.screen.dart';
+import 'package:flower_store/screens/store.main.screen.dart';
+import 'package:flower_store/screens/store_product_page/all_product.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flower_store/screens/setting/setting.screen.dart';
 import '../../shared/components/custom.theme.dart';
 
 class MainPageScreen extends StatefulWidget {
-  const MainPageScreen({super.key});
+  final Widget? currentScreen;
+  const MainPageScreen({super.key, this.currentScreen});
 
   @override
-  _MainPageScreenState createState() => _MainPageScreenState();
+  State<MainPageScreen> createState() => _MainPageScreenState();
 }
 
 class _MainPageScreenState extends State<MainPageScreen> {
@@ -20,10 +25,10 @@ class _MainPageScreenState extends State<MainPageScreen> {
   void initState() {
     super.initState();
     _pages = [
-      const Center(child: Text('Home', style: TextStyle(fontSize: 24))),
-      const Center(child: Text('Shop', style: TextStyle(fontSize: 24))),
-      const Center(child: Text('Cart', style: TextStyle(fontSize: 24))),
-      const Center(child: Text('Profile', style: TextStyle(fontSize: 24))),
+      const StoreMainScreen(),
+      const AllProductScreen(),
+      const CartPage(),
+      const ProfileScreen(),
       SettingScreen(
         isDarkMode: isDarkMode,
         onThemeChanged: (bool value) {
@@ -33,6 +38,9 @@ class _MainPageScreenState extends State<MainPageScreen> {
         },
       ),
     ];
+    if(widget.currentScreen != null) {
+      _currentIndex = _pages.indexWhere((wg) => widget.currentScreen!.toString() == wg.toString());
+    }
   }
 
   @override

@@ -1,4 +1,6 @@
 //hide customLightTheme, customDarkTheme;
+import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
+import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flower_store/screens/welcome/login.screen.dart';
 import 'package:flutter/material.dart';
 import '../../shared/components/custom.theme.dart';

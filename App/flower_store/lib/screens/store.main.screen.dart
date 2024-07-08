@@ -106,22 +106,27 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
                         products: productsFavorite,
                         title: 'Your favorite',
                         navigator: FavoriteScreen(),
+                        seeAll: true,
                       ),
                       ProductListview(
                         products: products,
                         title: 'Best Selling',
+                        seeAll: true,
                       ),
                       ProductListview(
                         products: products,
                         title: 'Special offers',
+                        seeAll: true,
                       ),
                       ProductListview(
                         products: products,
                         title: 'New Arrival',
+                        seeAll: true,
                       ),
                       ProductListview(
                         products: products,
                         title: 'Top Rating',
+                        seeAll: true,
                       ),
                     ],
                   ),
@@ -131,34 +136,7 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
           ],
         ),
       ),
-      drawer: customDrawer(
-        items: <Widget>[
-          commonListItem(
-            text: " Home",
-            prefixIcon: CustomIcon.custom_home,
-          ),
-          commonListItem(
-            text: " Account",
-            prefixIcon: Icons.person,
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfileScreen())),
-          ),
-          commonListItem(
-            text: " Purchase History",
-            prefixIcon: Icons.history_rounded,
-          ),
-          CustomDrawer(
-            width: MediaQuery.of(context).size.width / 1.6,           
-            menuItem: MenuItem.haveChildren(
-              "Products",
-              List.generate(
-                category.length,
-                (index) => MenuItem(category[index]),
-              ),
-            ),
-          ),
-        ],
-        drawerHeader: customDrawerHeader(name: "Bao Luong"),
-      ),
+      drawer: const CustomDrawer(),
     );
   }
 }

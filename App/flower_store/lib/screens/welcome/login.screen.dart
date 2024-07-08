@@ -1,5 +1,6 @@
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/screens/cart/cart.screen.dart';
+import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
 import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flower_store/screens/store_product_page/all_product.screen.dart';
 import 'package:flower_store/screens/store_product_page/product_display.screen.dart';
@@ -141,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           Navigator
           .of(context)
-          .push(MaterialPageRoute(builder: (context) => const AllProductScreen()));
+          .push(MaterialPageRoute(builder: (context) => const MainPageScreen()));
         },
         child: const Text(
           'Login',

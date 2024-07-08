@@ -2,6 +2,7 @@ import 'package:flower_store/assets/custom_icon.dart';
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/menu.model.dart';
 import 'package:flower_store/screens/main/profile.screen.dart';
+import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flower_store/shared/components/custom_drawer.dart';
 import 'package:flower_store/shared/components/input_decoration.dart';
 import 'package:flower_store/shared/components/main_page_header.dart';
@@ -129,27 +130,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   ),
                 ),
               ]))),
-      drawer: customDrawer(items: <Widget>[
-        commonListItem(
-          text: " Home",
-          prefixIcon: CustomIcon.custom_home,
-        ),
-        commonListItem(
-          text: " Account",
-          prefixIcon: Icons.person,
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfileScreen())),
-        ),
-        commonListItem(
-          text: " Purchase History",
-          prefixIcon: Icons.history_rounded,
-        ),
-        CustomDrawer(
-            width: MediaQuery.of(context).size.width / 1.6,
-            menuItem: MenuItem.haveChildren(
-                "Products",
-                List.generate(
-                    category.length, (index) => MenuItem(category[index]))))
-      ], drawerHeader: customDrawerHeader(name: "Bao Luong")),
+      drawer: const CustomDrawer(),
     );
   }
 }
