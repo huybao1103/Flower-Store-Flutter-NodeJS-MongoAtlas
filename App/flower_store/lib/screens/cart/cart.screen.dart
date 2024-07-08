@@ -1,3 +1,4 @@
+import 'package:flower_store/screens/cart/checkout.screen.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatefulWidget {
@@ -167,6 +168,7 @@ class _CartPageState extends State<CartPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Handle save changes button press
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CheckoutPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff967BB6),

@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+
+class OrderSuccessScreen extends StatefulWidget {
+  @override
+  _OrderSuccessScreenState createState() => _OrderSuccessScreenState();
+}
+
+class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Center(
+                child: Image.asset(
+                  'assets/images/order_successful.png',
+                ),
+              ),
+            ),
+            const Text(
+              'Order Successfully Placed',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Roboto',
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 15),
+            const Text(
+              'Your Order Has Been Successfully Placed\nAnd Has Been Processed For Delivery',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+                fontFamily: 'Roboto',
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 40),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xff967BB6),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+              ),
+              child: const Text(
+                'Continue Shopping',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+}

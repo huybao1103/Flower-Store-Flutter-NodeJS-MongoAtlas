@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
   @override
-  _CheckoutPageState createState() => _CheckoutPageState();
+  State<CheckoutPage> createState() => _CheckoutPageState();
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
@@ -29,21 +29,21 @@ class _CheckoutPageState extends State<CheckoutPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Edit Address'),
+          title: const Text('Edit Address'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: line1Controller,
-                decoration: InputDecoration(labelText: 'Address Line 1'),
+                decoration: const InputDecoration(labelText: 'Address Line 1'),
               ),
               TextField(
                 controller: line2Controller,
-                decoration: InputDecoration(labelText: 'Address Line 2'),
+                decoration: const InputDecoration(labelText: 'Address Line 2'),
               ),
               TextField(
                 controller: line3Controller,
-                decoration: InputDecoration(labelText: 'Address Line 3'),
+                decoration: const InputDecoration(labelText: 'Address Line 3'),
               ),
             ],
           ),
@@ -79,9 +79,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Checkout'),
+        title: const Text('Checkout'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {},
         ),
       ),
@@ -94,14 +94,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ChoiceChip(
-                  label: Text('Delivery'),
+                  label: const Text('Delivery'),
                   selected: true,
                   onSelected: (bool selected) {},
                   selectedColor: Colors.pink[100],
                 ),
                 SizedBox(width: 8),
                 ChoiceChip(
-                  label: Text('Payment'),
+                  label: const Text('Payment'),
                   selected: false,
                   onSelected: (bool selected) {},
                   selectedColor: Colors.grey[300],
@@ -112,7 +112,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Delivery Address',
                   style: TextStyle(
                     fontSize: 16,
@@ -129,16 +129,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
               leading: Icon(Icons.location_on),
               title: Text('$addressLine1\n$addressLine2\n$addressLine3'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.calendar_today),
               title: Text('Date'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.access_time),
               title: Text('Time'),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Order Summary',
               style: TextStyle(
                 fontSize: 16,
@@ -156,7 +156,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   children: [
                     ListView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: items.length,
                       itemBuilder: (context, index) {
                         return ListTile(
@@ -165,46 +165,46 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         );
                       },
                     ),
-                    Divider(),
+                    const Divider(),
                     ListTile(
-                      title: Text('Subtotal'),
+                      title: const Text('Subtotal'),
                       trailing: Text('\$$subtotal'),
                     ),
                     ListTile(
-                      title: Text('Delivery'),
+                      title: const Text('Delivery'),
                       trailing: Text('\$$delivery'),
                     ),
-                    Divider(),
+                    const Divider(),
                     ListTile(
-                      title: Text(
+                      title: const Text(
                         'Total',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       trailing: Text(
                         '\$$total',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PaymentMethodPage(),
-                                  ),
-                                );
-                              },
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PaymentMethodPage(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,
-                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 ),
-                child: Text(
+                child: const Text(
                   'Confirm',
                   style: TextStyle(color: Colors.white),
                 ),

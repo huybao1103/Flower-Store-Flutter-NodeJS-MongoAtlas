@@ -4,6 +4,7 @@ import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/menu.model.dart';
 import 'package:flower_store/models/product.dart';
 import 'package:flower_store/screens/favorite.screen.dart';
+import 'package:flower_store/screens/main/profile.screen.dart';
 import 'package:flower_store/shared/components/custom_drawer.dart';
 import 'package:flower_store/shared/components/main_page_header.dart';
 import 'package:flower_store/shared/widget/carousel.dart';
@@ -71,7 +72,7 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
       name: 'Herves Love',
       price: 56,
       imageUrl:
-'https://product.hstatic.net/200000846175/product/_052e215d0bf4937c855e88d6d4b3e092-min_4ee2c7cf7ae24d67b1b46156d8b96f8c_bd89a4bf469c4db7833f9c3a51f8252e_1024x1024.jpg',
+          'https://product.hstatic.net/200000846175/product/_052e215d0bf4937c855e88d6d4b3e092-min_4ee2c7cf7ae24d67b1b46156d8b96f8c_bd89a4bf469c4db7833f9c3a51f8252e_1024x1024.jpg',
       isFavorite: false,
     ),
     Product(
@@ -93,7 +94,7 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
         ),
         child: Column(
           children: [
-            mainPageHeader(_scaffoldKey), // Header cố định
+            mainPageHeader(_scaffoldKey, context),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -139,6 +140,7 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
           commonListItem(
             text: " Account",
             prefixIcon: Icons.person,
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfileScreen())),
           ),
           commonListItem(
             text: " Purchase History",
