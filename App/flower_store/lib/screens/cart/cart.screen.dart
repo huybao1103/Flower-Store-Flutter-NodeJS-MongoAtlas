@@ -1,4 +1,5 @@
 import 'package:flower_store/screens/cart/checkout.screen.dart';
+import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatefulWidget {
@@ -74,7 +75,12 @@ class _CartPageState extends State<CartPage> {
                     IconButton(
                       icon: const Icon(Icons.arrow_back, color: Colors.black),
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const StoreMainScreen(),
+                                  ),
+                                );
                       },
                     ),
                     const SizedBox(width: 8.0),
