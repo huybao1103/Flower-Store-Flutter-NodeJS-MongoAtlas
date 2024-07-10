@@ -2,8 +2,9 @@ import 'package:flower_store/assets/custom_icon.dart';
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/menu.model.dart';
 import 'package:flower_store/models/product.dart';
-import 'package:flower_store/screens/main/profile.screen.dart';
+
 import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
+import 'package:flower_store/screens/user/profile.screen.dart';
 import 'package:flower_store/shared/components/custom_widgets.dart';
 import 'package:flower_store/shared/styles/menu_style.dart';
 import 'package:flutter/material.dart';
