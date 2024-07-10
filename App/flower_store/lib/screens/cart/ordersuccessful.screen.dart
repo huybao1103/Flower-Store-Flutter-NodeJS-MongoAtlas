@@ -1,4 +1,5 @@
 import 'package:flower_store/screens/cart/addpaymentmethodpage.screen.dart';
+import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -31,7 +32,7 @@ class _OrderSuccessfulPageState extends State<OrderSuccessfulPage> {
                 ),
               ),
             ),
-            Text(
+            const Text(
               'Order Successfully Placed',
               style: TextStyle(
                 fontSize: 24,
@@ -39,32 +40,32 @@ class _OrderSuccessfulPageState extends State<OrderSuccessfulPage> {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Your Order Has Been Successfully Placed\nAnd Has Been Processed For Delivery',
               style: TextStyle(
                 fontSize: 16,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => AddPaymentMethodPage(),
+                                    builder: (context) => const StoreMainScreen(),
                                   ),
                                 );
                               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.purple,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'Continue Shopping',
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
