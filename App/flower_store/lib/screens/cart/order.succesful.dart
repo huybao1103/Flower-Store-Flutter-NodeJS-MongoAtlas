@@ -1,3 +1,4 @@
+import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
 import 'package:flutter/material.dart';
 
 class OrderSuccessScreen extends StatefulWidget {
@@ -43,7 +44,13 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
             ),
             const SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MainPageScreen()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xff967BB6),
                 shape: RoundedRectangleBorder(

@@ -13,48 +13,29 @@ class SettingScreen extends StatefulWidget {
   _SettingScreenState createState() => _SettingScreenState();
 }
 
-// // Define your custom dark theme
-// final ThemeData customDarkTheme = ThemeData.dark().copyWith(
-//   brightness: Brightness.dark,
-//   cardColor: const Color(0xff000000),
-//   scaffoldBackgroundColor: const Color(0xff2D2C2C),
-//   appBarTheme: const AppBarTheme(color: Color(0xffE5386D)),
-// );
-
-// // Define your custom light theme
-// final ThemeData customLightTheme = ThemeData.light().copyWith(
-//   brightness: Brightness.light,
-//   cardColor: const Color(0xffFFFFFF),
-//   scaffoldBackgroundColor: const Color(0xffF4F4F4),
-//   appBarTheme: const AppBarTheme(color: Color(0xffFF85A1)),
-// );
-
 class _SettingScreenState extends State<SettingScreen> {
   bool rememberMe = false;
-  // final List<String> _icons = [
-  //   'assets/vectors/cart_icon.svg',
-  //   'assets/vectors/account_icon.svg',
-  //   'assets/vectors/setting_icon.svg',
-  //   'assets/vectors/home_icon.svg',
-  //   'assets/vectors/shop_icon.svg'
-  // ];
+  late bool isDarkMode;
+
+  @override
+  void initState() {
+    super.initState();
+    isDarkMode = widget.isDarkMode;
+  }
 
   @override
   Widget build(BuildContext context) {
-    final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
     final appBarColor =
-        isDarkTheme ? const Color(0xffE5386D) : const Color(0xffFF85A1);
-    //final selectedColor = isDarkTheme ? Colors.white : Colors.pinkAccent;
-    //final unselectedColor = isDarkTheme ? Colors.pinkAccent : Colors.white;
+        isDarkMode ? const Color(0xffE5386D) : const Color(0xffFF85A1);
+
     return Scaffold(
       body: Stack(
-        //ở đây dùng stack để chia layer cho app bar và phần content bên trong, tạo hiệu ứng chồng lên nhau
         children: [
           Container(
             color: Theme.of(context).scaffoldBackgroundColor,
           ),
           Container(
-            height: 310, // Height of the "AppBar"
+            height: 310,
             decoration: BoxDecoration(
               color: appBarColor,
               borderRadius: const BorderRadius.vertical(
@@ -69,7 +50,6 @@ class _SettingScreenState extends State<SettingScreen> {
                   children: [
                     SvgPicture.asset(
                       'assets/vectors/setting.svg',
-                      //color: Colors.white,
                       height: 40,
                       width: 40,
                     ),
@@ -97,10 +77,8 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 180.0, 16.0,
-                  16.0), // chỉnh chiều dài phần padding để chồng lên phần appbar
+              padding: const EdgeInsets.fromLTRB(16.0, 180.0, 16.0, 16.0),
               child: Card(
-                //color: const Color(0xffFFFFFF),
                 elevation: 4,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -189,8 +167,13 @@ class _SettingScreenState extends State<SettingScreen> {
                                 fontFamily: 'Rubik',
                                 fontWeight: FontWeight.w400),
                           ),
-                          value: widget.isDarkMode,
-                          onChanged: widget.onThemeChanged,
+                          value: isDarkMode,
+                          onChanged: (bool value) {
+                            setState(() {
+                              isDarkMode = value;
+                            });
+                            widget.onThemeChanged(value);
+                          },
                         ),
                       ],
                     ),
@@ -225,11 +208,10 @@ class _SettingScreenState extends State<SettingScreen> {
                           trailing: const Icon(Icons.logout),
                           onTap: () {
                             Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()
-                                  ),
-                                );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()),
+                            );
                           },
                         ),
                       ],

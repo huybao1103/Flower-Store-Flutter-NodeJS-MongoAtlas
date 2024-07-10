@@ -3,7 +3,7 @@ import 'package:flower_store/screens/cart/paymentmethod.screen.dart';
 import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
 import 'package:flutter/material.dart';
 
-  Widget? preScreen;
+Widget? preScreen;
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
@@ -23,9 +23,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
   String addressLine3 = 'Address Line 3';
 
   void _editAddress() {
-    TextEditingController line1Controller = TextEditingController(text: addressLine1);
-    TextEditingController line2Controller = TextEditingController(text: addressLine2);
-    TextEditingController line3Controller = TextEditingController(text: addressLine3);
+    TextEditingController line1Controller =
+        TextEditingController(text: addressLine1);
+    TextEditingController line2Controller =
+        TextEditingController(text: addressLine2);
+    TextEditingController line3Controller =
+        TextEditingController(text: addressLine3);
 
     showDialog(
       context: context,
@@ -75,7 +78,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   @override
   Widget build(BuildContext context) {
-    int subtotal = items.fold(0, (sum, item) => sum + int.parse(item['price']!));
+    int subtotal =
+        items.fold(0, (sum, item) => sum + int.parse(item['price']!));
     int delivery = 3;
     int total = subtotal + delivery;
 
@@ -85,12 +89,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-           Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const MainPageScreen(isBack: true,),
-                                  ),
-                                );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MainPageScreen(
+                  isBack: true,
+                ),
+              ),
+            );
           },
         ),
       ),
@@ -155,6 +161,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
             ),
             Card(
+              color: Colors.white,
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -210,8 +217,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                  padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                  backgroundColor: const Color(0xff967BB6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 ),
                 child: const Text(
                   'Confirm',

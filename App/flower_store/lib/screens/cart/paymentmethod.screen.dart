@@ -1,9 +1,8 @@
 import 'package:flower_store/screens/cart/addpaymentmethodpage.screen.dart';
 import 'package:flower_store/screens/cart/checkout.screen.dart';
-import 'package:flower_store/screens/cart/ordersuccessful.screen.dart';
+import 'package:flower_store/screens/cart/order.succesful.dart';
+
 import 'package:flutter/material.dart';
-
-
 
 class PaymentMethodPage extends StatefulWidget {
   const PaymentMethodPage({super.key});
@@ -35,17 +34,17 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Checkout'),
+        title: const Text('Checkout'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const CheckoutPage(),
-                                  ),
-                                );
-                              },
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CheckoutPage(),
+              ),
+            );
+          },
         ),
       ),
       body: SingleChildScrollView(
@@ -57,32 +56,32 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ChoiceChip(
-                  label: Text('Delivery'),
+                  label: const Text('Delivery'),
                   selected: false,
                   onSelected: (bool selected) {},
                   selectedColor: Colors.grey[300],
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 ChoiceChip(
-                  label: Text('Payment'),
+                  label: const Text('Payment'),
                   selected: true,
                   onSelected: (bool selected) {},
                   selectedColor: Colors.pink[100],
                 ),
               ],
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Payment Method',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: paymentCards.length,
               itemBuilder: (context, index) {
                 return Card(
@@ -109,7 +108,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            const Text(
                               'Credit Card',
                               style: TextStyle(
                                 fontSize: 16,
@@ -122,21 +121,22 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => AddPaymentMethodPage(),
+                                    builder: (context) =>
+                                        AddPaymentMethodPage(),
                                   ),
                                 );
                               },
-                              child: Text(
+                              child: const Text(
                                 'Edit',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           paymentCards[index]['type'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -144,7 +144,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                         ),
                         Text(
                           paymentCards[index]['number'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Colors.white,
                           ),
@@ -155,22 +155,23 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                 );
               },
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => OrderSuccessfulPage(),
-                                  ),
-                                );
-                              },
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderSuccessScreen(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xff967BB6),
-                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                  backgroundColor: const Color(0xff967BB6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 ),
-                child: Text(
+                child: const Text(
                   'Make A Payment',
                   style: TextStyle(color: Colors.white),
                 ),

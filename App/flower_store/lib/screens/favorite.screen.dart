@@ -1,7 +1,7 @@
 import 'package:flower_store/assets/custom_icon.dart';
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/menu.model.dart';
-import 'package:flower_store/screens/main/profile.screen.dart';
+import 'package:flower_store/screens/user/profile.screen.dart';
 import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flower_store/shared/components/custom_drawer.dart';
 import 'package:flower_store/shared/components/input_decoration.dart';
