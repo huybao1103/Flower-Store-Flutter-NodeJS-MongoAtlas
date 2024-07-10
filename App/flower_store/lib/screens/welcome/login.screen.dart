@@ -1,9 +1,11 @@
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/screens/cart/cart.screen.dart';
+import 'package:flower_store/screens/forgot_password/forgot.password.dart';
 import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
 import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flower_store/screens/store_product_page/all_product.screen.dart';
 import 'package:flower_store/screens/store_product_page/product_display.screen.dart';
+import 'package:flower_store/screens/welcome/register.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -32,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
       resizeToAvoidBottomInset: false,
       body: new GestureDetector(
         onTap: () {
-         FocusScope.of(context).requestFocus(FocusNode());
+          FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Container(
           decoration: const BoxDecoration(
@@ -57,11 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 20,
                 ),
                 FormBuilder(
-                      key: _loginForm,
-                      child: Column(
-                        children: getLoginForm()
-                      )
-                    ),
+                    key: _loginForm, child: Column(children: getLoginForm())),
                 const SizedBox(
                   height: 15,
                 ),
@@ -70,7 +68,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     "Need a new account ?",
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegisterScreen()),
+                      );
+                    },
                     child: const Text(
                       "Sign up",
                       style: TextStyle(color: Color(0xff920000)),
@@ -88,15 +92,13 @@ class _LoginScreenState extends State<LoginScreen> {
   List<Widget> getLoginForm() {
     return [
       genericFieldContainer(
-        field: FormBuilderTextField(
-          name: 'email',
-          validator: FormBuilderValidators.compose([
-            // FormBuilderValidators.required(),
-            FormBuilderValidators.email(),
-          ]),
-          decoration: genericInputDecoration(label: 'Email')
-        )
-      ),
+          field: FormBuilderTextField(
+              name: 'email',
+              validator: FormBuilderValidators.compose([
+                // FormBuilderValidators.required(),
+                FormBuilderValidators.email(),
+              ]),
+              decoration: genericInputDecoration(label: 'Email'))),
       genericFieldContainer(
         field: FormBuilderTextField(
           name: 'password',
@@ -110,29 +112,34 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
       const SizedBox(height: 10),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                alignment: Alignment.centerRight,
-                child: SizedBox(
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Forgot password',
-                      style: TextStyle(color: Color(0xff920000)),
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ),
-              ),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        alignment: Alignment.centerRight,
+        child: SizedBox(
+          child: TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ForgotPasswordScreen()),
+              );
+            },
+            child: const Text(
+              'Forgot password',
+              style: TextStyle(color: Color(0xff920000)),
+              textAlign: TextAlign.right,
+            ),
+          ),
+        ),
+      ),
       const SizedBox(height: 10),
       MaterialButton(
         color: const Color(0xFFFFEED0),
         minWidth: double.infinity,
         padding: const EdgeInsets.all(15),
         shape: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(color: Colors.transparent)
-        ),
+            borderRadius: BorderRadius.circular(30),
+            borderSide: const BorderSide(color: Colors.transparent)),
         elevation: 10,
         focusElevation: 5,
         onPressed: () {
@@ -140,9 +147,8 @@ class _LoginScreenState extends State<LoginScreen> {
           _loginForm.currentState?.saveAndValidate();
           debugPrint(_loginForm.currentState?.value.toString());
 
-          Navigator
-          .of(context)
-          .push(MaterialPageRoute(builder: (context) => const MainPageScreen()));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const MainPageScreen()));
         },
         child: const Text(
           'Login',
@@ -154,4 +160,3 @@ class _LoginScreenState extends State<LoginScreen> {
     ];
   }
 }
-

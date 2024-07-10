@@ -1,6 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flower_store/screens/cart/cart.screen.dart';
-import 'package:flower_store/screens/main/profile.screen.dart';
+import 'package:flower_store/screens/user/profile.screen.dart';
 import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flower_store/screens/store_product_page/all_product.screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flower_store/screens/setting/setting.screen.dart';
 import '../../shared/components/custom.theme.dart';
 
-  Widget? preScreen;
+Widget? preScreen;
 
 class MainPageScreen extends StatefulWidget {
   final Widget? currentScreen;
@@ -42,12 +42,13 @@ class _MainPageScreenState extends State<MainPageScreen> {
         },
       ),
     ];
-    if(widget.isBack != null && widget.isBack!) {
-      _currentIndex = _pages.indexWhere((wg) => preScreen!.toString() == wg.toString());
-
+    if (widget.isBack != null && widget.isBack!) {
+      _currentIndex =
+          _pages.indexWhere((wg) => preScreen!.toString() == wg.toString());
     }
-    if(widget.currentScreen != null) {
-      _currentIndex = _pages.indexWhere((wg) => widget.currentScreen!.toString() == wg.toString());
+    if (widget.currentScreen != null) {
+      _currentIndex = _pages.indexWhere(
+          (wg) => widget.currentScreen!.toString() == wg.toString());
     }
     preScreen = _pages[_currentIndex];
   }
