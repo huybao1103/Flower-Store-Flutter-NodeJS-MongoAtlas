@@ -1,8 +1,9 @@
 import 'package:flower_store/screens/cart/cart.screen.dart';
 import 'package:flower_store/screens/cart/paymentmethod.screen.dart';
+import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
 import 'package:flutter/material.dart';
 
-
+  Widget? preScreen;
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
@@ -87,7 +88,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
            Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const CartPage(),
+                                    builder: (context) => const MainPageScreen(isBack: true,),
                                   ),
                                 );
           },

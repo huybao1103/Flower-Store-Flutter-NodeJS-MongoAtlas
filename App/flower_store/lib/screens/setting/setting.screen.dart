@@ -1,3 +1,4 @@
+import 'package:flower_store/screens/welcome/login.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -222,7 +223,14 @@ class _SettingScreenState extends State<SettingScreen> {
                                 fontWeight: FontWeight.w400),
                           ),
                           trailing: const Icon(Icons.logout),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginScreen()
+                                  ),
+                                );
+                          },
                         ),
                       ],
                     ),
