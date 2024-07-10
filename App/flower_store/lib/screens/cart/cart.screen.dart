@@ -1,4 +1,5 @@
 import 'package:flower_store/screens/cart/checkout.screen.dart';
+import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
 import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flutter/material.dart';
 
@@ -78,7 +79,7 @@ class _CartPageState extends State<CartPage> {
                         Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const StoreMainScreen(),
+                                    builder: (context) => const MainPageScreen(isBack: true,),
                                   ),
                                 );
                       },

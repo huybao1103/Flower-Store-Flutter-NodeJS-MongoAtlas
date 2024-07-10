@@ -1,5 +1,6 @@
 import 'package:flower_store/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -85,7 +86,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     icon: const Icon(Icons.arrow_back,
                                         size: 34, color: Color(0xff000000)),
                                     onPressed: () {
-                                      Navigator.of(context).pop();
+                                       Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MainPageScreen(isBack: true,),
+                                  ),
+                                );
                                     },
                                   ),
                                   const Row(
