@@ -1,6 +1,6 @@
 import 'package:flower_store/assets/custom_icon.dart';
 import 'package:flower_store/constants/colors.dart';
-import 'package:flower_store/screens/main/profile.screen.dart';
+import 'package:flower_store/screens/user/profile.screen.dart';
 import 'package:flutter/material.dart';
 
 Padding mainPageHeader(GlobalKey<ScaffoldState> scaffoldKey, BuildContext context) {
