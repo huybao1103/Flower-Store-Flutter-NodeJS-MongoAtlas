@@ -115,7 +115,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
           backgroundColor:
               isDarkMode ? const Color(0xff2D2C2C) : const Color(0xffEAEAEA),
           animationCurve: Curves.easeInOut,
-          animationDuration: const Duration(milliseconds: 600),
+          animationDuration: const Duration(milliseconds: 400),
           onTap: (index) {
             setState(() {
               preScreen = _pages[_currentIndex];
