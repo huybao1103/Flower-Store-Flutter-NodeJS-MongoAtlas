@@ -18,15 +18,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isDarkMode = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: customLightTheme,
-      darkTheme: customDarkTheme,
-      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home: const LoginScreen()
-    );
+        debugShowCheckedModeBanner: false,
+        theme: customLightTheme,
+        darkTheme: customDarkTheme,
+        themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+        home: const LoginScreen());
   }
 }
