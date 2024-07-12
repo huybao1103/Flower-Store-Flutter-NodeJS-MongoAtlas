@@ -129,12 +129,12 @@ class _AllProductScreenState extends State<AllProductScreen> {
                       onTap: () {},
                       name: proName ?? 'Search',
                       decoration: genericInputDecoration(
-                          label: 'Search', prefixIcon: Icons.search))),
+                          label: 'Tìm kiếm', prefixIcon: Icons.search))),
             ),
             Expanded(
               child: ProductGridview(
                 products: Product.products,
-                title: proName ?? 'All Products',
+                title: proName ?? 'Tất cả sản phẩm',
               ),
             ),
           ],

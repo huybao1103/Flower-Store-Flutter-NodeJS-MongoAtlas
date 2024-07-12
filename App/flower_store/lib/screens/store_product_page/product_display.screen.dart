@@ -85,7 +85,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
                         if (product.description != null) description(),
                         ProductListview(
                           products: product.includeProducts,
-                          title: 'Includes',
+                          title: 'Sản phẩm bao gồm',
                         ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
@@ -104,7 +104,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
                                 padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                               ),
                               child: const Text(
-                                'Add To Cart',
+                                'Thêm vào giỏ hàng',
                                 style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
                               ),
                             ),

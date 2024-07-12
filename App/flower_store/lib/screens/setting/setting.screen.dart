@@ -1,3 +1,5 @@
+import 'package:flower_store/screens/forgot_password/forgot.password.dart';
+import 'package:flower_store/screens/user/history.purchase.dart';
 import 'package:flower_store/screens/welcome/login.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -59,7 +61,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       child: const Row(
                         children: [
                           Text(
-                            'Settings',
+                            'Cài đặt',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 28,
@@ -112,27 +114,31 @@ class _SettingScreenState extends State<SettingScreen> {
                         const Padding(padding: EdgeInsets.only(top: 15)),
                         ListTile(
                           title: const Text(
-                            'History purchase',
+                            'Lịch sử mua hàng',
                             style: TextStyle(
                                 fontFamily: 'Rubik',
                                 fontWeight: FontWeight.w400),
                           ),
                           trailing: const Icon(Icons.chevron_right),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HistoryPurchaseScreen()));
+                          },
                         ),
                         ListTile(
                           title: const Text(
-                            'Change password',
+                            'Đổi mật khẩu',
                             style: TextStyle(
                                 fontFamily: 'Rubik',
                                 fontWeight: FontWeight.w400),
                           ),
                           trailing: const Icon(Icons.chevron_right),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ForgotPasswordScreen()));
+                          },
                         ),
                         ListTile(
                           title: const Text(
-                            'Add a payment method',
+                            'Thêm phương thức thanh toán',
                             style: TextStyle(
                                 fontFamily: 'Rubik',
                                 fontWeight: FontWeight.w400),
@@ -145,7 +151,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               const EdgeInsets.only(right: 10, left: 15),
                           activeColor: const Color(0xffFF85A1),
                           title: const Text(
-                            'Remember me',
+                            'Lưu đăng nhập',
                             style: TextStyle(
                                 fontFamily: 'Rubik',
                                 fontWeight: FontWeight.w400),
@@ -191,7 +197,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         const Padding(padding: EdgeInsets.only(top: 15)),
                         const ListTile(
                           title: Text(
-                            'More',
+                            'Thêm...',
                             style: TextStyle(
                                 color: Color(0xffADADAD),
                                 fontFamily: 'Rubik',
@@ -200,7 +206,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                         ListTile(
                           title: const Text(
-                            'Log out',
+                            'Đăng xuất',
                             style: TextStyle(
                                 fontFamily: 'Rubik',
                                 fontWeight: FontWeight.w400),

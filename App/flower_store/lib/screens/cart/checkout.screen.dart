@@ -13,22 +13,19 @@ class CheckoutPage extends StatefulWidget {
 
 class _CheckoutPageState extends State<CheckoutPage> {
   final List<Map<String, String>> items = [
-    {'name': 'Item 1', 'price': '100'},
-    {'name': 'Item 2', 'price': '100'},
-    {'name': 'Item 3', 'price': '100'},
+    {'name': 'sản phẩm 1', 'price': '100'},
+    {'name': 'sản phẩm 2', 'price': '100'},
+    {'name': 'sản phẩm 3', 'price': '100'},
   ];
 
-  String addressLine1 = 'Address Line 1';
-  String addressLine2 = 'Address Line 2';
-  String addressLine3 = 'Address Line 3';
+  String addressLine1 = 'Chử đồng tử';
+ 
 
   void _editAddress() {
     TextEditingController line1Controller =
         TextEditingController(text: addressLine1);
-    TextEditingController line2Controller =
-        TextEditingController(text: addressLine2);
-    TextEditingController line3Controller =
-        TextEditingController(text: addressLine3);
+   
+    
 
     showDialog(
       context: context,
@@ -42,14 +39,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 controller: line1Controller,
                 decoration: const InputDecoration(labelText: 'Address Line 1'),
               ),
-              TextField(
-                controller: line2Controller,
-                decoration: const InputDecoration(labelText: 'Address Line 2'),
-              ),
-              TextField(
-                controller: line3Controller,
-                decoration: const InputDecoration(labelText: 'Address Line 3'),
-              ),
+            
             ],
           ),
           actions: [
@@ -63,8 +53,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               onPressed: () {
                 setState(() {
                   addressLine1 = line1Controller.text;
-                  addressLine2 = line2Controller.text;
-                  addressLine3 = line3Controller.text;
+               
                 });
                 Navigator.of(context).pop();
               },
@@ -85,7 +74,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Checkout'),
+        title: const Text('Thanh toán'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -109,14 +98,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ChoiceChip(
-                  label: const Text('Delivery'),
+                  label: const Text('Vận chuyển'),
                   selected: true,
                   onSelected: (bool selected) {},
                   selectedColor: Colors.pink[100],
                 ),
                 SizedBox(width: 8),
                 ChoiceChip(
-                  label: const Text('Payment'),
+                  label: const Text('Thanh toán'),
                   selected: false,
                   onSelected: (bool selected) {},
                   selectedColor: Colors.grey[300],
@@ -128,33 +117,33 @@ class _CheckoutPageState extends State<CheckoutPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'Delivery Address',
+                  'Địa chỉ giao hàng',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 TextButton(
-                  child: Text('Edit'),
+                  child: Text('Sửa'),
                   onPressed: _editAddress,
                 ),
               ],
             ),
             ListTile(
               leading: Icon(Icons.location_on),
-              title: Text('$addressLine1\n$addressLine2\n$addressLine3'),
+              title: Text('$addressLine1'),
             ),
             const ListTile(
               leading: Icon(Icons.calendar_today),
-              title: Text('Date'),
+              title: Text('Ngày'),
             ),
             const ListTile(
               leading: Icon(Icons.access_time),
-              title: Text('Time'),
+              title: Text('Thời gian'),
             ),
             const SizedBox(height: 16),
             const Text(
-              'Order Summary',
+              'Chi tiết đơn hàng',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -183,11 +172,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                     const Divider(),
                     ListTile(
-                      title: const Text('Subtotal'),
+                      title: const Text('Tổng tiền'),
                       trailing: Text('\$$subtotal'),
                     ),
                     ListTile(
-                      title: const Text('Delivery'),
+                      title: const Text('Địa chỉ'),
                       trailing: Text('\$$delivery'),
                     ),
                     const Divider(),
@@ -222,7 +211,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 ),
                 child: const Text(
-                  'Confirm',
+                  'Xác nhận',
                   style: TextStyle(color: Colors.white),
                 ),
               ),

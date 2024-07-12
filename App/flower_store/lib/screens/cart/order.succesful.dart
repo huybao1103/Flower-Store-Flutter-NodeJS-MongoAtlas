@@ -25,7 +25,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
               ),
             ),
             const Text(
-              'Order Successfully Placed',
+              'Đặt hàng thành công',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Roboto',
@@ -34,7 +34,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
             ),
             const SizedBox(height: 15),
             const Text(
-              'Your Order Has Been Successfully Placed\nAnd Has Been Processed For Delivery',
+              'Đơn Hàng Của Bạn Đã Được Đặt Thành Công\nVà Đang Được Xử Lý Để Giao Hàng.',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
@@ -60,7 +60,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                     const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
               ),
               child: const Text(
-                'Continue Shopping',
+                'Tiếp tục mua hàng',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,

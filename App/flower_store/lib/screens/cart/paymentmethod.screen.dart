@@ -34,7 +34,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Checkout'),
+        title: const Text('Thanh toán'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -56,14 +56,14 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ChoiceChip(
-                  label: const Text('Delivery'),
+                  label: const Text('Vận Chuyển'),
                   selected: false,
                   onSelected: (bool selected) {},
                   selectedColor: Colors.grey[300],
                 ),
                 const SizedBox(width: 8),
                 ChoiceChip(
-                  label: const Text('Payment'),
+                  label: const Text('Thanh toán'),
                   selected: true,
                   onSelected: (bool selected) {},
                   selectedColor: Colors.pink[100],
@@ -72,7 +72,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Payment Method',
+              'Phương thức thanh toán',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -172,7 +172,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                       const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 ),
                 child: const Text(
-                  'Make A Payment',
+                  'Thực hiện thanh toán',
                   style: TextStyle(color: Colors.white),
                 ),
               ),

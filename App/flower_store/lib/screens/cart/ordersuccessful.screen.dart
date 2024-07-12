@@ -33,7 +33,7 @@ class _OrderSuccessfulPageState extends State<OrderSuccessfulPage> {
               ),
             ),
             const Text(
-              'Order Successfully Placed',
+              'Đặt hàng thành công',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -42,7 +42,7 @@ class _OrderSuccessfulPageState extends State<OrderSuccessfulPage> {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Your Order Has Been Successfully Placed\nAnd Has Been Processed For Delivery',
+              'Đơn Hàng Của Bạn Đã Được Đặt Thành Công\nVà Đang Được Xử Lý Để Giao Hàng.',
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -66,7 +66,7 @@ class _OrderSuccessfulPageState extends State<OrderSuccessfulPage> {
                 ),
               ),
               child: const Text(
-                'Continue Shopping',
+                'Tiếp tục mua hàng',
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),
