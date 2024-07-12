@@ -50,13 +50,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
     items = widget.items ??
         <Widget>[
           commonListItem(
-            text: " Home",
+            text: " Trang chủ",
             prefixIcon: CustomIcon.custom_home,
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const MainPageScreen())),
           ),
           commonListItem(
-            text: " Account",
+            text: " Tài khoản",
             prefixIcon: Icons.person,
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const MainPageScreen(
@@ -64,7 +64,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     ))),
           ),
           commonListItem(
-            text: " Purchase History",
+            text: " Lịch sử mua hàng",
             prefixIcon: Icons.history_rounded,
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const HistoryPurchaseScreen())),
@@ -72,7 +72,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           CustomSubmenu(
               width: MediaQuery.of(context).size.width / 1.6,
               menuItem: MenuItem.haveChildren(
-                  "Products",
+                  "Sản phẩm",
                   List.generate(
                       productCategories.length,
                       (index) => MenuItem.withEven(
@@ -105,7 +105,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               radius: 40,
             ),
             Text(
-              name ?? "Luong Quang Huy Bao",
+              name ?? "Lương Quang Huy Bảo",
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             )
           ],

@@ -52,7 +52,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       )),
                   const SizedBox(height: 25),
                   Text(
-                    'Forgot password',
+                    'Quên mật khẩu',
                     style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                       fontSize: 20,
@@ -61,7 +61,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    'Please enter your email to reset the password',
+                    'Nhập Email của bạn để tạo mật khẩu mới',
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       color: const Color(0xff989898),
@@ -72,7 +72,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     height: 25,
                   ),
                   Text(
-                    'Your Email',
+                    'Email của bạn',
                     style: GoogleFonts.inter(
                         fontWeight: FontWeight.w600, fontSize: 16),
                   ),
@@ -115,7 +115,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           );
                         },
                         child: Text(
-                          'Reset Password',
+                          'Tạo mật khẩu mới',
                           style: GoogleFonts.inter(
                               color: Colors.white,
                               fontSize: 16,

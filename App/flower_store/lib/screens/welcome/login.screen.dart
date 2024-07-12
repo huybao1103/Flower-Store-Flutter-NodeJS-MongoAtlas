@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 200,
                 ),
                 const Text(
-                  "Login",
+                  "Đăng nhập",
                   style: TextStyle(
                       fontSize: 28,
                       color: Color.fromARGB(255, 9, 9, 9),
@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   const Text(
-                    "Need a new account ?",
+                    "Tạo tài khoản mới ?",
                   ),
                   TextButton(
                     onPressed: () {
@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                     child: const Text(
-                      "Sign up",
+                      "Đăng ký ",
                       style: TextStyle(color: Color(0xff920000)),
                     ),
                   ),
@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
           obscureText: true,
           enableSuggestions: false,
           autocorrect: false,
-          decoration: genericInputDecoration(label: 'Password'),
+          decoration: genericInputDecoration(label: 'Mật khẩu'),
         ),
       ),
       const SizedBox(height: 10),
@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
               );
             },
             child: const Text(
-              'Forgot password',
+              'Quên mật khẩu',
               style: TextStyle(color: Color(0xff920000)),
               textAlign: TextAlign.right,
             ),
@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
               MaterialPageRoute(builder: (context) => const MainPageScreen()));
         },
         child: const Text(
-          'Login',
+          'Đăng nhập',
           style: TextStyle(
             fontSize: 18,
           ),

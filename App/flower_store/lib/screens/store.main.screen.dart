@@ -104,28 +104,28 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
                       ReusableCarousel(imageList: imgList),
                       ProductListview(
                         products: productsFavorite,
-                        title: 'Your favorite',
+                        title: 'Đã thích',
                         navigator: const FavoriteScreen(),
                         seeAll: true,
                       ),
                       ProductListview(
                         products: products,
-                        title: 'Best Selling',
+                        title: 'Bán nhiều nhất',
                         seeAll: true,
                       ),
                       ProductListview(
                         products: products,
-                        title: 'Special offers',
+                        title: 'Ưu đãi đặc biệt',
                         seeAll: true,
                       ),
                       ProductListview(
                         products: products,
-                        title: 'New Arrival',
+                        title: 'Hàng mới về',
                         seeAll: true,
                       ),
                       ProductListview(
                         products: products,
-                        title: 'Top Rating',
+                        title: 'Được đánh giá cao',
                         seeAll: true,
                       ),
                     ],

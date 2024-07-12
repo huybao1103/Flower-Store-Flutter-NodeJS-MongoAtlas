@@ -50,7 +50,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                       )),
                   const SizedBox(height: 25),
                   Text(
-                    'Check Your Email',
+                    'Xác thực Email',
                     style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                       fontSize: 20,
@@ -59,7 +59,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    'We sent a reset link to "contact@dscode.com" enter 5 digit code that mentioned in the email',
+                    'Chúng tôi đã gửi mã OTP tới "contact@dscode.com" hãy nhập 5 mã số được gửi vào Email của bạn ',
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       color: const Color(0xff989898),
@@ -115,7 +115,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                           );
                         },
                         child: Text(
-                          'Reset Password',
+                          'Tạo mật khẩu mới',
                           style: GoogleFonts.inter(
                               color: Colors.white,
                               fontSize: 16,
@@ -130,14 +130,14 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: 'Haven’t got the email yet? ',
+                            text: 'Mã chưa được gửi vào Email? ',
                             style: GoogleFonts.inter(
                                 color: const Color(0xff989898),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500),
                           ),
                           TextSpan(
-                            text: 'Resend email',
+                            text: 'Gửi lại',
                             style: GoogleFonts.inter(
                               color: const Color(0xff648DDB),
                               fontWeight: FontWeight.bold,

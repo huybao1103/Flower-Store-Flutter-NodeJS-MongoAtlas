@@ -82,9 +82,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             SizedBox(height: 10),
                             Row(
                               children: [
-                                Padding(padding: EdgeInsets.only(left: 110)),
+                                Padding(padding: EdgeInsets.only(left: 120)),
                                 Text(
-                                  'Edit Profile',
+                                  'Thông tin',
                                   style: TextStyle(
                                     color: Color(0xff000000),
                                     fontSize: 24,
@@ -136,7 +136,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(height: 16.0),
-                              const Text('Name', style: titleStyle),
+                              const Text('Tên', style: titleStyle),
                               const SizedBox(height: 8.0),
                               TextField(
                                 controller: _nameController,
@@ -156,7 +156,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               const SizedBox(height: 16.0),
-                              const Text('Password', style: titleStyle),
+                              const Text('Mật khẩu', style: titleStyle),
                               const SizedBox(height: 8.0),
                               TextField(
                                 style: inputtextStyle,
@@ -167,7 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 obscureText: true,
                               ),
                               const SizedBox(height: 16.0),
-                              const Text('Date of Birth', style: titleStyle),
+                              const Text('Ngày sinh', style: titleStyle),
                               const SizedBox(height: 8.0),
                               GestureDetector(
                                 onTap: () async {
@@ -195,7 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               const SizedBox(height: 16.0),
-                              const Text('Country/Region', style: titleStyle),
+                              const Text('Quốc Tịch', style: titleStyle),
                               const SizedBox(height: 8.0),
                               DropdownButtonFormField<String>(
                                 style: inputtextStyle,
@@ -239,7 +239,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         Navigator.of(context).pop();
                                       },
                                       child: const Text(
-                                        'Save changes',
+                                        'Lưu và thay đổi',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 18,

@@ -121,12 +121,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           onTap: () {},
                           name: 'Search',
                           decoration: genericInputDecoration(
-                              label: 'Search', prefixIcon: Icons.search))),
+                              label: 'Tìm kiếm', prefixIcon: Icons.search))),
                 ),
                 Expanded(
                   child: ProductGridview(
                     products: productsFavorite,
-                    title: 'Your favorite',
+                    title: 'Đã thích',
                   ),
                 ),
               ]))),
