@@ -100,12 +100,12 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
                                 );
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: softPink,
-                                padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                                backgroundColor: Color(0xfff56789),
+                                padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
                               ),
-                              child: const Text(
+                              child: const  Text(
                                 'Thêm vào giỏ hàng',
-                                style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
+                                style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),

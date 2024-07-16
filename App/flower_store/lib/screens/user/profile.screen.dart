@@ -75,54 +75,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.0, vertical: 5.0),
-                    child: Column(
-                      children: [
-                        Column(
-                          children: [
-                            SizedBox(height: 10),
-                            Row(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 10, top: 10),
+                            child: Text(
+                                      'Thông tin',
+                                      style: TextStyle(
+                                        color: Color(0xff000000),
+                                        fontSize: 24,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                          ),
+                          Center(
+                            child: Stack(
                               children: [
-                                Padding(padding: EdgeInsets.only(left: 120)),
-                                Text(
-                                  'Thông tin',
-                                  style: TextStyle(
-                                    color: Color(0xff000000),
-                                    fontSize: 24,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.bold,
+                                CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage: NetworkImage(
+                                    'https://i.pinimg.com/originals/5c/e6/ec/5ce6ec7936ed9aa8c2dd89fe540e36a1.jpg',
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: CircleAvatar(
+                                    backgroundColor: Color(0xff544C4C),
+                                    radius: 15,
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      size: 18,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20),
-                          ],
-                        ),
-                        Center(
-                          child: Stack(
-                            children: [
-                              CircleAvatar(
-                                radius: 50,
-                                backgroundImage: NetworkImage(
-                                  'https://i.pinimg.com/originals/5c/e6/ec/5ce6ec7936ed9aa8c2dd89fe540e36a1.jpg',
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 0,
-                                right: 0,
-                                child: CircleAvatar(
-                                  backgroundColor: Color(0xff544C4C),
-                                  radius: 15,
-                                  child: Icon(
-                                    Icons.camera_alt,
-                                    size: 18,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
