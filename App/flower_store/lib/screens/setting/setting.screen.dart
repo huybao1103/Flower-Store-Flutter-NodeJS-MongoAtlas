@@ -195,15 +195,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     Column(
                       children: [
                         const Padding(padding: EdgeInsets.only(top: 15)),
-                        const ListTile(
-                          title: Text(
-                            'Thêm...',
-                            style: TextStyle(
-                                color: Color(0xffADADAD),
-                                fontFamily: 'Rubik',
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
+                        
                         ListTile(
                           title: const Text(
                             'Đăng xuất',
