@@ -1,3 +1,4 @@
+import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xff967BB6),
+                backgroundColor: iconColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),

@@ -1,3 +1,4 @@
+import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/screens/cart/addpaymentmethodpage.screen.dart';
 import 'package:flower_store/screens/cart/checkout.screen.dart';
 import 'package:flower_store/screens/cart/order.succesful.dart';
@@ -167,9 +168,9 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff967BB6),
+                  backgroundColor: iconColor,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                      const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
                 ),
                 child: const Text(
                   'Thực hiện thanh toán',

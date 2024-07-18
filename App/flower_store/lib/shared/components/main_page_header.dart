@@ -24,7 +24,7 @@ Padding mainPageHeader(GlobalKey<ScaffoldState> scaffoldKey, BuildContext contex
             ),
             const Text(
               "4 MAN FLOWER",
-              style: TextStyle(color: headerBrandNameColor, fontSize: 18),
+              style: TextStyle(color: iconColor, fontSize: 18),
             ),
           ],
         ),

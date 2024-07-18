@@ -103,7 +103,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(
-                        color: Color(0xff648DDB),
+                        color: Color(0xfff56789),
                         borderRadius: BorderRadius.all(Radius.circular(12))),
                     child: TextButton(
                         onPressed: () {

@@ -206,7 +206,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff967BB6),
+                  backgroundColor: const Color(0xfff56789),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 ),

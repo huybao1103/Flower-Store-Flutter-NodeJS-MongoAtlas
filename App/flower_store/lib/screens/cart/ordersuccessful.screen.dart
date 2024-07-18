@@ -1,3 +1,4 @@
+import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/screens/cart/addpaymentmethodpage.screen.dart';
 import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class _OrderSuccessfulPageState extends State<OrderSuccessfulPage> {
                                 );
                               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.purple,
+                backgroundColor: iconColor,
                 padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
