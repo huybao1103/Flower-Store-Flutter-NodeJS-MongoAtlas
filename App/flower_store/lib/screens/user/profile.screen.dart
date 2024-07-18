@@ -223,7 +223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor:
-                                            const Color(0xff967BB6),
+                                            iconColor,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(8),

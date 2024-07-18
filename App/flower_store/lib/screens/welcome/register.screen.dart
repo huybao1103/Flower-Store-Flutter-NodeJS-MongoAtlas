@@ -39,7 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(
                     width: double.infinity,
                     child: Text(
-                      'Sign Up',
+                      'Đăng Ký',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             FormBuilderValidators.required(),
           ]),
           decoration: genericInputDecoration(
-            label: 'Your Name',
+            label: 'Tên',
             prefixIcon: Icons.person_2_outlined,
           ),
         ),
@@ -100,7 +100,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             FormBuilderValidators.numeric(),
           ]),
           decoration: genericInputDecoration(
-            label: 'Phone Number',
+            label: 'Số Điện Thoại',
             prefixIcon: Icons.phone_android_outlined,
           ),
         ),
@@ -116,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           enableSuggestions: false,
           autocorrect: false,
           decoration: genericInputDecoration(
-            label: 'Password',
+            label: 'Mật Khẩu',
             prefixIcon: Icons.password_outlined,
           ),
         ),
@@ -143,7 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           }
         },
         child: const Text(
-          'Sign Up',
+          'Đăng Ký',
           style: TextStyle(
             fontSize: 25,
           ),

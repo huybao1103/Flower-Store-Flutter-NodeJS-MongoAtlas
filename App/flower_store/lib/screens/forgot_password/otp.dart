@@ -103,7 +103,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                   Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(
-                        color: Color(0xff648DDB),
+                        color: Color(0xfff56789),
                         borderRadius: BorderRadius.all(Radius.circular(12))),
                     child: TextButton(
                         onPressed: () {
@@ -139,11 +139,11 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                           TextSpan(
                             text: 'Gửi lại',
                             style: GoogleFonts.inter(
-                              color: const Color(0xff648DDB),
+                              color: const Color(0xfff56789),
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                               decoration: TextDecoration.underline,
-                              decorationColor: const Color(0xff648DDB),
+                              decorationColor: const Color(0xfff56789),
                             ),
                           ),
                         ],

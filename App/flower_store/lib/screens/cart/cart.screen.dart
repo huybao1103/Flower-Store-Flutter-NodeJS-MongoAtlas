@@ -178,7 +178,7 @@ class _CartPageState extends State<CartPage> {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CheckoutPage()));
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff967BB6),
+                    backgroundColor: const Color(0xfff56789),
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                   ),
                   child: const Text('Than toán',
