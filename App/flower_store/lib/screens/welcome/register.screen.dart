@@ -1,5 +1,6 @@
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/authorize/signup.model.dart';
+import 'package:flower_store/screens/welcome/login.screen.dart';
 import 'package:flower_store/services/authorize.service.dart';
 import 'package:flower_store/shared/components/input_decoration.dart';
 import 'package:flutter/material.dart';
@@ -128,7 +129,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             data.fromJsonMapping(_registerForm.currentState!.value);
 
             authorizeService.signup(data)
-            .then((val) => debugPrint(val.toString()))
+            .then((val) => Navigator
+                .of(context)
+                .push(MaterialPageRoute(builder: (context) => const LoginScreen())))
             .catchError((onError) => debugPrint(onError.toString()));
             
           }
