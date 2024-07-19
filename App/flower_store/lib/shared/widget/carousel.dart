@@ -57,7 +57,7 @@ class _ReusableCarouselState extends State<ReusableCarousel> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6.0),
                     color: _current == entry.key
-                        ? Color(0xff967BB6)
+                        ? Color(0xfff56789)
                         : Colors.white,
                     border: Border.all(color: Colors.black54, width: 1.0),
                   ),

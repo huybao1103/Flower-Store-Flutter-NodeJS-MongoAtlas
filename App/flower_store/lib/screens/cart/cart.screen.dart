@@ -1,4 +1,6 @@
 import 'package:flower_store/screens/cart/checkout.screen.dart';
+import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
+import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatefulWidget {
@@ -10,25 +12,25 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   List<Map<String, dynamic>> items = [
     {
-      'name': 'Item Name',
+      'name': 'Tên sản phẩm',
       'price': 50,
       'quantity': 1,
       'image': 'assets/images/cart_item.jpg'
     },
     {
-      'name': 'Item Name',
+      'name': 'Tên sản phẩm',
       'price': 50,
       'quantity': 1,
       'image': 'assets/images/cart_item.jpg'
     },
     {
-      'name': 'Item Name',
+      'name': 'Tên sản phẩm',
       'price': 50,
       'quantity': 1,
       'image': 'assets/images/cart_item.jpg'
     },
     {
-      'name': 'adasdasdas',
+      'name': 'Tên sản phẩm',
       'price': 50,
       'quantity': 1,
       'image': 'assets/images/cart_item.jpg'
@@ -74,12 +76,17 @@ class _CartPageState extends State<CartPage> {
                     IconButton(
                       icon: const Icon(Icons.arrow_back, color: Colors.black),
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MainPageScreen(isBack: true,),
+                                  ),
+                                );
                       },
                     ),
                     const SizedBox(width: 8.0),
                     const Text(
-                      'Shopping cart',
+                      'Giỏ hàng',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 30,
@@ -171,10 +178,10 @@ class _CartPageState extends State<CartPage> {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CheckoutPage()));
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff967BB6),
+                    backgroundColor: const Color(0xfff56789),
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                   ),
-                  child: const Text('Checkout',
+                  child: const Text('Than toán',
                       style: TextStyle(fontSize: 16, color: Color(0xffF0F0F0))),
                 ),
               ),
