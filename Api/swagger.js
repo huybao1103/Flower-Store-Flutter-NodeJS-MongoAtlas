@@ -15,7 +15,8 @@ const doc = {
     },
     host: 'localhost:3000',
     definitions: {
-        Accounts: AccountSchemaDoc
+        Accounts: AccountSchemaDoc,
+        Login: { email: 'string', password: 'string' }
     }
 };
 

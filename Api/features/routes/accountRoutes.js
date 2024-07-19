@@ -18,13 +18,23 @@ router.post('/signup', async (req, res) => {
         } 
         #swagger.responses[200] = { description: 'Sign up success', schema: true }
     */
-    if(await accountController.NewAccount(req.body, res)) genericHttpResponse.response(res, value);
-    else genericHttpResponse.response(res, 'Error save task', false);
+    var result = await accountController.NewAccount(req.body, res);
+    if(result === true) genericHttpResponse.success(res, true);
+    else genericHttpResponse.fail(res, result);
 });
 
 
-router.get('/test', (req,res) => {
-    // #swagger.tags = ['Accounts']
-    res.send('Test');
+router.post('/login', async (req,res) => {
+    /*  
+        #swagger.tags = ['Accounts']
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Login.',
+            schema: { $ref: '#/definitions/Login' }
+        } 
+        #swagger.responses[200] = { description: 'Login success', schema: { $ref: '#/definitions/Accounts' } }
+        #swagger.responses[500] = { description: 'Login failt', schema: 'error' }
+    */
+    return accountController.Login(req.body, res);
 })
 module.exports = router;

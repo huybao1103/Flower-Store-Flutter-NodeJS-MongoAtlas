@@ -1,4 +1,6 @@
 import 'package:flower_store/constants/colors.dart';
+import 'package:flower_store/models/authorize/signup.model.dart';
+import 'package:flower_store/services/authorize.service.dart';
 import 'package:flower_store/shared/components/input_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -13,6 +15,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _registerForm = GlobalKey<FormBuilderState>();
+  static AuthorizeService authorizeService = AuthorizeService();
   
   @override
   Widget build(BuildContext context) {
@@ -47,6 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   FormBuilder(
                     key: _registerForm,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     child: Column(
                       children: getRegisterForm()
                     )
@@ -119,8 +123,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
         focusElevation: 5,
         onPressed: () {
           // Validate and save the form values
-          _registerForm.currentState?.saveAndValidate();
-          debugPrint(_registerForm.currentState?.value.toString());
+          if(_registerForm.currentState!.saveAndValidate()) {
+            AccountModel data = AccountModel();
+            data.fromJsonMapping(_registerForm.currentState!.value);
+
+            authorizeService.signup(data)
+            .then((val) => debugPrint(val.toString()))
+            .catchError((onError) => debugPrint(onError.toString()));
+            
+          }
         },
         child: const Text(
           'Sign Up',

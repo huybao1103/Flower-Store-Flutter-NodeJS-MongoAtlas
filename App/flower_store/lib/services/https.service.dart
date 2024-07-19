@@ -7,7 +7,8 @@ import 'package:http/http.dart' as http;
 
 class HttpService {
   constructor() {}
-  String headerUrl = 'http://192.168.208.68:3000/';
+  // String headerUrl = 'http://10.0.2.2:3000/'; // Emulator
+  String headerUrl = 'http://192.168.1.85:3000/'; // Physic device
 
   Future<TType> get<TModel extends IBaseModel, TType>(String path, IBaseModel model) async {
     final response = await http.get(Uri.parse("$headerUrl$path"));
@@ -21,7 +22,7 @@ class HttpService {
   }
 
   Future<TType> post<TModel extends IBaseModel, TType>(String path, IBaseModel model) async {
-    final response = await http.post(Uri.parse("$headerUrl$path"), body: model);
+    final response = await http.post(Uri.parse("$headerUrl$path"), body: model.toJson());
 
     switch (response.statusCode) {
       case HttpStatus.ok:
