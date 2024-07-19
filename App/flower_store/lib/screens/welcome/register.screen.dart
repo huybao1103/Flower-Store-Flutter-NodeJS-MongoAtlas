@@ -1,4 +1,7 @@
 import 'package:flower_store/constants/colors.dart';
+import 'package:flower_store/models/authorize/signup.model.dart';
+import 'package:flower_store/screens/welcome/login.screen.dart';
+import 'package:flower_store/services/authorize.service.dart';
 import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
 import 'package:flower_store/screens/welcome/login.screen.dart';
 import 'package:flower_store/shared/components/input_decoration.dart';
@@ -15,7 +18,8 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _registerForm = GlobalKey<FormBuilderState>();
-
+  static AuthorizeService authorizeService = AuthorizeService();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +56,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   FormBuilder(
                     key: _registerForm,
-                    child: Column(children: getRegisterForm()),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    child: Column(
+                      children: getRegisterForm()
+                    )
                   ),
                 ],
               ),
@@ -134,12 +141,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
         focusElevation: 5,
         onPressed: () {
           // Validate and save the form values
-          if (_registerForm.currentState?.saveAndValidate() ?? false) {
-            debugPrint(_registerForm.currentState?.value.toString());
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-            );
+          if(_registerForm.currentState!.saveAndValidate()) {
+            AccountModel data = AccountModel();
+            data.fromJsonMapping(_registerForm.currentState!.value);
+
+            authorizeService.signup(data)
+            .then((val) => Navigator
+                .of(context)
+                .push(MaterialPageRoute(builder: (context) => const LoginScreen())))
+            .catchError((onError) => debugPrint(onError.toString()));
+            
           }
         },
         child: const Text(

@@ -1,8 +1,12 @@
 class GenericHttpResponse {
     constructor() {}
 
-    response(res, value, isSuccess = true) {
-        return isSuccess ? res.status(200).send(value) : res.status(500).send(value);
+    success(res, value) {
+        return res.status(200).send(value);
+    }
+
+    fail(res, error) {
+        return res.status(500).send(error);
     }
 }
 module.exports = GenericHttpResponse;
