@@ -1,6 +1,6 @@
 import 'package:flower_store/assets/custom_icon.dart';
 import 'package:flower_store/constants/colors.dart';
-import 'package:flower_store/screens/main/profile.screen.dart';
+import 'package:flower_store/screens/user/profile.screen.dart';
 import 'package:flutter/material.dart';
 
 Padding mainPageHeader(GlobalKey<ScaffoldState> scaffoldKey, BuildContext context) {
@@ -24,7 +24,7 @@ Padding mainPageHeader(GlobalKey<ScaffoldState> scaffoldKey, BuildContext contex
             ),
             const Text(
               "4 MAN FLOWER",
-              style: TextStyle(color: headerBrandNameColor, fontSize: 18),
+              style: TextStyle(color: iconColor, fontSize: 18),
             ),
           ],
         ),

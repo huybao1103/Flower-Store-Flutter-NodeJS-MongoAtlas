@@ -2,13 +2,15 @@ import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/authorize/signup.model.dart';
 import 'package:flower_store/screens/welcome/login.screen.dart';
 import 'package:flower_store/services/authorize.service.dart';
+import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
+import 'package:flower_store/screens/welcome/login.screen.dart';
 import 'package:flower_store/shared/components/input_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({ Key? key }) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -21,24 +23,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: gradientBackground
-        ),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: const BoxDecoration(gradient: gradientBackground),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+              constraints:
+                  BoxConstraints(minHeight: MediaQuery.of(context).size.height),
               child: Column(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.only(top: 100),
+                    padding: EdgeInsets.only(top: 30),
+                  ),
+                  Image.asset(
+                    'assets/images/logo_shop.png',
+                    width: 200,
                   ),
                   const SizedBox(
                     width: double.infinity,
                     child: Text(
-                      'Sign Up',
+                      'Đăng Ký',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -73,7 +78,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
           ]),
-          decoration: genericInputDecoration(label: 'Your Name', prefixIcon: Icons.person_2_outlined)
+          decoration: genericInputDecoration(
+            label: 'Tên',
+            prefixIcon: Icons.person_2_outlined,
+          ),
         ),
       ),
       genericFieldContainer(
@@ -83,8 +91,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             FormBuilderValidators.required(),
             FormBuilderValidators.email(),
           ]),
-          decoration: genericInputDecoration(label: 'Email', prefixIcon: Icons.email_outlined)
-        )
+          decoration: genericInputDecoration(
+            label: 'Email',
+            prefixIcon: Icons.email_outlined,
+          ),
+        ),
       ),
       genericFieldContainer(
         field: FormBuilderTextField(
@@ -93,22 +104,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
             FormBuilderValidators.required(),
             FormBuilderValidators.maxLength(12),
             FormBuilderValidators.minLength(10),
-            FormBuilderValidators.numeric()
+            FormBuilderValidators.numeric(),
           ]),
-          decoration: genericInputDecoration(label: 'Phone Number', prefixIcon: Icons.phone_android_outlined)
-        )
+          decoration: genericInputDecoration(
+            label: 'Số Điện Thoại',
+            prefixIcon: Icons.phone_android_outlined,
+          ),
+        ),
       ),
       genericFieldContainer(
         field: FormBuilderTextField(
           name: 'password',
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
-            FormBuilderValidators.minLength(6)
+            FormBuilderValidators.minLength(6),
           ]),
           obscureText: true,
           enableSuggestions: false,
           autocorrect: false,
-          decoration: genericInputDecoration(label: 'Password', prefixIcon: Icons.password_outlined),
+          decoration: genericInputDecoration(
+            label: 'Mật Khẩu',
+            prefixIcon: Icons.password_outlined,
+          ),
         ),
       ),
       const SizedBox(height: 20),
@@ -118,7 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         padding: const EdgeInsets.all(15),
         shape: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(color: Colors.transparent)
+          borderSide: const BorderSide(color: Colors.transparent),
         ),
         elevation: 10,
         focusElevation: 5,
@@ -137,7 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           }
         },
         child: const Text(
-          'Sign Up',
+          'Đăng Ký',
           style: TextStyle(
             fontSize: 25,
           ),

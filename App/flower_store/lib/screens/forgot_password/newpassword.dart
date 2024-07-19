@@ -1,3 +1,4 @@
+import 'package:flower_store/screens/welcome/login.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,7 +52,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                       )),
                   const SizedBox(height: 25),
                   Text(
-                    'Set a new password',
+                    'Đặt lại mật khẩu',
                     style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                       fontSize: 20,
@@ -60,7 +61,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    'Create a new password. Ensure it differs from previous ones for security',
+                    'Tạo mật khẩu mới. Đảm bảo nó khác với những cái trước để bảo mật',
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       color: const Color(0xff989898),
@@ -80,7 +81,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                 children: [
                   const SizedBox(height: 8),
                   Text(
-                    'Password',
+                    'Mật khẩu mới',
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       color: const Color.fromARGB(255, 0, 0, 0),
@@ -113,7 +114,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Confirm Password',
+                    'Nhập lại mật khẩu',
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       color: const Color.fromARGB(255, 0, 0, 0),
@@ -148,12 +149,18 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                   Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(
-                        color: Color(0xff648DDB),
+                        color: Color(0xfff56789),
                         borderRadius: BorderRadius.all(Radius.circular(12))),
                     child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen()),
+                          );
+                        },
                         child: Text(
-                          'Update Password',
+                          'Đặt lại mật khẩu',
                           style: GoogleFonts.inter(
                               color: Colors.white,
                               fontSize: 16,

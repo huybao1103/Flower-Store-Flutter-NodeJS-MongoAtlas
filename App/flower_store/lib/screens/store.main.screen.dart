@@ -4,7 +4,7 @@ import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/menu.model.dart';
 import 'package:flower_store/models/product.dart';
 import 'package:flower_store/screens/favorite.screen.dart';
-import 'package:flower_store/screens/main/profile.screen.dart';
+import 'package:flower_store/screens/user/profile.screen.dart';
 import 'package:flower_store/shared/components/custom_drawer.dart';
 import 'package:flower_store/shared/components/main_page_header.dart';
 import 'package:flower_store/shared/widget/carousel.dart';
@@ -104,28 +104,28 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
                       ReusableCarousel(imageList: imgList),
                       ProductListview(
                         products: productsFavorite,
-                        title: 'Your favorite',
-                        navigator: FavoriteScreen(),
+                        title: 'Đã thích',
+                        navigator: const FavoriteScreen(),
                         seeAll: true,
                       ),
                       ProductListview(
                         products: products,
-                        title: 'Best Selling',
+                        title: 'Bán nhiều nhất',
                         seeAll: true,
                       ),
                       ProductListview(
                         products: products,
-                        title: 'Special offers',
+                        title: 'Ưu đãi đặc biệt',
                         seeAll: true,
                       ),
                       ProductListview(
                         products: products,
-                        title: 'New Arrival',
+                        title: 'Hàng mới về',
                         seeAll: true,
                       ),
                       ProductListview(
                         products: products,
-                        title: 'Top Rating',
+                        title: 'Được đánh giá cao',
                         seeAll: true,
                       ),
                     ],

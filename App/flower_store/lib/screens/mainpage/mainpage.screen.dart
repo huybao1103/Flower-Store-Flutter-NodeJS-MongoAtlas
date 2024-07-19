@@ -1,15 +1,19 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flower_store/screens/cart/cart.screen.dart';
-import 'package:flower_store/screens/main/profile.screen.dart';
+import 'package:flower_store/screens/user/profile.screen.dart';
 import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flower_store/screens/store_product_page/all_product.screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flower_store/screens/setting/setting.screen.dart';
 import '../../shared/components/custom.theme.dart';
 
+Widget? preScreen;
+
 class MainPageScreen extends StatefulWidget {
   final Widget? currentScreen;
-  const MainPageScreen({super.key, this.currentScreen});
+  final bool? isBack;
+  const MainPageScreen({super.key, this.currentScreen, this.isBack});
 
   @override
   State<MainPageScreen> createState() => _MainPageScreenState();
@@ -38,9 +42,15 @@ class _MainPageScreenState extends State<MainPageScreen> {
         },
       ),
     ];
-    if(widget.currentScreen != null) {
-      _currentIndex = _pages.indexWhere((wg) => widget.currentScreen!.toString() == wg.toString());
+    if (widget.isBack != null && widget.isBack!) {
+      _currentIndex =
+          _pages.indexWhere((wg) => preScreen!.toString() == wg.toString());
     }
+    if (widget.currentScreen != null) {
+      _currentIndex = _pages.indexWhere(
+          (wg) => widget.currentScreen!.toString() == wg.toString());
+    }
+    preScreen = _pages[_currentIndex];
   }
 
   @override
@@ -105,9 +115,10 @@ class _MainPageScreenState extends State<MainPageScreen> {
           backgroundColor:
               isDarkMode ? const Color(0xff2D2C2C) : const Color(0xffEAEAEA),
           animationCurve: Curves.easeInOut,
-          animationDuration: const Duration(milliseconds: 600),
+          animationDuration: const Duration(milliseconds: 400),
           onTap: (index) {
             setState(() {
+              preScreen = _pages[_currentIndex];
               _currentIndex = index;
               if (index == 4) {
                 _pages[4] = SettingScreen(

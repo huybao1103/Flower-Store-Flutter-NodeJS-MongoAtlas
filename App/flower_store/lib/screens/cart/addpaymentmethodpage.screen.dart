@@ -34,7 +34,7 @@ class _AddPaymentMethodPageState extends State<AddPaymentMethodPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Payment Method'),
+        title: const Text('Phương thức thanh toán'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {

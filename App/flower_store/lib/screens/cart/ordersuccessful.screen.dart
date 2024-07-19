@@ -1,4 +1,6 @@
+import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/screens/cart/addpaymentmethodpage.screen.dart';
+import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -31,41 +33,41 @@ class _OrderSuccessfulPageState extends State<OrderSuccessfulPage> {
                 ),
               ),
             ),
-            Text(
-              'Order Successfully Placed',
+            const Text(
+              'Đặt hàng thành công',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 16),
-            Text(
-              'Your Order Has Been Successfully Placed\nAnd Has Been Processed For Delivery',
+            const SizedBox(height: 16),
+            const Text(
+              'Đơn Hàng Của Bạn Đã Được Đặt Thành Công\nVà Đang Được Xử Lý Để Giao Hàng.',
               style: TextStyle(
                 fontSize: 16,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => AddPaymentMethodPage(),
+                                    builder: (context) => const StoreMainScreen(),
                                   ),
                                 );
                               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.purple,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                backgroundColor: iconColor,
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              child: Text(
-                'Continue Shopping',
+              child: const Text(
+                'Tiếp tục mua hàng',
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),

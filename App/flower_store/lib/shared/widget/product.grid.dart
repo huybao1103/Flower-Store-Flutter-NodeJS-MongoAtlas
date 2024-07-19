@@ -39,8 +39,8 @@ class ProductGridview extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(8,0,8,10),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 8.0,
-              mainAxisSpacing: 8.0,
+              crossAxisSpacing: 5.0,
+              mainAxisSpacing: 1.0,
               childAspectRatio: 0.75,
             ),
             itemCount: products.length,
