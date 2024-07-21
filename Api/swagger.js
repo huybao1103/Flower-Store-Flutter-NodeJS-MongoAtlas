@@ -8,7 +8,8 @@ const { app } = require('./app');
 const {AccountSchemaDoc} = require('./features/models/account/account');
 const {ProductSchemaDoc} = require('./features/models/product/product');
 const {CategorySchemaDoc} = require('./features/models/category/category');
-
+const {InvoicetSchemaDoc} = require('./features/models/invoice/invoice');
+const {DetailInvoiceSchemaDoc} = require('./features/models/invoice/detailInvoice');
 
 const doc = {
     info: {
@@ -27,12 +28,18 @@ const doc = {
         UpdateCategory: {
             name: 'string', 
             idProduct: 'string' 
-        }
-    },
+        },
+        FindProduct: {id: 'string', nameProduct:'string'},
+        Invoice: InvoicetSchemaDoc,
+        FindInvoice: {id: 'string', acountId:'string'},
+        DetailInvoice: DetailInvoiceSchemaDoc,
+        
+    }
+
 };
 
 const outputFile = './swagger-output.json';
-const routes = ['./features/routes/accountRoutes','./features/routes/categoryRoutes'];
+const routes = ['./features/routes/accountRoutes','./features/routes/categoryRoutes','./features/routes/invoiceRoutes','./features/routes/detailInvoiceRoutes','./features/routes/productRoutes'];
 
 swaggerAutogen(outputFile, routes, doc).then(() => {
     require("./index");
