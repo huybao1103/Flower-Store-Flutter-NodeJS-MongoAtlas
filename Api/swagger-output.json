@@ -76,6 +76,178 @@
           }
         }
       }
+    },
+    "/find-product": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Find product",
+            "schema": {
+              "$ref": "#/definitions/FindProduct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Find success ",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          },
+          "500": {
+            "description": "Find Fail",
+            "schema": {
+              "type": "string",
+              "example": "error",
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get-product": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new Product.",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New Products Success",
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update-product/{id}": {
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update Product.",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Products Success",
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delete-product/{id}": {
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Delete Product by ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Products Success",
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getbyid-product/{id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Get Product by ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Product Success",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          }
+        }
+      }
+    },
+    "/getall-products": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Get All Products Success",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -114,6 +286,66 @@
           "example": "string"
         },
         "password": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Products": {
+      "type": "object",
+      "properties": {
+        "nameProduct": {
+          "type": "string",
+          "example": "string"
+        },
+        "price": {
+          "type": "string",
+          "example": "number"
+        },
+        "img": {
+          "type": "string",
+          "example": "string"
+        },
+        "quantity": {
+          "type": "string",
+          "example": "number"
+        },
+        "descrip": {
+          "type": "string",
+          "example": "string"
+        },
+        "inclueId": {
+          "type": "string",
+          "example": "string"
+        },
+        "fav": {
+          "type": "string",
+          "example": "boolean"
+        },
+        "cateid": {
+          "type": "string",
+          "example": "string"
+        }
+      },
+      "required": [
+        "nameProduct",
+        "price",
+        "img",
+        "quantity",
+        "descrip",
+        "inclueId",
+        "fav",
+        "cateid"
+      ]
+    },
+    "FindProduct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "string"
+        },
+        "nameProduct": {
           "type": "string",
           "example": "string"
         }

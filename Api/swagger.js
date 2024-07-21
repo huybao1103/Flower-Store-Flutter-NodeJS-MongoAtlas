@@ -6,6 +6,7 @@ const { app } = require('./app');
 
 // Schemas
 const {AccountSchemaDoc} = require('./features/models/account/account');
+const {ProductSchemaDoc} = require('./features/models/product/product');
 const {CategorySchemaDoc} = require('./features/models/category/category');
 
 
@@ -18,6 +19,8 @@ const doc = {
     definitions: {
         Accounts: AccountSchemaDoc,
         Login: { email: 'string', password: 'string' },
+        Products: ProductSchemaDoc,
+        FindProduct: {id: 'string', nameProduct:'string'},
         Categories: CategorySchemaDoc,
         FindCategory: { name: 'string'},
         DeleteCategory: { id: 'string'},
