@@ -19,7 +19,10 @@ class AccountModel extends IBaseModel<AccountModel> {
   }
 
   @override
-  AccountModel fromJson(Map<String, Object> json) => fromJsonMapping(json);
+  AccountModel fromJson(Map<String, Object> json) {
+    fromJsonMapping(json);
+    return this;
+  }
   
   @override
   Map<String, dynamic> toJson() {
