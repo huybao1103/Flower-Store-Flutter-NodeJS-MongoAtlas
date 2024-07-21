@@ -23,6 +23,30 @@ router.post('/add-category', async (req, res) => {
     else genericHttpResponse.fail(res, result);
 });
 
+router.get('/get-list-category', async (req, res) => {
+    /*  
+        #swagger.tags = ['Categories']
+        #swagger.responses[200] = { description: 'Get category list success', schema: { $ref: '#/definitions/Categories' } }
+        #swagger.responses[500] = { description: 'Get category list failed', schema: 'error' }
+    */
+    return categoryController.GetCategoryList(req, res);
+});
+
+router.get('/get-category-by-id/:id', async (req, res) => {
+    /*  
+        #swagger.tags = ['Categories']
+        #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'Get category by id',
+            required: true,
+            type: 'string'
+        }
+        #swagger.responses[200] = { description: 'Get category success', schema: { $ref: '#/definitions/Categories' } }
+        #swagger.responses[404] = { description: 'Category not found', schema: { message: 'string' } }
+        #swagger.responses[500] = { description: 'Get category failed', schema: 'error' }
+    */
+    return categoryController.GetCategoryById(req, res);
+});
 
 router.get('/find-category', async (req,res) => {
     /*  
@@ -77,4 +101,5 @@ router.delete('/delete-category/:id', async (req, res) => {
     */
     return categoryController.DeleteCategory(req, res);
 });
+
 module.exports = router;

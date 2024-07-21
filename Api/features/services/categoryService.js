@@ -3,12 +3,12 @@ const {CategoryModel} = require('../models/category/category');
 class CategoryService {
     constructor() {}
 
-    async NewCategory(name, idProduct) {
+    async NewCategory(name) {
         try {
-            const acocunt = new CategoryModel({
-                name, idProduct
+            const category = new CategoryModel({
+                name
             });
-            await acocunt.save();
+            await category.save();
             return true;
         }
         catch(e) {
@@ -41,6 +41,22 @@ class CategoryService {
         try {
             await CategoryModel.findByIdAndDelete(_id).exec();
             return true;
+        } catch (e) {
+            return e;
+        }
+    }
+
+    async GetCategoryList() {
+        try {
+            return await CategoryModel.find().exec();
+        } catch (e) {
+            return e;
+        }
+    }
+
+    async GetCategoryById(id) {
+        try {
+            return await CategoryModel.findById(id).exec();
         } catch (e) {
             return e;
         }

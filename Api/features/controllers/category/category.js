@@ -5,7 +5,7 @@ class CategoryController {
     constructor() {}
 
     async NewCategory(req, res) {
-        return await categoryService.NewCategory(req.name, req.email, req.phone, req.password);
+        return await categoryService.NewCategory(req.name);
     }
 
     async FindCategory(req, res) {
@@ -14,11 +14,19 @@ class CategoryController {
     
     async UpdateCategory(req, res) {
         const updatedData = req.body;
-        return await categoryService.UpdateCategory(req._id, updatedData, res);
+        return await categoryService.UpdateCategory(req.params._id, updatedData);
     }
 
     async DeleteCategory(req, res) {
-        return await categoryService.DeleteCategory(req._id, res);
+        return await categoryService.DeleteCategory(req.params._id);
+    }
+
+    async GetCategoryList(req, res) {
+        return await categoryService.GetCategoryList();
+    }
+
+    async GetCategoryById(req, res) {
+        return await categoryService.GetCategoryById(req.params.id);    
     }
 }
 module.exports = CategoryController;
