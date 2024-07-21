@@ -7,7 +7,8 @@ const { app } = require('./app');
 // Schemas
 const {AccountSchemaDoc} = require('./features/models/account/account');
 const {ProductSchemaDoc} = require('./features/models/product/product');
-
+const {InvoicetSchemaDoc} = require('./features/models/invoice/invoice');
+const {DetailInvoiceSchemaDoc} = require('./features/models/invoice/detailInvoice');
 
 const doc = {
     info: {
@@ -19,12 +20,16 @@ const doc = {
         Accounts: AccountSchemaDoc,
         Login: { email: 'string', password: 'string' },
         Products: ProductSchemaDoc,
-        FindProduct: {id: 'string', nameProduct:'string'}
+        FindProduct: {id: 'string', nameProduct:'string'},
+        Invoice: InvoicetSchemaDoc,
+        FindInvoice: {id: 'string', acountId:'string'},
+        DetailInvoice: DetailInvoiceSchemaDoc,
+        
     }
 };
 
 const outputFile = './swagger-output.json';
-const routes = ['./features/routes/accountRoutes','./features/routes/productRoutes'];
+const routes = ['./features/routes/accountRoutes','./features/routes/productRoutes','./features/routes/invoiceRoutes','./features/routes/detailInvoiceRoutes'];
 
 swaggerAutogen(outputFile, routes, doc).then(() => {
     require("./index");
