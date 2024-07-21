@@ -6,6 +6,7 @@ const { app } = require('./app');
 
 // Schemas
 const {AccountSchemaDoc} = require('./features/models/account/account');
+const {ProductSchemaDoc} = require('./features/models/product/product');
 
 
 const doc = {
@@ -16,12 +17,14 @@ const doc = {
     host: 'localhost:3000',
     definitions: {
         Accounts: AccountSchemaDoc,
-        Login: { email: 'string', password: 'string' }
+        Login: { email: 'string', password: 'string' },
+        Products: ProductSchemaDoc,
+        FindProduct: {id: 'string', nameProduct:'string'}
     }
 };
 
 const outputFile = './swagger-output.json';
-const routes = ['./features/routes/accountRoutes'];
+const routes = ['./features/routes/accountRoutes','./features/routes/productRoutes'];
 
 swaggerAutogen(outputFile, routes, doc).then(() => {
     require("./index");
