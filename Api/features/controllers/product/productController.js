@@ -15,12 +15,7 @@ class ProductController {
     async UpdateProduct(req, res) {
         const { id } = req.params;
         const updateData = req.body;
-        const result = await productService.UpdateProduct(id, updateData);
-        if (result) {
-            return res.status(200).json(result);
-        } else {
-            return res.status(500).send("Error updating product");
-        }
+        return await productService.UpdateProduct(id, updateData);
     }
 
     async DeleteProduct(req, res) {
@@ -32,21 +27,11 @@ class ProductController {
 
     async GetProductById(req, res) {
         const { id } = req.params;
-        const result = await productService.GetProductById(id);
-        if (result) {
-            return res.status(200).json(result);
-        } else {
-            return res.status(500).send("Product not found");
-        }
+        return await productService.GetProductById(id);
     }
 
     async GetAllProducts(req, res) {
-        const result = await productService.GetAllProducts();
-        if (result) {
-            return res.status(200).json(result);
-        } else {
-            return res.status(500).send("Error fetching products");
-        }
+        return await productService.GetAllProducts();
     }
 }
 module.exports = ProductController;
