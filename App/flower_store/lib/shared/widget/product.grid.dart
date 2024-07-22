@@ -1,4 +1,5 @@
 // lib/widgets/product_grid.dart
+import 'package:flower_store/models/product/product.model.dart';
 import 'package:flower_store/shared/widget/sorting.dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart';
@@ -6,7 +7,7 @@ import '../../models/product.dart';
 import 'product_card_favorite.dart';
 
 class ProductGridview extends StatelessWidget {
-  final List<Product> products;
+  final List<ProductModel> products;
   final String title;
   ProductGridview({Key? key, required this.products, required this.title})
       : super(key: key);

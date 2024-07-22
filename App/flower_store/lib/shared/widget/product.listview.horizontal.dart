@@ -1,10 +1,11 @@
 // lib/widgets/product_grid.dart
+import 'package:flower_store/models/product/product.model.dart';
 import 'package:flutter/material.dart';
 import '../../models/product.dart';
 import 'product_card_favorite.dart';
 
 class ProductListview extends StatelessWidget {
-  final List<Product> products;
+  final List<ProductModel> products;
   final String title;
   Widget? navigator;
   late bool? seeAll = true;

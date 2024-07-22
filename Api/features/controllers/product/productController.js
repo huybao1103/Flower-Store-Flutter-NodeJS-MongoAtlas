@@ -33,5 +33,14 @@ class ProductController {
     async GetAllProducts(req, res) {
         return await productService.GetAllProducts();
     }
+
+    async GetProductFavorite(req, res) {
+        return await productService.GetProductFavorite();
+    }
+
+    async toggleFavorite(req, res) {
+        const { id, isFavorite } = req.body;
+        return await productService.toggleFavorite(id, isFavorite);
+    }
 }
 module.exports = ProductController;

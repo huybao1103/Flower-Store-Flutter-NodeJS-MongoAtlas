@@ -66,7 +66,26 @@ class ProductService {
         }
     }
 
-   
+    async GetProductFavorite() {
+        try {
+          const favoriteProducts = await ProductModel.find({ fav: true }).exec();
+          return favoriteProducts;
+        } catch (e) {
+          throw new Error(e);
+        }
+      }
+    async toggleFavorite(id, isFavorite) {
+        try {
+            const product = await ProductModel.findByIdAndUpdate(
+                id,
+                { fav: isFavorite },
+                { new: true }
+            ).exec();
+            return product;
+        } catch (e) {
+            throw new Error('Không thể cập nhật trạng thái yêu thích: ' + e.message);
+        }
+    }
 
 }
 module.exports = ProductService;
