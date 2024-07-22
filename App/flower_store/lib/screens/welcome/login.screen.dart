@@ -160,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
             
             authorizeService.login(model)
             .then((val) {
-                debugPrint(val.email);
+                debugPrint(val.toJson().toString());
                 Navigator
                 .of(context)
                 .push(MaterialPageRoute(builder: (context) => const MainPageScreen()));
