@@ -5,24 +5,14 @@ class InvoiceController {
     constructor() {}
 
     async NewInvoice(req, res) {
-        return await invoiceService.NewInvoice( req.detailinvoiceId,req.accountId);
+        return await invoiceService.NewInvoice( req.nameInvoice,req.detailInvoice,req.productId,req.quantity,req.price,req.address,req.date,req.accountId);
     }
 
     async FindInvoice(req, res) {
         return await invoiceService.FindInvoice(req.accountId, res);
     }
 
-    async UpdateInvoice(req, res) {
-        const { id } = req.params;
-        const updateData = req.body;
-        return await invoiceService.UpdateInvoice(id, updateData);
-       
-    }
-
-    async DeleteInvoice(req, res) {     
-        const { id } = req.params;
-        return await invoiceService.DeleteInvoice(id);
-    }
+   
 
     async GetInvoiceById(req, res) {
         const { id } = req.params;
@@ -34,5 +24,7 @@ class InvoiceController {
         return await invoiceService.GetAllInvoices();
         
     }
+
+
 }
 module.exports = InvoiceController;

@@ -6,7 +6,7 @@ class InvoiceService {
     async NewInvoice(detailinvoiceId,accountId) {
         try {
             const invoice = new InvoiceModel({
-                detailinvoiceId,accountId
+                nameInvoice,detailInvoice,productId,quantity,price,address,date,accountId
             });
             await invoice.save();
             return true;
@@ -28,23 +28,7 @@ class InvoiceService {
         return null;
     }
 
-    async UpdateInvoice(id, updateData) {
-        try {
-            const invoice = await InvoiceModel.findByIdAndUpdate(id, updateData, { new: true });
-            return invoice;
-        } catch (e) {
-            return res.status(500).send(e); 
-        }
-    }
-
-    async DeleteInvoice(id) {
-        try {
-            await InvoiceModel.findByIdAndDelete(id);
-            return true;
-        } catch (e) {
-            return e;
-        }
-    }
+    
     
     async GetInvoiceById(id) {
         try {
