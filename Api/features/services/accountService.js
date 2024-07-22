@@ -19,7 +19,8 @@ class AccountService {
 
     async Login(email, password, res) {
         try {
-            var temp = await AccountModel.findOne({email, password}).exec();
+            var doc = await AccountModel.findOne({email: email, password: password}).exec();
+            
             return await AccountModel.findOne({email, password}).exec();
         } 
         catch(e) {

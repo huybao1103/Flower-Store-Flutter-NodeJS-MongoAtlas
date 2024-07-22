@@ -35,6 +35,7 @@ router.post('/login', async (req,res) => {
         #swagger.responses[200] = { description: 'Login success', schema: { $ref: '#/definitions/Accounts' } }
         #swagger.responses[500] = { description: 'Login failt', schema: 'error' }
     */
-    return accountController.Login(req.body, res);
+    var result = await accountController.Login(req.body, res);
+    return genericHttpResponse.success(res, result);
 })
 module.exports = router;

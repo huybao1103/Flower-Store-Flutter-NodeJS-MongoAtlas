@@ -77,12 +77,16 @@ router.get('/getbyid-product/:id', async (req, res) => {
     else genericHttpResponse.fail(res, result);
 });
 
-router.get('/getall-product', async (req, res) => {
+router.post('/getall-product', async (req, res) => {
     /*  
         #swagger.tags = ['Product']
+        #swagger.parameters['ids'] = {
+            in: 'path',
+            description: 'Get Product by list of IDs.',
+        }
         #swagger.responses[200] = { description: 'Get All Products Success', schema: { $ref: '#/definitions/Products' } }
     */
-    var result = await productController.GetAllProducts(req, res);
+    var result = await productController.GetAllProducts(req.body, res);
     if(result) genericHttpResponse.success(res, result);
     else genericHttpResponse.fail(res, result);
 });

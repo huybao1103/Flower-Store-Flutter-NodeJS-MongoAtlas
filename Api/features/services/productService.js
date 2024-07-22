@@ -55,9 +55,11 @@ class ProductService {
         }
     }
 
-    async GetAllProducts() {
+    async GetAllProducts(ids) {
         try {
-            const products = await ProductModel.find().exec();
+            const products = ids != null && ids instanceof Array
+            ? await ProductModel.find({ _id: { $in: ids }}).exec() 
+            : await ProductModel.find().exec();
             return products;
         } catch (e) {
             return e;
