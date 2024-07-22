@@ -2,37 +2,38 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flower_store/models/base.model.dart';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 
 class HttpService {
   constructor() {}
   // String headerUrl = 'http://10.0.2.2:3000/'; // Emulator
-  String headerUrl = 'http://192.168.1.5:3000/api/'; // Physic device
+  String headerUrl = 'http://192.168.1.85:3000/api/'; // Physic device
+  var dio = Dio();
 
   Future<TResultType> get<TModel extends IBaseModel, TResultType>(String path, IBaseModel model) async {
-    final response = await http.get(Uri.parse("$headerUrl$path"));
+    final response = await dio.get("$headerUrl$path");
 
     switch (response.statusCode) {
       case HttpStatus.ok:
-        return _jsonBodyParser<TModel>(model, response.body);
+        return _jsonBodyParser<TModel>(model, response.data);
       default:
-        throw response.body;
+        throw response.data;
     }
   }
 
   Future<TResultType> post<TModel extends IBaseModel, TResultType>(String path, IBaseModel model, { IBaseModel? returnType }) async {
-    final response = await http.post(Uri.parse("$headerUrl$path"), body: model.toJson());
+    final response = await dio.post("$headerUrl$path", data: model.toJson());
 
     switch (response.statusCode) {
       case HttpStatus.ok:
-        return _jsonBodyParser<TResultType>(model, response.body, returnType: returnType);
+        return _jsonBodyParser<TResultType>(model, response.data, returnType: returnType);
       default:
-        throw response.body;
+        throw response.data;
     }
   }
 
-  dynamic _jsonBodyParser<TResultType>(IBaseModel model, String body, { IBaseModel? returnType }) {
-    final jsonBody = jsonDecode(body);
+  dynamic _jsonBodyParser<TResultType>(IBaseModel model, dynamic jsonBody, { IBaseModel? returnType }) {
     if (jsonBody is List) {
       if(jsonBody.isNotEmpty && jsonBody.first is Map) {
         return jsonBody.map((e) => returnType != null 

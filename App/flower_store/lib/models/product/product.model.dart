@@ -28,26 +28,26 @@ class ProductModel extends IBaseModel<ProductModel> {
   @override
   fromJsonMapping(Map<String, dynamic> json) {
     nameProduct = json['nameProduct'];
-    price = double.parse(json['price']);
-    img = json['img'] ?? '';
-    quantity = int.parse(json['quantity']);
-    descrip = json['descrip'] ?? '';
+    price = double.parse(json['price'].toString());
+    img = json['img'];
+    quantity = int.parse(json['quantity'].toString());
+    descrip = json['descrip'];
     var inclueId = json['inclueId'] != null ? List<String>.from(json['inclueId']) : null;
-    fav = bool.parse(json['fav']);
-    cateid = json['cateid'] ?? '';
+    fav = json['fav'];
+    cateid = json['cateid'];
   }
 
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['nameProduct'] = nameProduct;
-    data['price'] = price.toString();
+    data['price'] = price;
     data['img'] = img;
-    data['quantity'] = quantity.toString();
-    data['descrip'] = descrip ?? '';
-    data['inclueId'] = inclueId ?? [''].toString();
-    data['fav'] = fav ?? false.toString();
-    data['cateid'] = cateid ?? '';
+    data['quantity'] = quantity;
+    data['descrip'] = descrip;
+    data['inclueId'] = inclueId;
+    data['fav'] = fav;
+    data['cateid'] = cateid;
     return data;
   }
 }
