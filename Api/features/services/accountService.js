@@ -3,8 +3,11 @@ const {AccountModel} = require('../models/account/account');
 class AccountService {
     constructor() {}
 
-    async NewAccount(name, email, phone, password) {
+    async NewAccount(_id, name, email, phone, password) {
         try {
+            if(_id != null) {
+                return await AccountModel.findByIdAndUpdate(_id, {name, email, phone, password}).exec();
+            }
             const acocunt = new AccountModel({
                 name, email, password, phone
             });
