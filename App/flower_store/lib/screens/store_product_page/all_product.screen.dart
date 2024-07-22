@@ -43,7 +43,6 @@ class _AllProductScreenState extends State<AllProductScreen> {
         price: 0,
         img: '',
         quantity: 0,
-        cateid: '',
       ));
       setState(() {
         products = productList;

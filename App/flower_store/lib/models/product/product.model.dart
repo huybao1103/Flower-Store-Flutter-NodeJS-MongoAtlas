@@ -4,13 +4,13 @@ import 'package:flower_store/models/base.model.dart';
 
 class ProductModel extends IBaseModel<ProductModel> {
   late String nameProduct;
-  late String price;
+  late double price;
   late String img;
   late int quantity;
   String? descrip;
   late List<ProductModel>? includeProducts;
   bool? fav;
-  late String? cateid;
+  late String? cateid = '';
   
   ProductModel({
     required this.nameProduct,
@@ -28,13 +28,13 @@ class ProductModel extends IBaseModel<ProductModel> {
   @override
   fromJsonMapping(Map<String, dynamic> json) {
     nameProduct = json['nameProduct'];
-    price = json['price'];
-    img = json['img'];
-    quantity = json['quantity'];
-    descrip = json['descrip'];
+    price = double.parse(json['price']);
+    img = json['img'] ?? '';
+    quantity = int.parse(json['quantity']);
+    descrip = json['descrip'] ?? '';
     var inclueId = json['inclueId'] != null ? List<String>.from(json['inclueId']) : null;
-    fav = json['fav'];
-    cateid = json['cateid'];
+    fav = bool.parse(json['fav']);
+    cateid = json['cateid'] ?? '';
   }
 
   @override
@@ -44,10 +44,10 @@ class ProductModel extends IBaseModel<ProductModel> {
     data['price'] = price.toString();
     data['img'] = img;
     data['quantity'] = quantity.toString();
-    data['descrip'] = descrip;
-    data['inclueId'] = inclueId;
-    data['fav'] = fav;
-    data['cateid'] = cateid;
+    data['descrip'] = descrip ?? '';
+    data['inclueId'] = inclueId ?? [''].toString();
+    data['fav'] = fav ?? false.toString();
+    data['cateid'] = cateid ?? '';
     return data;
   }
 }
