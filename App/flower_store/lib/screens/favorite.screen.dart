@@ -123,12 +123,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           decoration: genericInputDecoration(
                               label: 'Tìm kiếm', prefixIcon: Icons.search))),
                 ),
-                Expanded(
-                  child: ProductGridview(
-                    products: productsFavorite,
-                    title: 'Đã thích',
-                  ),
-                ),
+                // Expanded(
+                //   child: ProductGridview(
+                //     products: productsFavorite,
+                //     title: 'Đã thích',
+                //   ),
+                // ),
               ]))),
       drawer: const CustomDrawer(),
     );

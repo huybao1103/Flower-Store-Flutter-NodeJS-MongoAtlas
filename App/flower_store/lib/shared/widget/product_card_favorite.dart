@@ -1,10 +1,11 @@
 // lib/widgets/product_card.dart
 import 'package:flower_store/models/product.dart';
+import 'package:flower_store/models/product/product.model.dart';
 import 'package:flower_store/screens/store_product_page/product_display.screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  final Product product;
+  final ProductModel product;
   Widget? navigator;
   ProductCard({super.key, required this.product, this.navigator}) ;
 
@@ -27,7 +28,7 @@ class ProductCard extends StatelessWidget {
                     topRight: Radius.circular(10.0),
                   ),
                   child: Image.network(
-                    product.imageUrl,
+                    product.img,
                     height: 150,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -37,8 +38,8 @@ class ProductCard extends StatelessWidget {
                   top: 8.0,
                   right: 8.0,
                   child: Icon(
-                    product.isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: product.isFavorite ? Colors.red : Colors.grey,
+                    product.fav == false ? Icons.favorite : Icons.favorite_border,
+                    color: product.fav == true ? Colors.red : Colors.grey,
                   ),
                 ),
               ],
@@ -56,8 +57,8 @@ class ProductCard extends StatelessWidget {
                   child: Text(
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    product.name,
-                    style: TextStyle(
+                    product.nameProduct,
+                    style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -69,7 +70,7 @@ class ProductCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 '\$${product.price}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,

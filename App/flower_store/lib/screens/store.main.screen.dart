@@ -101,33 +101,33 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: Column(
                     children: [
-                      ReusableCarousel(imageList: imgList),
-                      ProductListview(
-                        products: productsFavorite,
-                        title: 'Đã thích',
-                        navigator: const FavoriteScreen(),
-                        seeAll: true,
-                      ),
-                      ProductListview(
-                        products: products,
-                        title: 'Bán nhiều nhất',
-                        seeAll: true,
-                      ),
-                      ProductListview(
-                        products: products,
-                        title: 'Ưu đãi đặc biệt',
-                        seeAll: true,
-                      ),
-                      ProductListview(
-                        products: products,
-                        title: 'Hàng mới về',
-                        seeAll: true,
-                      ),
-                      ProductListview(
-                        products: products,
-                        title: 'Được đánh giá cao',
-                        seeAll: true,
-                      ),
+                      // ReusableCarousel(imageList: imgList),
+                      // ProductListview(
+                      //   products: productsFavorite,
+                      //   title: 'Đã thích',
+                      //   navigator: const FavoriteScreen(),
+                      //   seeAll: true,
+                      // ),
+                      // ProductListview(
+                      //   products: products,
+                      //   title: 'Bán nhiều nhất',
+                      //   seeAll: true,
+                      // ),
+                      // ProductListview(
+                      //   products: products,
+                      //   title: 'Ưu đãi đặc biệt',
+                      //   seeAll: true,
+                      // ),
+                      // ProductListview(
+                      //   products: products,
+                      //   title: 'Hàng mới về',
+                      //   seeAll: true,
+                      // ),
+                      // ProductListview(
+                      //   products: products,
+                      //   title: 'Được đánh giá cao',
+                      //   seeAll: true,
+                      // ),
                     ],
                   ),
                 ),

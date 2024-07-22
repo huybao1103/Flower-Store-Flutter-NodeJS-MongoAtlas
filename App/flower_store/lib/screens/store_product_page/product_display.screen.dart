@@ -1,12 +1,13 @@
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/product.dart';
+import 'package:flower_store/models/product/product.model.dart';
 import 'package:flower_store/screens/cart/cart.screen.dart';
 import 'package:flower_store/shared/widget/product.listview.horizontal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductDisplayScreen extends StatefulWidget {
-  final Product product;
+  final ProductModel product;
   const ProductDisplayScreen({super.key, required this.product});
 
   @override
@@ -20,7 +21,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
   bool _isPriceCardFixed = false;
 
   late bool liked = false;
-  late Product product;
+  late ProductModel product;
   late double originalPrice;
   int quantity = 1;
   double screenHeight = 1000;
@@ -30,7 +31,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
     // TODO: implement initState
     super.initState();
     product = widget.product;
-    liked = widget.product.isFavorite;
+    liked = widget.product.fav == true;
     originalPrice = product.price;
 
     _scrollController.addListener(_scrollListener);
@@ -77,14 +78,14 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(product.name,
+                            Text(product.nameProduct,
                                 style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
                           ],
                         ),
                         if (!_isPriceCardFixed) priceCard(),
-                        if (product.description != null) description(),
+                        if (product.descrip != null) description(),
                         ProductListview(
-                          products: product.includeProducts,
+                          products: product.inclueId,
                           title: 'Sản phẩm bao gồm',
                         ),
                         Padding(
@@ -158,13 +159,13 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: product.imageUrl.contains('https://')
+              child: product.img.contains('https://')
                   ? Image.network(
-                      product.imageUrl,
+                      product.img,
                       // width: MediaQuery.of(context).size.width * 60/100,
                     )
                   : Image.asset(
-                      product.imageUrl,
+                      product.img,
                       // width: MediaQuery.of(context).size.width * 60/100,
                     ),
             ),
@@ -208,7 +209,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
               IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () => setState(() {
-                  if (quantity < product.stock) {
+                  if (quantity < product.quantity) {
                     quantity++;
                   }
                   product.price = originalPrice * quantity;
@@ -229,7 +230,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
         child: SizedBox(
           height: screenHeight * 15 / 100,
           child: SingleChildScrollView(
-            child: Text('${product.description}',
+            child: Text('${product.descrip}',
                 style: const TextStyle(fontSize: 17)),
           ),
         ),

@@ -149,7 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             .then((val) => Navigator
                 .of(context)
                 .push(MaterialPageRoute(builder: (context) => const LoginScreen())))
-            .catchError((onError) => debugPrint(onError.toString()));
+            .catchError((onError) => debugPrint(onError.toString())); 
             
           }
         },
