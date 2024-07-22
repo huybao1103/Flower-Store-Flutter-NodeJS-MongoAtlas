@@ -19,23 +19,7 @@ class DetailInvoiceService {
 
 
 
-    async UpdateDetailInvoice(id, updateData) {
-        try {
-            const detailInvoice = await DetailInvoiceModel.findByIdAndUpdate(id, updateData, { new: true });
-            return detailInvoice;
-        } catch (e) {
-            return res.status(500).send(e); 
-        }
-    }
-
-    async DeleteDetailInvoice(id) {
-        try {
-            await DetailInvoiceModel.findByIdAndDelete(id);
-            return true;
-        } catch (e) {
-            return e;
-        }
-    }
+   
     
     async GetDetailInvoiceById(id) {
         try {

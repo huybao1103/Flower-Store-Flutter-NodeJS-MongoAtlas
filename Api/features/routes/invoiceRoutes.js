@@ -35,34 +35,7 @@ router.post('/addnew-invoice', async (req, res) => {
     else genericHttpResponse.fail(res, result);
 });
 
-router.put('/update-invoice/:id', async (req, res) => {
-    /*  
-        #swagger.tags = ['Invoice']
-        #swagger.parameters['body'] = {
-            in: 'body',
-            description: 'Update Invoice.',
-            schema: { $ref: '#/definitions/Invoices' }
-        } 
-        #swagger.responses[200] = { description: 'Update Invoices Success', schema: true }
-    */
-    var result = await invoiceController.UpdateInvoice(req, res);
-    if(result) genericHttpResponse.success(res, result);
-    else genericHttpResponse.fail(res, result);
-});
 
-router.delete('/delete-invoice/:id', async (req, res) => {
-    /*  
-        #swagger.tags = ['Invoice']
-        #swagger.parameters['id'] = {
-            in: 'path',
-            description: 'Delete Invoice by ID.',
-        } 
-        #swagger.responses[200] = { description: 'Delete Invoices Success', schema: true }
-    */
-    var result = await invoiceController.DeleteInvoice(req, res);
-    if(result === true) genericHttpResponse.success(res, true);
-    else genericHttpResponse.fail(res, result);
-});
 
 router.get('/getbyid-invoice/:id', async (req, res) => {
     /*  

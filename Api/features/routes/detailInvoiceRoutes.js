@@ -23,34 +23,7 @@ router.post('/addnew-detailInvoice', async (req, res) => {
     else genericHttpResponse.fail(res, result);
 });
 
-router.put('/update-detailInvoice/:id', async (req, res) => {
-    /*  
-        #swagger.tags = ['DetailInvoice']
-        #swagger.parameters['body'] = {
-            in: 'body',
-            description: 'Update DetailInvoice.',
-            schema: { $ref: '#/definitions/DetailInvoices' }
-        } 
-        #swagger.responses[200] = { description: 'Update DetailInvoices Success', schema: true }
-    */
-    var result = await detailInvoiceController.UpdateDetailInvoice(req, res);
-    if(result) genericHttpResponse.success(res, result);
-    else genericHttpResponse.fail(res, result);
-});
 
-router.delete('/delete-detailInvoice/:id', async (req, res) => {
-    /*  
-        #swagger.tags = ['DetailInvoice']
-        #swagger.parameters['id'] = {
-            in: 'path',
-            description: 'Delete DetailInvoice by ID.',
-        } 
-        #swagger.responses[200] = { description: 'Delete DetailInvoices Success', schema: true }
-    */
-    var result = await detailInvoiceController.DeleteDetailInvoice(req, res);
-    if(result === true) genericHttpResponse.success(res, true);
-    else genericHttpResponse.fail(res, result);
-});
 
 router.get('/getbyid-detailInvoice/:id', async (req, res) => {
     /*  
