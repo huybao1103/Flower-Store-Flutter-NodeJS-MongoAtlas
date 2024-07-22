@@ -5,7 +5,7 @@ class InvoiceController {
     constructor() {}
 
     async NewInvoice(req, res) {
-        return await invoiceService.NewInvoice( req.nameInvoice,req.detailInvoice,req.productId,req.quantity,req.price,req.address,req.date,req.accountId);
+        return await invoiceService.NewInvoice( req.nameInvoice,req.details,req.productId,req.quantity,req.price,req.address,req.date,req.accountId);
     }
 
     async FindInvoice(req, res) {

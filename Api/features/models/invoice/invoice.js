@@ -20,4 +20,4 @@ const InvoiceSchema = new Schema({
 
 
 const InvoiceModel = model('Invoice', InvoiceSchema);
-module.exports = { InvoiceModel };
+module.exports = { InvoiceModel, DetailInvoiceModel };

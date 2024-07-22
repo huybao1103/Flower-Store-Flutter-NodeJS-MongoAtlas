@@ -1,12 +1,24 @@
-const {InvoiceModel} = require('../models/invoice/invoice');
+const {InvoiceModel, DetailInvoiceModel} = require('../models/invoice/invoice');
 
 class InvoiceService {
     constructor() {}
 
-    async NewInvoice(detailinvoiceId,accountId) {
+    async NewInvoice(nameInvoice,details,productId,quantity,price,address,date,accountId) {
         try {
+            let newDetailIds = new Array;
+            if(details != null && details instanceof Array) {
+                for (let index = 0; index < details.length; index++) {
+                    const element = details[index];
+                    const {productId,quantity,price,address,date} = element;
+
+                    let detail = new DetailInvoiceModel({productId,quantity,price,address,date});
+                    var newDetail = await detail.save();
+                    newDetailIds.push(newDetail._id);
+                }
+                
+            }
             const invoice = new InvoiceModel({
-                nameInvoice,detailInvoice,productId,quantity,price,address,date,accountId
+                nameInvoice,details: newDetailIds,productId,quantity,price,address,date,accountId
             });
             await invoice.save();
             return true;
@@ -41,7 +53,7 @@ class InvoiceService {
 
     async GetAllInvoices() {
         try {
-            const invoices = await InvoiceModel.find().exec();
+            const invoices = await InvoiceModel.find().populate('details').exec();
             return invoices;
         } catch (e) {
             return e;
