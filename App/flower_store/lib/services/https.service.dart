@@ -8,7 +8,7 @@ import 'package:dio/dio.dart';
 class HttpService {
   constructor() {}
   // String headerUrl = 'http://10.0.2.2:3000/'; // Emulator
-  String headerUrl = 'http://192.168.1.85:3000/api/'; // Physic device
+  String headerUrl = 'http://192.168.1.5:3000/api/'; // Physic device
   var dio = Dio();
 
   Future<TResultType> get<TModel extends IBaseModel, TResultType>(String path, IBaseModel model) async {
@@ -71,22 +71,4 @@ class HttpService {
   //       throw response.body;
   //   }
   // }
-  Future<List<TModel>> postList<TModel extends IBaseModel<TModel>>(String path, TModel model, Map<String, dynamic> body) async {
-    final response = await http.post(
-      Uri.parse("$headerUrl$path"),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(body),
-    );
-
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        return (jsonDecode(response.body) as List)
-            .map((data) => model.fromJson(data))
-            .toList();
-      default:
-        throw response.body;
-    }
-  }
 }

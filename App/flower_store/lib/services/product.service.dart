@@ -10,5 +10,5 @@ class ProductService {
     
   }
   Future<List<ProductModel>> getAll(ProductModel model) => 
-    _httpService.post<ProductModel, List<ProductModel>>('$controller/getall-product', model);
+    _httpService.post<ProductModel, List<ProductModel>>('$controller/getall-product', model, returnType: ProductModel.empty());
 }

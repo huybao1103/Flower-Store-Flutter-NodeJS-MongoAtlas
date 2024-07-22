@@ -31,10 +31,6 @@ class _AllProductScreenState extends State<AllProductScreen> {
   void initState() {
     super.initState();
     _fetchProducts();
-    // _futureProducts = _productService.getAll(ProductModel(nameProduct: '', price: 0, img: '', quantity: 0, cateid: ''));
-    // setState(() {
-    //   products = _futureProducts as List<ProductModel>;
-    // });
   }
 
   Future<void> _fetchProducts() async {

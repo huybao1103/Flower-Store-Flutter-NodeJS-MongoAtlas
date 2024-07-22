@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:flower_store/models/base.model.dart';
 
 class ProductModel extends IBaseModel<ProductModel> {
@@ -8,33 +7,42 @@ class ProductModel extends IBaseModel<ProductModel> {
   late String img;
   late int quantity;
   String? descrip;
-  late List<ProductModel>? includeProducts;
+  List<String>? includeProducts; 
   bool? fav;
-  late String? cateid = '';
-  
+  String? cateid;
+
   ProductModel({
     required this.nameProduct,
     required this.price,
     required this.img,
     required this.quantity,
     this.descrip,
+    this.cateid,
+    this.includeProducts,
+    this.fav,
   });
 
-  get inclueId => null;
+  ProductModel.empty();
 
   @override
-  fromJson(Map<String, Object> json) => fromJsonMapping(json);
+  ProductModel fromJson(Map<String, Object?> json) {
+    return fromJsonMapping(json);
+  }
 
   @override
-  fromJsonMapping(Map<String, dynamic> json) {
-    nameProduct = json['nameProduct'];
-    price = double.parse(json['price'].toString());
-    img = json['img'];
-    quantity = int.parse(json['quantity'].toString());
-    descrip = json['descrip'];
-    var inclueId = json['inclueId'] != null ? List<String>.from(json['inclueId']) : null;
-    fav = json['fav'];
-    cateid = json['cateid'];
+  ProductModel fromJsonMapping(Map<String, dynamic> json) {
+    return ProductModel(
+      nameProduct: json['nameProduct'] as String? ?? '',
+      price: (json['price'] != null) ? double.parse(json['price'].toString()) : 0.0,
+      img: json['img'] as String? ?? '',
+      quantity: (json['quantity'] != null) ? int.parse(json['quantity'].toString()) : 0,
+      descrip: json['descrip'] as String?,
+      cateid: json['cateid'] as String?,
+      includeProducts: json['includeProducts'] != null
+          ? List<String>.from(json['includeProducts'] as List)
+          : [],
+      fav: json['fav'] as bool?,
+    );
   }
 
   @override
@@ -45,7 +53,7 @@ class ProductModel extends IBaseModel<ProductModel> {
     data['img'] = img;
     data['quantity'] = quantity;
     data['descrip'] = descrip;
-    data['inclueId'] = inclueId;
+    data['includeProducts'] = includeProducts;
     data['fav'] = fav;
     data['cateid'] = cateid;
     return data;

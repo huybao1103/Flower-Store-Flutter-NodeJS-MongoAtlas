@@ -32,7 +32,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
     super.initState();
     product = widget.product;
     liked = widget.product.fav == true;
-    originalPrice = product.price;
+    // originalPrice = product.price;
 
     _scrollController.addListener(_scrollListener);
   }
@@ -84,10 +84,10 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
                         ),
                         if (!_isPriceCardFixed) priceCard(),
                         if (product.descrip != null) description(),
-                        ProductListview(
-                          products: product.inclueId,
-                          title: 'Sản phẩm bao gồm',
-                        ),
+                        // ProductListview(
+                        //   products: product.includeProducts,
+                        //   title: 'Sản phẩm bao gồm',
+                        // ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: Center(
@@ -199,7 +199,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
                   if (quantity > 1) {
                     quantity--;
                   }
-                  product.price = originalPrice * quantity;
+                  // product.price = originalPrice * quantity;
                 }),
               ),
               Text(
@@ -212,7 +212,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
                   if (quantity < product.quantity) {
                     quantity++;
                   }
-                  product.price = originalPrice * quantity;
+                  // product.price = originalPrice * quantity;
                 }),
               ),
             ],
