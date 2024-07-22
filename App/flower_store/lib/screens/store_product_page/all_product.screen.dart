@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/menu.model.dart';
 import 'package:flower_store/models/product.dart';
@@ -26,7 +27,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
   final ProductService _productService = ProductService();
   List<Product> productsFavorite = [];
   List<ProductModel> products = [];
-  late Future<List<ProductModel>> _futureProducts;
+  Dio dio = Dio();
   @override
   void initState() {
     super.initState();
@@ -34,15 +35,14 @@ class _AllProductScreenState extends State<AllProductScreen> {
   }
 
   Future<void> _fetchProducts() async {
-      List<ProductModel> productList = await _productService.getAll(ProductModel(
-        nameProduct: '',
-        price: 0,
-        img: '',
-        quantity: 0,
-      ));
+    try {
+      List<ProductModel> productList = await _productService.getAll();
       setState(() {
         products = productList;
       });
+    } catch (e) {
+      print('Lỗi khi tải sản phẩm: $e');
+    }
   }
 
   @override

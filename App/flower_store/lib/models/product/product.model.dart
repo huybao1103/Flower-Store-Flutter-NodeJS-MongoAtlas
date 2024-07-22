@@ -1,7 +1,8 @@
-import 'dart:ffi';
 import 'package:flower_store/models/base.model.dart';
+import 'package:intl/intl.dart';
 
 class ProductModel extends IBaseModel<ProductModel> {
+  String? id; 
   late String nameProduct;
   late double price;
   late String img;
@@ -12,6 +13,7 @@ class ProductModel extends IBaseModel<ProductModel> {
   String? cateid;
 
   ProductModel({
+    this.id, 
     required this.nameProduct,
     required this.price,
     required this.img,
@@ -24,6 +26,11 @@ class ProductModel extends IBaseModel<ProductModel> {
 
   ProductModel.empty();
 
+  String get formattedPrice {
+    final NumberFormat formatter = NumberFormat('#,###');
+    return formatter.format(price);
+  }
+
   @override
   ProductModel fromJson(Map<String, Object?> json) {
     return fromJsonMapping(json);
@@ -32,6 +39,7 @@ class ProductModel extends IBaseModel<ProductModel> {
   @override
   ProductModel fromJsonMapping(Map<String, dynamic> json) {
     return ProductModel(
+      id: json['_id'] as String?,
       nameProduct: json['nameProduct'] as String? ?? '',
       price: (json['price'] != null) ? double.parse(json['price'].toString()) : 0.0,
       img: json['img'] as String? ?? '',
@@ -48,6 +56,7 @@ class ProductModel extends IBaseModel<ProductModel> {
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = id;
     data['nameProduct'] = nameProduct;
     data['price'] = price;
     data['img'] = img;

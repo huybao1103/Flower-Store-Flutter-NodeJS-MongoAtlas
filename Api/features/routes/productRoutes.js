@@ -91,4 +91,30 @@ router.post('/getall-product', async (req, res) => {
     else genericHttpResponse.fail(res, result);
 });
 
+router.get('/get-favorite-products', async (req, res) => {
+    /*  
+        #swagger.tags = ['Product']
+        #swagger.responses[200] = { description: 'Get Favorite Products Success', schema: { $ref: '#/definitions/Products' } }
+    */
+    var result = await productController.GetProductFavorite(req, res);
+    if (result) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
+  });
+
+  router.post('/toggle-favorite', async (req, res) => {
+    /*  
+        #swagger.tags = ['Product']
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Toggle favorite status of a Product.',
+            schema: { id: 'string', isFavorite: 'boolean' }
+        }
+        #swagger.responses[200] = { description: 'Toggle Favorite Success', schema: { $ref: '#/definitions/Products' } }
+        #swagger.responses[500] = { description: 'Toggle Favorite Fail', schema: 'error' }
+    */
+    var result = await productController.toggleFavorite(req, res);
+    if (result) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
+});  
+
 module.exports = router;
