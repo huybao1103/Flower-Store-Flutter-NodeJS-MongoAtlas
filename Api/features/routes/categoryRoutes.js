@@ -29,7 +29,9 @@ router.get('/get-list-category', async (req, res) => {
         #swagger.responses[200] = { description: 'Get category list success', schema: { $ref: '#/definitions/Categories' } }
         #swagger.responses[500] = { description: 'Get category list failed', schema: 'error' }
     */
-    return categoryController.GetCategoryList(req, res);
+    var result = await categoryController.GetCategoryList(req, res);
+    if(result != null) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
 });
 
 router.get('/get-category-by-id/:id', async (req, res) => {
@@ -45,7 +47,9 @@ router.get('/get-category-by-id/:id', async (req, res) => {
         #swagger.responses[404] = { description: 'Category not found', schema: { message: 'string' } }
         #swagger.responses[500] = { description: 'Get category failed', schema: 'error' }
     */
-    return categoryController.GetCategoryById(req, res);
+    var result = await categoryController.GetCategoryById(req, res);
+    if(result != null) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
 });
 
 router.get('/find-category', async (req,res) => {
@@ -59,7 +63,9 @@ router.get('/find-category', async (req,res) => {
         #swagger.responses[200] = { description: 'Find success', schema: { $ref: '#/definitions/Categories' } }
         #swagger.responses[500] = { description: 'Find failt', schema: 'error' }
     */
-    return categoryController.FindCategory(req.body, res);
+    var result = await categoryController.FindCategory(req.body, res);
+    if(result != null) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
 });
 
 router.put('/update-category/:id', async (req, res) => {
@@ -79,7 +85,9 @@ router.put('/update-category/:id', async (req, res) => {
         #swagger.responses[200] = { description: 'Update success', schema: { $ref: '#/definitions/UpdateCategory' } }
         #swagger.responses[500] = { description: 'Update failed', schema: 'error' }
     */
-    return categoryController.UpdateCategory(req, res);
+    var result = await categoryController.UpdateCategory(req, res);
+    if(result != null) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
 });
 
 router.delete('/delete-category/:id', async (req, res) => {
@@ -99,7 +107,9 @@ router.delete('/delete-category/:id', async (req, res) => {
         #swagger.responses[200] = { description: 'Delete success', schema: true }
         #swagger.responses[500] = { description: 'Delete failed', schema: 'error' }
     */
-    return categoryController.DeleteCategory(req, res);
+    var result = await categoryController.DeleteCategory(req, res);
+    if(result === true) genericHttpResponse.success(res, true);
+    else genericHttpResponse.fail(res, result);
 });
 
 module.exports = router;

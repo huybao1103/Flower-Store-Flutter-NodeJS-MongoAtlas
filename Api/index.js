@@ -14,9 +14,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.use('/Accounts', accountRoutes);
-app.use('/Product', productRoutes);
-app.use('/Categories', categoryRoutes);
+// Thêm route
+app.use('/api/Accounts', accountRoutes);
+app.use('/api/Product', productRoutes);
+app.use('/api/Categories', categoryRoutes);
 app.use('/api/Invoice', invoiceRoutes);
 app.use('/api/DetailInvoice', detailInvoiceRoutes);
 

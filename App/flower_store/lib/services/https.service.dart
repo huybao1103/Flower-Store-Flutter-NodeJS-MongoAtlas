@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class HttpService {
   constructor() {}
   // String headerUrl = 'http://10.0.2.2:3000/'; // Emulator
-  String headerUrl = 'http://192.168.1.107:3000/'; // Physic device
+  String headerUrl = 'http://192.168.1.85:3000/api/'; // Physic device
 
   Future<TResultType> get<TModel extends IBaseModel, TResultType>(String path, IBaseModel model) async {
     final response = await http.get(Uri.parse("$headerUrl$path"));

@@ -10,3 +10,5 @@ App/flower_store/pubspec.lock
 .DS_Store
 Api/.DS_Store
 App/.DS_Store
+/Admin/.angular
+/Admin/node_modules
