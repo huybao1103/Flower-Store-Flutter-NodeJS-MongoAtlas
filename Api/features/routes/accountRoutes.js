@@ -8,7 +8,7 @@ const accountController = new AccountController();
 const genericHttpResponse = new GenericHttpResponse();
 
 
-router.post('/signup', async (req, res) => {
+router.post('/signup-update', async (req, res) => {
     /*  
         #swagger.tags = ['Accounts']
         #swagger.parameters['body'] = {
@@ -19,7 +19,7 @@ router.post('/signup', async (req, res) => {
         #swagger.responses[200] = { description: 'Sign up success', schema: true }
     */
     var result = await accountController.NewAccount(req.body, res);
-    if(result === true) genericHttpResponse.success(res, true);
+    if(result != null || result === true) genericHttpResponse.success(res, true);
     else genericHttpResponse.fail(res, result);
 });
 
