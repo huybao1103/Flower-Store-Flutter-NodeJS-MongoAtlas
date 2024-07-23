@@ -89,4 +89,20 @@ class ProductService {
         .map((product) => ProductModel.empty().fromJson(product))
         .toList();
   }
+
+  Future<List<ProductModel>> getIncludeProductById(String id) async {
+    try {
+      final response = await _httpService.dio.get('${_httpService.headerUrl}Product/get-include-product-by-product-id/$id');
+      if (response.statusCode == 200) {
+        List<ProductModel> favoriteProducts = (response.data as List)
+            .map((product) => ProductModel.empty().fromJson(product))
+            .toList();
+        return favoriteProducts;
+      } else {
+        throw Exception('Không thể tải sản phẩm bao gom');
+      }
+    } catch (e) {
+      throw Exception('Không thể tải sản phẩm bao gom: $e');
+    }
+  }
 }
