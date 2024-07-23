@@ -5,6 +5,7 @@ import 'package:flower_store/services/share_pre.dart';
 import 'package:flower_store/services/sqlite_pro5.dart';
 import 'package:flutter/material.dart';
 import 'package:flower_store/constants/colors.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -108,7 +109,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (success) {
       // Update SharedPreferences with the latest data
       await sharedPreferencesService.saveAccountInfo(account);
-
+      Fluttertoast.showToast(
+        msg: "Cập nhật thông tin thành công",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: const Color.fromARGB(255, 136, 244, 140),
+        textColor: Colors.black,
+        fontSize: 16.0
+      );
       // Navigate to MainPageScreen
       Navigator.push(
         context,

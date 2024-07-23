@@ -130,5 +130,14 @@ class ProductService {
             throw new Error('Không thể tìm kiếm sản phẩm theo thể loại: ' + e.message);
         }
     }
+
+    async GetAllIncludeProducts(id) {
+        try {
+            const pros = await ProductModel.findById(id).populate('inclueId').exec();
+            return pros.inclueId;
+        } catch (e) { 
+            return e;
+        }
+    }
 }
 module.exports = ProductService;
