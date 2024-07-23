@@ -122,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const ProfileScreen(),
+          builder: (context) => const MainPageScreen(),
         ),
       );
     } else {
@@ -133,169 +133,170 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  void _dismissKeyboard() {
-    FocusScope.of(context).unfocus();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Thông tin',
-          style: TextStyle(
-            fontSize: 24,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
+      backgroundColor: const Color(0xffF0F0F0),
       resizeToAvoidBottomInset: true,
-      body: GestureDetector(
-        onTap: _dismissKeyboard,
-        child: SingleChildScrollView(
-          child: Container(
-            decoration: const BoxDecoration(color: tdBGColor),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height - kToolbarHeight - 24,
-                ),
-                child: IntrinsicHeight(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Center(
-                        child: Stack(
-                          children: [
-                            CircleAvatar(
-                              radius: 50,
-                              backgroundImage: NetworkImage(
-                                avatarLink ??
-                                    'https://i.pinimg.com/originals/5c/e6/ec/5ce6ec7936ed9aa8c2dd89fe540e36a1.jpg',
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: const BoxDecoration(color: Color(0xffF0F0F0)),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: ConstrainedBox(
+              constraints:
+                  BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 5.0),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 10, top: 10),
+                            child: Text(
+                              'Thông tin',
+                              style: TextStyle(
+                                color: Color(0xff000000),
+                                fontSize: 24,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Center(
+                            child: Stack(
+                              children: [
+                                CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage: NetworkImage(
+                                    avatarLink ??
+                                        'https://i.pinimg.com/originals/5c/e6/ec/5ce6ec7936ed9aa8c2dd89fe540e36a1.jpg',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20, right: 20, top: 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, top: 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 16.0),
+                              const Text('Tên', style: titleStyle),
+                              const SizedBox(height: 8.0),
+                              TextField(
+                                controller: _nameController,
+                                style: inputtextStyle,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              const SizedBox(height: 16.0),
+                              const Text('Email', style: titleStyle),
+                              const SizedBox(height: 8.0),
+                              TextField(
+                                style: inputtextStyle,
+                                controller: _emailController,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              const SizedBox(height: 16.0),
+                              const Text('Mật khẩu', style: titleStyle),
+                              const SizedBox(height: 8.0),
+                              TextField(
+                                style: inputtextStyle,
+                                controller: _passwordController,
+                                decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _isPasswordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _isPasswordVisible =
+                                            !_isPasswordVisible;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                obscureText: !_isPasswordVisible,
+                              ),
+                              const SizedBox(height: 16.0),
+                              const Text('Số điện thoại', style: titleStyle),
+                              const SizedBox(height: 8.0),
+                              TextField(
+                                controller: _phoneController,
+                                style: inputtextStyle,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              const SizedBox(height: 16.0),
+                              const Text('Link hình ảnh', style: titleStyle),
+                              const SizedBox(height: 8.0),
+                              TextField(
+                                controller: _avatarController,
+                                style: inputtextStyle,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              const SizedBox(height: 12.0),
+                              Column(
                                 children: [
-                                  const SizedBox(height: 16.0),
-                                  const Text('Tên', style: titleStyle),
-                                  const SizedBox(height: 8.0),
-                                  TextField(
-                                    controller: _nameController,
-                                    style: inputtextStyle,
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                    ),
+                                  const Align(
+                                    alignment: Alignment.center,
                                   ),
-                                  const SizedBox(height: 16.0),
-                                  const Text('Email', style: titleStyle),
-                                  const SizedBox(height: 8.0),
-                                  TextField(
-                                    style: inputtextStyle,
-                                    controller: _emailController,
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  const Text('Mật khẩu', style: titleStyle),
-                                  const SizedBox(height: 8.0),
-                                  TextField(
-                                    style: inputtextStyle,
-                                    controller: _passwordController,
-                                    decoration: InputDecoration(
-                                      border: const OutlineInputBorder(),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            _isPasswordVisible = !_isPasswordVisible;
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                    obscureText: !_isPasswordVisible,
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  const Text('Số điện thoại', style: titleStyle),
-                                  const SizedBox(height: 8.0),
-                                  TextField(
-                                    controller: _phoneController,
-                                    style: inputtextStyle,
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  const Text('Link hình ảnh', style: titleStyle),
-                                  const SizedBox(height: 8.0),
-                                  TextField(
-                                    controller: _avatarController,
-                                    style: inputtextStyle,
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 12.0),
-                                  Column(
-                                    children: [
-                                      const Align(
-                                        alignment: Alignment.center,
-                                      ),
-                                      SizedBox(
-                                        width: 300,
-                                        height: 50,
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: iconColor,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                          onPressed: () async {
-                                            await _saveAvatarLink();
-                                            await _updateProfile();
-                                          },
-                                          child: const Text(
-                                            'Lưu và thay đổi',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                            ),
-                                          ),
+                                  SizedBox(
+                                    width: 300,
+                                    height: 50,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: iconColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
-                                    ],
+                                      onPressed: () async {
+                                        await _saveAvatarLink();
+                                        await _updateProfile();
+                                      },
+                                      child: const Text(
+                                        'Lưu và thay đổi',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      )
-                    ],
-                  ),
-                ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
           ),

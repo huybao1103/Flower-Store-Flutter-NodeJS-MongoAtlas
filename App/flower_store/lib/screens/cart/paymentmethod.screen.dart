@@ -1,7 +1,9 @@
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/screens/cart/addpaymentmethodpage.screen.dart';
+import 'package:flower_store/screens/cart/cart.screen.dart';
 import 'package:flower_store/screens/cart/checkout.screen.dart';
 import 'package:flower_store/screens/cart/order.succesful.dart';
+import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -42,7 +44,9 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const CheckoutPage(),
+                builder: (context) => const MainPageScreen(
+                  currentScreen: CartPage(),
+                ),
               ),
             );
           },

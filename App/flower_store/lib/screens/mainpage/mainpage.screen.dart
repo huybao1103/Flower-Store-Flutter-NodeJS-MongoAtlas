@@ -114,7 +114,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
           color: backgroundColor,
           buttonBackgroundColor: circleicon,
           backgroundColor:
-              isDarkMode ? const Color(0xff2D2C2C) : const Color(0xffEAEAEA),
+              isDarkMode ? const Color(0xff2D2C2C) : const Color(0xffF0F0F0),
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 400),
           onTap: (index) {
