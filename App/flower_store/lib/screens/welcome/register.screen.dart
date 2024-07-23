@@ -160,6 +160,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
       ),
+      TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const LoginScreen()),
+          );
+        },
+        child: const Text(
+          'Đã có tài khoản ?',
+          style: TextStyle(color: Color(0xff920000)),
+          textAlign: TextAlign.right,
+        ),
+      ),
     ];
   }
 }

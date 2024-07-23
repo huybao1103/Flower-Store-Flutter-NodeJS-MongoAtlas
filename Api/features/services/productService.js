@@ -17,14 +17,15 @@ class ProductService {
         return false;
     }
 
-    async FindProduct( nameProduct, res) {
+    async FindProduct(nameProduct, res) {
         try {
-            return await ProductModel.findOne({ nameProduct}).populate('inclueId').exec();
-        } 
-        catch(e) {
-            return res.status(500).send(e); 
+            const products = await ProductModel.find({
+                nameProduct: { $regex: nameProduct, $options: 'i' }
+            }).populate('inclueId').exec();
+            return products;
+        } catch (e) {
+            return res.status(500).send(e);
         }
-        return null;
     }
 
     async UpdateProduct(id, updateData) {
@@ -97,5 +98,37 @@ class ProductService {
         }
     }
 
+    async getProductsByCategory(categoryId) {
+        try {
+            const products = await ProductModel.find({ cateid: categoryId }).exec();
+            return products;
+        } catch (e) {
+            throw new Error('Không thể lấy danh sách sản phẩm theo thể loại: ' + e.message);
+        }
+    }
+
+    async searchFavoriteProducts(keyword) {
+        try {
+            const products = await ProductModel.find({
+                nameProduct: { $regex: keyword, $options: 'i' },
+                fav: true
+            }).exec();
+            return products;
+        } catch (e) {
+            throw new Error('Không thể tìm kiếm sản phẩm yêu thích: ' + e.message);
+        }
+    }
+
+    async searchProductsByCategory(categoryId, keyword) {
+        try {
+            const products = await ProductModel.find({
+                cateid: categoryId,
+                nameProduct: { $regex: keyword, $options: 'i' }
+            }).exec();
+            return products;
+        } catch (e) {
+            throw new Error('Không thể tìm kiếm sản phẩm theo thể loại: ' + e.message);
+        }
+    }
 }
 module.exports = ProductService;

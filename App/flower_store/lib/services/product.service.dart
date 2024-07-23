@@ -50,4 +50,43 @@ class ProductService {
       throw Exception('Không thể cập nhật trạng thái yêu thích: $e');
     }
   }
+
+  Future<List<ProductModel>> getProductsByCategory(String categoryId) async {
+    final response = await _httpService.dio.get(
+        '${_httpService.headerUrl}Product/get-products-by-category/$categoryId'
+    );
+    return (response.data as List)
+        .map((product) => ProductModel.empty().fromJson(product))
+        .toList();
+ }
+
+ Future<List<ProductModel>> searchProducts(String keyword) async {
+    final response = await _httpService.dio.get(
+      '${_httpService.headerUrl}Product/find-product',
+      queryParameters: {'nameProduct': keyword},
+    );
+    return (response.data as List)
+        .map((product) => ProductModel.empty().fromJson(product))
+        .toList();
+  }
+
+  Future<List<ProductModel>> searchFavoriteProducts(String keyword) async {
+    final response = await _httpService.dio.get(
+      '${_httpService.headerUrl}Product/search-favorite-products',
+      queryParameters: {'keyword': keyword},
+    );
+    return (response.data as List)
+        .map((product) => ProductModel.empty().fromJson(product))
+        .toList();
+  }
+
+  Future<List<ProductModel>> searchProductsByCategory(String categoryId, String keyword) async {
+    final response = await _httpService.dio.get(
+      '${_httpService.headerUrl}Product/search-products-by-category',
+      queryParameters: {'categoryId': categoryId, 'keyword': keyword},
+    );
+    return (response.data as List)
+        .map((product) => ProductModel.empty().fromJson(product))
+        .toList();
+  }
 }

@@ -67,4 +67,13 @@ router.delete('/delete/:_id', async (req, res) => {
    var result = await accountController.delete(req, res);
    return genericHttpResponse.success(res, result)
 })
+router.get('/get-by-email/:email', async (req, res) => {
+    /*  
+        #swagger.tags = ['Accounts']
+        #swagger.responses[200] = { description: 'Get success', schema: { $ref: '#/definitions/Accounts' } }
+        #swagger.responses[500] = { description: 'Get fail', schema: 'error' }
+    */
+   var result = await accountController.GetByEmail(req, res);
+   return genericHttpResponse.success(res, result)
+})
 module.exports = router;

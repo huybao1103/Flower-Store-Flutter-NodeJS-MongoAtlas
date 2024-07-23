@@ -53,6 +53,21 @@ class _ProductCardState extends State<ProductCard> {
     }
   }
 
+  Future<void> _navigateToProductDisplayScreen() async {
+    final result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ProductDisplayScreen(product: widget.product),
+      ),
+    );
+
+    if (result != null && result is ProductModel) {
+      setState(() {
+        widget.product.fav = result.fav;
+        isFavorite = result.fav ?? false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -92,13 +107,7 @@ class _ProductCardState extends State<ProductCard> {
               ],
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ProductDisplayScreen(product: widget.product),
-                  ),
-                );
-              },
+              onTap: _navigateToProductDisplayScreen,
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Center(  // Sử dụng Center để căn giữa nội dung

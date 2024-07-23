@@ -1,10 +1,14 @@
+import 'package:flower_store/models/authorize/signup.model.dart';
 import 'package:flower_store/screens/welcome/login.screen.dart';
+import 'package:flower_store/services/authorize.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UpdatePasswordScreen extends StatefulWidget {
-  const UpdatePasswordScreen({super.key});
+  final AccountModel account;
+  const UpdatePasswordScreen({super.key, required this.account});
 
   @override
   _UpdatePasswordScreenState createState() => _UpdatePasswordScreenState();
@@ -13,9 +17,18 @@ class UpdatePasswordScreen extends StatefulWidget {
 class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _authorizeService = AuthorizeService();
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
+  late AccountModel account;
+  String? error;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    account = widget.account;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,6 +159,17 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                     ),
                   ),
                   const SizedBox(height: 32),
+                  error != null ? Center(
+                    child: Text(
+                      error!,
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        color: Colors.red,
+                        fontWeight: FontWeight.w600,
+                        
+                      ),
+                    ),
+                  ) : const SizedBox.shrink(),
                   Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(
@@ -153,11 +177,37 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(12))),
                     child: TextButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginScreen()),
-                          );
+                          if(_passwordController.text == '' || _confirmPasswordController.text == '') {
+                            setState(() {
+                              error = 'Vui lòng nhập đầy đủ thông tin';
+                            });
+                          }
+                          else if(_confirmPasswordController.text != _passwordController.text) {
+                            setState(() {
+                              error = 'Mật khẩu nhập lại không khớp';
+                            });
+                          }
+                          else {
+                            String newPassword = _passwordController.text;
+                            account.password = newPassword;
+                            _authorizeService.signup(account)
+                            .then((value) {
+                              Fluttertoast.showToast(
+                                msg: "Đổi mật khẩu thành công",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: const Color.fromARGB(255, 136, 244, 140),
+                                textColor: Colors.black,
+                                fontSize: 16.0
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginScreen()),
+                              );
+                            });
+                          }
                         },
                         child: Text(
                           'Đặt lại mật khẩu',
