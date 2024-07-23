@@ -66,8 +66,26 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  deletePro(id?: string) {
-    
+  deletePro(id: string) {
+    this.confirmDialog.showConfirmDialog(
+      'Bạn có chắc muốn xóa thể loại này?',
+      'Xác nhận xóa'
+    ).subscribe({
+      next:(value) => {
+        if(value) {
+          this.productService.deletePro(id)
+          .pipe(first())
+          .subscribe({
+            next:(value) => {
+              if(value) {
+                this.toast.add({ severity: 'success', summary: 'Thành công', detail: 'Xóa thành công' });
+                this.getProducts();
+              }
+            },
+          })
+        }
+      },
+    })
   }
 
   getCategories() {

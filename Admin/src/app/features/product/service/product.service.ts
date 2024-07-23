@@ -54,4 +54,10 @@ export class ProductService {
       controller: 'Categories', url: `/delete-category/${id}`
     })
   }
+
+  deletePro(id: string) {
+    return this.httpService.delete<boolean>({
+      controller: 'Product', url: `/delete-product/${id}`
+    })
+  }
 }
