@@ -1,15 +1,22 @@
-// lib/widgets/product_grid.dart
 import 'package:flower_store/models/product/product.model.dart';
+import 'package:flower_store/shared/widget/product_card_favorite.dart';
 import 'package:flutter/material.dart';
-import '../../models/product.dart';
-import 'product_card_favorite.dart';
 
 class ProductListview extends StatelessWidget {
   final List<ProductModel> products;
   final String title;
   Widget? navigator;
   late bool? seeAll = true;
-  ProductListview({super.key, required this.products, required this.title, this.navigator, this.seeAll});
+  final Function(ProductModel)? onTap; // Thêm thuộc tính onTap
+
+  ProductListview({
+    super.key,
+    required this.products,
+    required this.title,
+    this.navigator,
+    this.seeAll,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +35,20 @@ class ProductListview extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              seeAll != null && seeAll == true ? TextButton(
-                onPressed: () {
-                  if(navigator != null) {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => navigator!));
-                  }
-                },
-                child: const Text(
-                  'See all',
-                  style: TextStyle(color: Colors.black),
-                ),
-              )
-              : const SizedBox.shrink(),
+              seeAll != null && seeAll == true
+                  ? TextButton(
+                      onPressed: () {
+                        if (navigator != null) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => navigator!));
+                        }
+                      },
+                      child: const Text(
+                        'See all',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
         ),
@@ -50,10 +59,13 @@ class ProductListview extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             itemCount: products.length,
             itemBuilder: (context, index) {
-              return Container(
-                width: 180, 
-                margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: ProductCard(product: products[index]),
+              return GestureDetector(
+                onTap: () => onTap?.call(products[index]),
+                child: Container(
+                  width: 180,
+                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: ProductCard(product: products[index]),
+                ),
               );
             },
           ),
@@ -62,4 +74,3 @@ class ProductListview extends StatelessWidget {
     );
   }
 }
-
