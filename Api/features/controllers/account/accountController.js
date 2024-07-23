@@ -5,7 +5,7 @@ class AccountController {
     constructor() {}
 
     async NewAccount(req, res) {
-        return await accountService.NewAccount(req._id ,req.name, req.email, req.phone, req.password);
+        return await accountService.NewAccount(req._id,req.name, req.email, req.phone, req.password);
     }
 
     async Login(req, res) {
