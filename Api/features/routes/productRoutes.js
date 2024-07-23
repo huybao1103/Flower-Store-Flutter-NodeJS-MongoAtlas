@@ -7,18 +7,40 @@ const router = express.Router();
 const productController = new ProductController();
 const genericHttpResponse = new GenericHttpResponse();
 
-router.get('/find-product',async(req,res)=>{
+router.get('/find-product', async (req, res) => {
     /*  
         #swagger.tags = ['Product']
-        #swagger.parameters['body'] = {
-            in: 'body',
-            description: 'Find product',
-            schema: { $ref: '#/definitions/FindProduct' }
+        #swagger.parameters['nameProduct'] = {
+            in: 'query',
+            description: 'Search product by name',
+            required: true,
+            type: 'string'
         } 
         #swagger.responses[200] = { description: 'Find success ', schema: {$ref: '#/definitions/Products'} }
         #swagger.responses[500] = { description: 'Find Fail', schema: 'error' }
     */
-})
+    var result = await productController.FindProduct(req, res);
+    if (result) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
+});
+
+router.get('/search-favorite-products', async (req, res) => {
+    /*
+        #swagger.tags = ['Product']
+        #swagger.parameters['keyword'] = {
+            in: 'query',
+            description: 'Search favorite products by keyword',
+            required: true,
+            type: 'string'
+        }
+        #swagger.responses[200] = { description: 'Search success', schema: { $ref: '#/definitions/Products' } }
+        #swagger.responses[500] = { description: 'Search fail', schema: 'error' }
+    */
+    var result = await productController.searchFavoriteProducts(req, res);
+    if(result) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
+});
+
 router.post('/new-product', async (req, res) => {
     /*  
         #swagger.tags = ['Product']
@@ -117,4 +139,40 @@ router.get('/get-favorite-products', async (req, res) => {
     else genericHttpResponse.fail(res, result);
 });  
 
+router.get('/get-products-by-category/:categoryId', async (req, res) => {
+    /*  
+        #swagger.tags = ['Product']
+        #swagger.parameters['categoryId'] = {
+            in: 'path',
+            description: 'Get Products by Category ID.',
+        }
+        #swagger.responses[200] = { description: 'Get Products by Category Success', schema: { $ref: '#/definitions/Products' } }
+    */
+    var result = await productController.getProductsByCategory(req, res);
+    if (result) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
+});
+
+router.get('/search-products-by-category', async (req, res) => {
+    /*
+        #swagger.tags = ['Product']
+        #swagger.parameters['categoryId'] = {
+            in: 'query',
+            description: 'Category ID',
+            required: true,
+            type: 'string'
+        }
+        #swagger.parameters['keyword'] = {
+            in: 'query',
+            description: 'Search keyword',
+            required: true,
+            type: 'string'
+        }
+        #swagger.responses[200] = { description: 'Search success', schema: { $ref: '#/definitions/Products' } }
+        #swagger.responses[500] = { description: 'Search fail', schema: 'error' }
+    */
+    var result = await productController.searchProductsByCategory(req, res);
+    if (result) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
+});
 module.exports = router;

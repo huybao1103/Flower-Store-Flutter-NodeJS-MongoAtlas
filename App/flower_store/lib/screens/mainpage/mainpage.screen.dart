@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flower_store/screens/cart/cart.screen.dart';
+import 'package:flower_store/screens/favorite.screen.dart';
 import 'package:flower_store/screens/user/profile.screen.dart';
 import 'package:flower_store/screens/store.main.screen.dart';
 import 'package:flower_store/screens/store_product_page/all_product.screen.dart';
@@ -32,7 +33,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
       const StoreMainScreen(),
       const AllProductScreen(),
       const CartPage(),
-      const ProfileScreen(),
+      const FavoriteScreen(),
       SettingScreen(
         isDarkMode: isDarkMode,
         onThemeChanged: (bool value) {
@@ -102,7 +103,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
             CircleAvatar(
               radius: 20,
               backgroundColor: circleicon,
-              child: Icon(Icons.person, size: 25, color: selectedItemColor),
+              child: Icon(Icons.favorite, size: 25, color: selectedItemColor),
             ),
             CircleAvatar(
               radius: 20,

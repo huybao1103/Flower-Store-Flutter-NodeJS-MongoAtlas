@@ -9,19 +9,22 @@ import 'package:flower_store/shared/widget/product.grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class AllProductScreen extends StatefulWidget {
-  const AllProductScreen({super.key});
+class CategoryProductsScreen extends StatefulWidget {
+  final String categoryId;
+  final String categoryName;
+
+  const CategoryProductsScreen({super.key, required this.categoryId, required this.categoryName});
 
   @override
-  State<AllProductScreen> createState() => _AllProductScreenState();
+  State<CategoryProductsScreen> createState() => _CategoryProductsScreenState();
 }
 
-class _AllProductScreenState extends State<AllProductScreen> {
+class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final ProductService _productService = ProductService();
   List<ProductModel> products = [];
   final TextEditingController _searchController = TextEditingController();
-  
+
   @override
   void initState() {
     super.initState();
@@ -30,7 +33,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
 
   Future<void> _fetchProducts() async {
     try {
-      List<ProductModel> productList = await _productService.getAll();
+      List<ProductModel> productList = await _productService.getProductsByCategory(widget.categoryId);
       setState(() {
         products = productList;
       });
@@ -41,7 +44,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
 
   Future<void> _searchProducts(String keyword) async {
     try {
-      List<ProductModel> productList = await _productService.searchProducts(keyword);
+      List<ProductModel> productList = await _productService.searchProductsByCategory(widget.categoryId, keyword);
       setState(() {
         products = productList;
       });
@@ -88,7 +91,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
             Expanded(
               child: ProductGridview(
                 products: products,
-                title: 'Tất cả sản phẩm',
+                title: widget.categoryName,
               ),
             ),
           ],

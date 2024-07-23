@@ -2,10 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flower_store/assets/custom_icon.dart';
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/menu.model.dart';
-import 'package:flower_store/models/product.dart';
 import 'package:flower_store/models/product/product.model.dart';
 import 'package:flower_store/screens/favorite.screen.dart';
 import 'package:flower_store/screens/user/profile.screen.dart';
+import 'package:flower_store/screens/store_product_page/product_display.screen.dart';
 import 'package:flower_store/services/product.service.dart';
 import 'package:flower_store/shared/components/custom_drawer.dart';
 import 'package:flower_store/shared/components/main_page_header.dart';
@@ -31,17 +31,16 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
     'https://img.teleflora.com/images/o_0/l_backgrounds:202002-DOTD_640LandingPage,pg_1/w_640,cs_no_cmyk,c_pad,g_south/f_auto,q_80,e_sharpen:1/backgrounds/202002-DOTD_640LandingPage/flowers'
   ];
   List<String> category = [
-    " Bridal bouquet",
-    " Bouquet",
-    " Vase of flowers",
+    "Bridal bouquet",
+    "Bouquet",
+    "Vase of flowers",
     "Basker of flowers",
     "Box of flowers",
     "Congratulation flowers",
     "Condolence flowers",
     "Tet flower collection",
   ];
-  List<ProductModel> productsFavorite = [
-  ];
+  List<ProductModel> productsFavorite = [];
 
   @override
   void initState() {
@@ -57,6 +56,18 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
       });
     } catch (e) {
       print('Lỗi khi tải sản phẩm: $e');
+    }
+  }
+
+  Future<void> _navigateToProductDisplayScreen(ProductModel product) async {
+    final result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ProductDisplayScreen(product: product),
+      ),
+    );
+
+    if (result != null && result is ProductModel) {
+      _fetchProducts(); // Load lại dữ liệu khi quay trở lại
     }
   }
 
@@ -83,26 +94,31 @@ class _StoreMainScreenState extends State<StoreMainScreen> {
                         title: 'Đã thích',
                         navigator: const FavoriteScreen(),
                         seeAll: true,
+                        onTap: _navigateToProductDisplayScreen,
                       ),
                       ProductListview(
                         products: products,
                         title: 'Bán nhiều nhất',
                         seeAll: true,
+                        onTap: _navigateToProductDisplayScreen,
                       ),
                       ProductListview(
                         products: saleProducts,
                         title: 'Ưu đãi đặc biệt',
                         seeAll: true,
+                        onTap: _navigateToProductDisplayScreen,
                       ),
                       ProductListview(
                         products: listProducts,
                         title: 'Hàng mới về',
                         seeAll: true,
+                        onTap: _navigateToProductDisplayScreen,
                       ),
                       ProductListview(
                         products: products,
                         title: 'Được đánh giá cao',
                         seeAll: true,
+                        onTap: _navigateToProductDisplayScreen,
                       ),
                     ],
                   ),
