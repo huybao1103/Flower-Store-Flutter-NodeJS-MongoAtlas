@@ -20,7 +20,7 @@ const ProductSchema = new Schema({
     img: { type: String, required: true },
     quantity: { type: Number, required: true },
     descrip: { type: String },
-    inclueId: { type: [String]  },
+    inclueId: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
     fav: { type: Boolean },
     cateid: { type: String, required: true },
 })

@@ -37,5 +37,34 @@ router.post('/login', async (req,res) => {
     */
     var result = await accountController.Login(req.body, res);
     return genericHttpResponse.success(res, result);
+});
+
+router.get('/get-list', async (req, res) => {
+    /*  
+        #swagger.tags = ['Accounts']
+        #swagger.responses[200] = { description: 'Get list success', schema: { $ref: '#/definitions/Accounts' } }
+        #swagger.responses[500] = { description: 'Get fail', schema: 'error' }
+    */
+   var result = await accountController.GetList(res);
+   return genericHttpResponse.success(res, result);
+});
+
+router.get('/get-by-id/:_id', async (req, res) => {
+    /*  
+        #swagger.tags = ['Accounts']
+        #swagger.responses[200] = { description: 'Get success', schema: { $ref: '#/definitions/Accounts' } }
+        #swagger.responses[500] = { description: 'Get fail', schema: 'error' }
+    */
+   var result = await accountController.GetById(req, res);
+   return genericHttpResponse.success(res, result)
+})
+router.delete('/delete/:_id', async (req, res) => {
+    /*  
+        #swagger.tags = ['Accounts']
+        #swagger.responses[200] = { description: 'Delete success', schema: true }
+        #swagger.responses[500] = { description: 'Delete fail', schema: 'error' }
+    */
+   var result = await accountController.delete(req, res);
+   return genericHttpResponse.success(res, result)
 })
 module.exports = router;

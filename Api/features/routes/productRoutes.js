@@ -19,7 +19,7 @@ router.get('/find-product',async(req,res)=>{
         #swagger.responses[500] = { description: 'Find Fail', schema: 'error' }
     */
 })
-router.post('/get-product', async (req, res) => {
+router.post('/new-product', async (req, res) => {
     /*  
         #swagger.tags = ['Product']
         #swagger.parameters['body'] = {
