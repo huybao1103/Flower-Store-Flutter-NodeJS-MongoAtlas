@@ -49,7 +49,7 @@ class APIRepository {
     }
   }
 
-  Future<bool> addNewInvoice(Map<String, dynamic> invoiceData) async {
+  Future<Invoice?> addNewInvoice(Map<String, dynamic> invoiceData) async {
     try {
       Response response = await _dio.post(
         '/Invoice/addnew-invoice',
@@ -58,10 +58,9 @@ class APIRepository {
           'Content-Type': 'application/json',
         }),
       );
-      return response.statusCode == 200;
+      return Invoice.fromJson(response.data as Map<String, dynamic>);
     } catch (e) {
-      print('Failed to add new invoice: $e');
-      return false;
+      throw 'Tạo hóa đơn thất bại';
     }
   }
 }

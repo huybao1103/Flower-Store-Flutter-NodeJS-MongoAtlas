@@ -84,36 +84,18 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Lịch sử mua hàng'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       backgroundColor: const Color(0xffF0F0F0),
       body: Column(
         children: [
-          const SizedBox(height: 30),
-          Container(
-            width: double.infinity,
-            height: 60,
-            decoration: const BoxDecoration(
-              color: Color(0xffF0F0F0),
-            ),
-            child: Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.black),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const SizedBox(width: 8.0),
-                const Text(
-                  'Lịch sử mua hàng',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
           const SizedBox(height: 16.0),
           Row(
             children: [

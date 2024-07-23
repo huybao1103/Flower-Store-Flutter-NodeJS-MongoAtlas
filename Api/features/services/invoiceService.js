@@ -22,8 +22,8 @@ class InvoiceService {
             const invoice = new InvoiceModel({
                 nameInvoice,details: newDetailIds,productId,quantity,price,address,date,accountId,account: accountId
             });
-            await invoice.save();
-            return true;
+            const res = await invoice.save();
+            return await this.GetInvoiceById(res._id);
         }
         catch(e) {
             return e;
