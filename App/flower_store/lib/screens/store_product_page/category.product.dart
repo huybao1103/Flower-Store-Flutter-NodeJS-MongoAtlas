@@ -31,6 +31,20 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
     _fetchProducts();
   }
 
+void _sortProducts(String sortOption) {
+    setState(() {
+      if (sortOption == 'A-Z') {
+        products.sort((a, b) => a.nameProduct.compareTo(b.nameProduct));
+      } else if (sortOption == 'Z-A') {
+        products.sort((a, b) => b.nameProduct.compareTo(a.nameProduct));
+      } else if (sortOption == 'Giá, thấp đến cao') {
+        products.sort((a, b) => a.price.compareTo(b.price));
+      } else if (sortOption == 'Giá, cao đến thấp') {
+        products.sort((a, b) => b.price.compareTo(a.price));
+      }
+    });
+  }
+
   Future<void> _fetchProducts() async {
     try {
       List<ProductModel> productList = await _productService.getProductsByCategory(widget.categoryId);
@@ -92,6 +106,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
               child: ProductGridview(
                 products: products,
                 title: widget.categoryName,
+                onSortOptionChanged: _sortProducts,
               ),
             ),
           ],
