@@ -45,16 +45,24 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
           invoices.sort((a, b) => a.id.compareTo(b.id));
           break;
         case 'Date':
-          // Assuming there's a date field in your Invoice model
-          // invoices.sort((a, b) {
-          //   DateTime dateA = DateFormat('dd/MM/yyyy').parse(a.date);
-          //   DateTime dateB = DateFormat('dd/MM/yyyy').parse(b.date);
-          //   return dateA.compareTo(dateB);
-          // });
+          invoices.sort((a, b) {
+            DateTime dateA = a.details.isNotEmpty
+                ? DateFormat('dd-MM-yyyy').parse(a.details[0].date)
+                : DateTime.now();
+            DateTime dateB = b.details.isNotEmpty
+                ? DateFormat('dd-MM-yyyy').parse(b.details[0].date)
+                : DateTime.now();
+            return dateA.compareTo(dateB);
+          });
           break;
         case 'Price':
-          // Assuming there's a total field in your Invoice model
-          //invoices.sort((a, b) => a.total.compareTo(b.total));
+          invoices.sort((a, b) {
+            int totalPriceA = a.details
+                .fold(0, (sum, item) => sum + item.price * item.quantity);
+            int totalPriceB = b.details
+                .fold(0, (sum, item) => sum + item.price * item.quantity);
+            return totalPriceA.compareTo(totalPriceB);
+          });
           break;
         case 'A-Z':
           invoices.sort((a, b) => a.id.compareTo(b.id));
@@ -66,6 +74,11 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
           break;
       }
     });
+  }
+
+  String formatCurrency(int amount) {
+    final formatter = NumberFormat.currency(locale: 'vi_VN', symbol: 'VND');
+    return formatter.format(amount);
   }
 
   @override
@@ -91,7 +104,7 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
                 ),
                 const SizedBox(width: 8.0),
                 const Text(
-                  'History Purchase',
+                  'Lịch sử mua hàng',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -160,6 +173,10 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
                       itemCount: invoices.length,
                       itemBuilder: (context, index) {
                         final invoice = invoices[index];
+                        int totalQuantity = invoice.details
+                            .fold(0, (sum, item) => sum + item.quantity);
+                        int totalPrice = invoice.details.fold(
+                            0, (sum, item) => sum + item.price * item.quantity);
                         return Card(
                           margin: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Padding(
@@ -179,7 +196,7 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
                                       colors: [
                                         Color.fromARGB(255, 229, 207, 212),
                                         Color.fromARGB(255, 243, 203, 212),
-                                        Color(0xffFF85A1),
+                                        Color(0xffFF85A1)
                                       ],
                                     ),
                                     borderRadius: BorderRadius.only(
@@ -188,7 +205,7 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
                                     ),
                                   ),
                                   child: Text(
-                                    invoice.id,
+                                    invoice.nameInvoice,
                                     style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -198,33 +215,94 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
                                 ),
                                 const SizedBox(height: 8.0),
                                 const Padding(
-                                  padding: EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    'Account ID',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ),
+                                    padding: EdgeInsets.only(left: 20),
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.location_on, size: 16),
+                                        Text(
+                                          'Địa chỉ giao hàng',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    )),
                                 Padding(
                                   padding:
-                                      const EdgeInsets.only(left: 20, top: 4),
-                                  child: Text(invoice.accountId),
+                                      const EdgeInsets.only(left: 38, top: 4),
+                                  child: Text(invoice.details.isNotEmpty
+                                      ? invoice.details[0].address
+                                      : 'Không có địa chỉ'),
                                 ),
                                 const SizedBox(height: 8.0),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    'Detail Invoice ID',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ),
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: 20, top: 4),
-                                  child: Text(invoice.detailInvoiceId),
+                                  child: Row(
+                                    children: [
+                                      const Icon(Icons.calendar_today,
+                                          size: 16),
+                                      const SizedBox(width: 4.0),
+                                      Text(invoice.details.isNotEmpty
+                                          ? invoice.details[0].date
+                                          : 'Không có ngày'),
+                                    ],
+                                  ),
                                 ),
-                                const SizedBox(height: 16.0),
+                                const Divider(),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: invoice.details.length,
+                                    itemBuilder: (context, itemIndex) {
+                                      final item = invoice.details[itemIndex];
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                                '${item.product.nameProduct} (${item.quantity} cái)'),
+                                            Text(
+                                                '${formatCurrency(item.price)} '),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                const Divider(),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text('Tổng số lượng'),
+                                          Text('$totalQuantity cái'),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 4.0),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text('Tổng tiền'),
+                                          Text(
+                                              '${formatCurrency(totalPrice)} '),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 16.0),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),

@@ -1,10 +1,12 @@
 import 'package:flower_store/constants/colors.dart';
+import 'package:flower_store/models/cart.dart';
 import 'package:flower_store/models/product/product.model.dart';
 import 'package:flower_store/screens/cart/cart.screen.dart';
+import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
 import 'package:flower_store/services/product.service.dart';
+import 'package:flower_store/services/sqlite.dart';
 import 'package:flower_store/shared/widget/product.listview.horizontal.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 class ProductDisplayScreen extends StatefulWidget {
@@ -19,6 +21,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
   final GlobalKey _key = GlobalKey();
   final ScrollController _scrollController = ScrollController();
   final ProductService _productService = ProductService();
+  final DatabaseHelper _databaseHelper = DatabaseHelper();
 
   bool _isPriceCardFixed = false;
   late bool liked;
@@ -31,7 +34,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
   void initState() {
     super.initState();
     product = widget.product;
-    liked = widget.product.fav == true;
+    liked = widget.product.fav ?? false;
     originalPrice = product.price;
     _scrollController.addListener(_scrollListener);
   }
@@ -90,6 +93,26 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
     return formatter.format(price);
   }
 
+  Future<void> _addToCart() async {
+    await _databaseHelper.insertProduct(Cart(
+      productID: product.id!,
+      name: product.nameProduct,
+      price: product.price,
+      img: product.img,
+      address: 'Default Address', // Replace with actual address
+      des: product.descrip ?? '',
+      date: DateFormat('dd/MM/yyyy').format(DateTime.now()),
+      quantity: quantity,
+    ));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const MainPageScreen(
+                currentScreen: CartPage(),
+              )),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
@@ -101,7 +124,9 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
             decoration: const BoxDecoration(color: Color(0xFFF0F0F0)),
             child: SingleChildScrollView(
               controller: _scrollController,
-              padding: EdgeInsets.only(top: screenHeight * 35 / 100 + (_isPriceCardFixed ? screenHeight * 5 / 100 : 0)),
+              padding: EdgeInsets.only(
+                  top: screenHeight * 35 / 100 +
+                      (_isPriceCardFixed ? screenHeight * 5 / 100 : 0)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -113,7 +138,8 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(product.nameProduct,
-                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
                           ],
                         ),
                         if (!_isPriceCardFixed) priceCard(),
@@ -126,21 +152,18 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: Center(
                             child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const CartPage(),
-                                  ),
-                                );
-                              },
+                              onPressed: _addToCart,
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xfff56789),
-                                padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                                backgroundColor: const Color(0xfff56789),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 80, vertical: 15),
                               ),
                               child: const Text(
                                 'Thêm vào giỏ hàng',
-                                style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -181,7 +204,8 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
           color: softPink,
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(40))),
       child: Padding(
-        padding: EdgeInsets.only(left: 16, right: 16, top: screenHeight * 5 / 100, bottom: 10),
+        padding: EdgeInsets.only(
+            left: 16, right: 16, top: screenHeight * 5 / 100, bottom: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,7 +225,8 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
                     ),
             ),
             IconButton(
-              icon: Icon(liked ? Icons.favorite : Icons.favorite_border, color: liked ? Colors.red : Colors.grey),
+              icon: Icon(liked ? Icons.favorite : Icons.favorite_border,
+                  color: liked ? Colors.red : Colors.grey),
               onPressed: toggleFavorite,
             ),
           ],
@@ -213,12 +238,15 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
   Card priceCard() {
     return Card(
       key: _key,
-      margin: _isPriceCardFixed ? EdgeInsets.zero : const EdgeInsets.only(bottom: 10, top: 10),
+      margin: _isPriceCardFixed
+          ? EdgeInsets.zero
+          : const EdgeInsets.only(bottom: 10, top: 10),
       elevation: 10,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('  ${getFormattedPrice(product.price)} vnđ', style: const TextStyle(fontSize: 20, color: Colors.red)),
+          Text('  ${getFormattedPrice(product.price)} vnđ',
+              style: const TextStyle(fontSize: 20, color: Colors.red)),
           Row(
             children: [
               IconButton(
@@ -256,7 +284,8 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
       child: SizedBox(
         height: screenHeight * 15 / 100,
         child: SingleChildScrollView(
-          child: Text('${product.descrip}', style: const TextStyle(fontSize: 17)),
+          child:
+              Text('${product.descrip}', style: const TextStyle(fontSize: 17)),
         ),
       ),
     );
@@ -266,21 +295,24 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
     ProductModel(
       nameProduct: 'Orange tulips',
       price: 100000,
-      img: 'https://labellarosaflowers.com/cdn/shop/products/B734817C-DE8A-4244-8F9A-76EDEC4136B62.jpg?v=1641203935&width=2200',
+      img:
+          'https://labellarosaflowers.com/cdn/shop/products/B734817C-DE8A-4244-8F9A-76EDEC4136B62.jpg?v=1641203935&width=2200',
       fav: false,
       quantity: 10,
     ),
     ProductModel(
       nameProduct: 'Pink roses',
       price: 45000,
-      img: 'https://labellarosaflowers.com/cdn/shop/products/FullSizeRender156.jpg?v=1645196351&width=2200',
+      img:
+          'https://labellarosaflowers.com/cdn/shop/products/FullSizeRender156.jpg?v=1645196351&width=2200',
       fav: false,
       quantity: 10,
     ),
     ProductModel(
       nameProduct: 'White daisies',
       price: 75000,
-      img: 'https://product.hstatic.net/200000846175/product/z5585714112334_bcd9c83928e16e7b1f93006df9500d94-min__1__0938be19940c46b5a261fcf29ffd2a62_1024x1024.jpg',
+      img:
+          'https://product.hstatic.net/200000846175/product/z5585714112334_bcd9c83928e16e7b1f93006df9500d94-min__1__0938be19940c46b5a261fcf29ffd2a62_1024x1024.jpg',
       fav: false,
       quantity: 10,
     ),

@@ -1,9 +1,8 @@
 import 'package:flower_store/data/api_repository.dart';
 import 'package:flower_store/models/authorize/signup.model.dart';
 import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
-import 'package:flower_store/services/authorize.service.dart';
 import 'package:flower_store/services/share_pre.dart';
-import 'package:flower_store/services/sqlite.dart';
+import 'package:flower_store/services/sqlite_pro5.dart';
 import 'package:flutter/material.dart';
 import 'package:flower_store/constants/colors.dart';
 

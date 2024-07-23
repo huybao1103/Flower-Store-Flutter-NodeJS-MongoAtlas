@@ -39,11 +39,7 @@ class APIRepository {
           'Content-Type': 'application/json',
         }),
       );
-      if (response.statusCode == 200) {
-        return true;
-      } else {
-        return false;
-      }
+      return response.statusCode == 200;
     } catch (e) {
       print('Failed to update profile: $e');
       return false;

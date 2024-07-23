@@ -1,17 +1,13 @@
+import 'package:flower_store/models/cart.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class SQLiteService {
-  static final SQLiteService _instance = SQLiteService._internal();
-
-  factory SQLiteService() {
-    return _instance;
-  }
-
-  SQLiteService._internal();
+class DatabaseHelper {
+  static final DatabaseHelper _databaseService = DatabaseHelper._internal();
+  factory DatabaseHelper() => _databaseService;
+  DatabaseHelper._internal();
 
   static Database? _database;
-
   Future<Database> get database async {
     if (_database != null) return _database!;
     _database = await _initDatabase();
@@ -19,43 +15,101 @@ class SQLiteService {
   }
 
   Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'flower_store.db');
+    final databasePath = await getDatabasesPath();
+    final path = join(databasePath, 'db_cart.db');
+    print("Đường dẫn database: $databasePath");
     return await openDatabase(
       path,
-      version: 1,
-      onCreate: (db, version) {
-        return db.execute(
-          "CREATE TABLE avatar (id INTEGER PRIMARY KEY, link TEXT)",
-        );
-      },
+      onCreate: _onCreate,
+      version: 2, // Increment the version number
     );
   }
 
-  Future<void> saveAvatarLink(String link) async {
-    final db = await database;
+  Future<void> _onCreate(Database db, int version) async {
+    await db.execute(
+      'CREATE TABLE Cart('
+      'productID TEXT PRIMARY KEY, name TEXT, price FLOAT, img TEXT, address TEXT, des TEXT, date TEXT, quantity INTEGER)',
+    );
+  }
+
+  Future<void> insertProduct(Cart productModel) async {
+    final db = await _databaseService.database;
     await db.insert(
-      'avatar',
-      {'link': link},
+      'Cart',
+      productModel.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-  Future<String?> getAvatarLink() async {
-    final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('avatar');
-    if (maps.isNotEmpty) {
-      return maps.first['link'];
-    }
-    return null;
+  Future<List<Cart>> products() async {
+    final db = await _databaseService.database;
+    final List<Map<String, dynamic>> maps = await db.query('Cart');
+    return List.generate(maps.length, (index) => Cart.fromMap(maps[index]));
   }
 
-  Future<void> updateAvatarLink(String link) async {
-    final db = await database;
+  Future<Cart> product(String id) async {
+    final db = await _databaseService.database;
+    final List<Map<String, dynamic>> maps =
+        await db.query('Cart', where: 'productID = ?', whereArgs: [id]);
+    return Cart.fromMap(maps[0]);
+  }
+
+  Future<void> minus(Cart product) async {
+    final db = await _databaseService.database;
+    if (product.quantity > 1) {
+      product.quantity--;
+      await db.update(
+        'Cart',
+        product.toMap(),
+        where: 'productID = ?',
+        whereArgs: [product.productID],
+      );
+    } else {
+      await db.delete(
+        'Cart',
+        where: 'productID = ?',
+        whereArgs: [product.productID],
+      );
+    }
+  }
+
+  Future<void> add(Cart product) async {
+    final db = await _databaseService.database;
+    product.quantity++;
     await db.update(
-      'avatar',
-      {'link': link},
-      where: 'id = ?',
-      whereArgs: [1], // Assuming there's only one row with ID = 1
+      'Cart',
+      product.toMap(),
+      where: 'productID = ?',
+      whereArgs: [product.productID],
     );
+  }
+
+  Future<void> deleteProduct(String id) async {
+    final db = await _databaseService.database;
+    await db.delete(
+      'Cart',
+      where: 'productID = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<void> deleteProductAll() async {
+    final db = await _databaseService.database;
+    await db.delete('Cart');
+  }
+
+  Future<int> updateProduct(Cart cart) async {
+    final db = await database;
+    return await db.update(
+      'Cart',
+      cart.toMap(),
+      where: 'productID = ?',
+      whereArgs: [cart.productID],
+    );
+  }
+
+  Future<void> clear() async {
+    final db = await _databaseService.database;
+    await db.delete('Cart', where: 'quantity > 0');
   }
 }
