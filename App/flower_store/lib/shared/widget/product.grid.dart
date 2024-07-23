@@ -1,16 +1,16 @@
-// lib/widgets/product_grid.dart
 import 'package:flower_store/models/product/product.model.dart';
 import 'package:flower_store/shared/widget/sorting.dropdown.dart';
 import 'package:flutter/material.dart';
-import 'package:mongo_dart/mongo_dart.dart';
 import '../../models/product.dart';
 import 'product_card_favorite.dart';
 
 class ProductGridview extends StatelessWidget {
   final List<ProductModel> products;
   final String title;
-  ProductGridview({Key? key, required this.products, required this.title})
-      : super(key: key);
+  final Function(String) onSortOptionChanged;
+
+  ProductGridview({Key? key, required this.products, required this.title, required this.onSortOptionChanged}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,23 +21,23 @@ class ProductGridview extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-                Flexible(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    overflow: TextOverflow.ellipsis,
+              Flexible(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
                   ),
+                  overflow: TextOverflow.ellipsis,
                 ),
-              SortingDropdown(),
+              ),
+              SortingDropdown(onSortOptionChanged: onSortOptionChanged),
             ],
           ),
         ),
         Expanded(
           child: GridView.builder(
-            padding: const EdgeInsets.fromLTRB(8,0,8,10),
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 10),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 5.0,
