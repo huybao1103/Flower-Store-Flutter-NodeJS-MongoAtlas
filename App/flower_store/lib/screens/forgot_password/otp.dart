@@ -24,194 +24,183 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    if(codes.isEmpty) send();
+    if (codes.isEmpty) send();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 60, left: 20, right: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              Row(
                 children: [
                   Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: const BoxDecoration(
-                        color: Color(0xffECECEC),
-                        shape: BoxShape.circle,
+                    width: 20.0,
+                    height: 20.0,
+                    decoration: const BoxDecoration(
+                      color: Color(0xffECECEC),
+                      shape: BoxShape.circle,
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: SvgPicture.asset(
+                        'assets/icons/back_icon.svg',
+                        height: 20,
+                        width: 20,
                       ),
-                      child: Column(
-                        children: [
-                          const Padding(
-                              padding: EdgeInsets.only(top: 13, right: 10)),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: SvgPicture.asset(
-                              'assets/icons/back_icon.svg',
-                              height: 25,
-                              width: 25,
-                            ),
-                          ),
-                        ],
-                      )),
-                  const SizedBox(height: 25),
+                    ),
+                  ),
+                  const SizedBox(width: 15),
                   Text(
                     'Xác thực Email',
                     style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    )),
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
-                    'Chúng tôi đã gửi mã OTP tới "${widget.account.email}" hãy nhập 5 mã số được gửi vào Email của bạn ',
-                    style: GoogleFonts.inter(
-                      fontSize: 16,
-                      color: const Color(0xff989898),
-                      fontWeight: FontWeight.w500,
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(5, (index) {
-                      return SizedBox(
-                        width: 50,
-                        child: TextField(
-                          controller: _codeController[index],
-                          keyboardType: TextInputType.number,
-                          maxLength: 1,
-                          decoration: const InputDecoration(
-                            counterText: '',
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                borderSide: BorderSide(
-                                    width: 2, color: Color(0xffE1E1E1))),
+                ],
+              ),
+              const SizedBox(height: 25),
+              Text(
+                'Chúng tôi đã gửi mã OTP tới "${widget.account.email}" hãy nhập 5 mã số được gửi vào Email của bạn',
+                style: GoogleFonts.inter(
+                  fontSize: 16,
+                  color: const Color(0xff989898),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 25),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(5, (index) {
+                  return SizedBox(
+                    width: 50,
+                    child: TextField(
+                      controller: _codeController[index],
+                      keyboardType: TextInputType.number,
+                      maxLength: 1,
+                      decoration: const InputDecoration(
+                        counterText: '',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: Color(0xffE1E1E1),
                           ),
                         ),
-                      );
-                    }),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 300, left: 15, right: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 8),
-                  const SizedBox(height: 32),
-                  error != null ? Center(
-                    child: Text(
-                      error!,
-                      style: GoogleFonts.inter(
-                        fontSize: 16,
-                        color: Colors.red,
-                        fontWeight: FontWeight.w600,
-                        
                       ),
                     ),
-                  ) : const SizedBox.shrink(),
-                  Container(
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      color: Color(0xfff56789),
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
-                      child: TextButton(
-                        onPressed: () {
-                          bool correct = true;
-                          for (var i = 0; i < _codeController.length; i++) {
-                            correct = int.parse(_codeController[i].text) == codes[i];
-                          }
-                          if(correct) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                     UpdatePasswordScreen(account: widget.account,)),
-                            );
-                          }
-                          else {
-                            setState(() {
-                              error = 'Sai mã OTP';
-                            });
-                          }
-                        },
-                        child: Text(
-                          'Tạo mật khẩu mới',
-                          style: GoogleFonts.inter(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
-                        )
-                      ),
+                  );
+                }),
+              ),
+              const SizedBox(height: 25),
+              if (error != null)
+                Center(
+                  child: Text(
+                    error!,
+                    style: GoogleFonts.inter(
+                      fontSize: 16,
+                      color: Colors.red,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    child: Center(
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Mã chưa được gửi vào Email? ',
-                              style: GoogleFonts.inter(
-                                  color: const Color(0xff989898),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            TextSpan(
-                              text: 'Gửi lại',
-                              style: GoogleFonts.inter(
-                                color: const Color(0xfff56789),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                decoration: TextDecoration.underline,
-                                decorationColor: const Color(0xfff56789),
-                              ),
-                            ),
-                          ],
+                ),
+              const SizedBox(height: 32),
+              Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Color(0xfff56789),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    bool correct = true;
+                    for (var i = 0; i < _codeController.length; i++) {
+                      correct = int.parse(_codeController[i].text) == codes[i];
+                    }
+                    if (correct) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              UpdatePasswordScreen(account: widget.account),
                         ),
-                      ),
+                      );
+                    } else {
+                      setState(() {
+                        error = 'Sai mã OTP';
+                      });
+                    }
+                  },
+                  child: Text(
+                    'Tạo mật khẩu mới',
+                    style: GoogleFonts.inter(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     ),
-                    onTap: () => send(),
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              GestureDetector(
+                child: Center(
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Mã chưa được gửi vào Email? ',
+                          style: GoogleFonts.inter(
+                            color: const Color(0xff989898),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Gửi lại',
+                          style: GoogleFonts.inter(
+                            color: const Color(0xfff56789),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            decoration: TextDecoration.underline,
+                            decorationColor: const Color(0xfff56789),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                onTap: () => send(),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  send() {
+  void send() {
     String code = '';
     codes = List.generate(5, (i) => Random().nextInt(10));
     for (var n in codes) {
       code = '$code$n';
     }
-    sendEmail(widget.account.email, _emailTempalte(code, widget.account.name), 'Đặt lại mật khẩu')
-    .then((a) => setState(() {
-      
-    }));
+    sendEmail(widget.account.email, _emailTemplate(code, widget.account.name), 'Đặt lại mật khẩu').then(
+      (a) => setState(() {}),
+    );
   }
 
-  String _emailTempalte(String code, String name) {
+  String _emailTemplate(String code, String name) {
     return '''<!DOCTYPE html>
       <html>
       <head>

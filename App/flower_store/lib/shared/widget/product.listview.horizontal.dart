@@ -7,7 +7,7 @@ class ProductListview extends StatelessWidget {
   final String title;
   Widget? navigator;
   late bool? seeAll = true;
-  final Function(ProductModel)? onTap; // Thêm thuộc tính onTap
+  final Function(ProductModel)? onTap;
 
   ProductListview({
     super.key,
@@ -44,7 +44,7 @@ class ProductListview extends StatelessWidget {
                         }
                       },
                       child: const Text(
-                        'See all',
+                        'Xem thêm',
                         style: TextStyle(color: Colors.black),
                       ),
                     )
