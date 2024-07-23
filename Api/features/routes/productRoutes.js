@@ -41,7 +41,7 @@ router.get('/search-favorite-products', async (req, res) => {
     else genericHttpResponse.fail(res, result);
 });
 
-router.post('/get-product', async (req, res) => {
+router.post('/new-product', async (req, res) => {
     /*  
         #swagger.tags = ['Product']
         #swagger.parameters['body'] = {

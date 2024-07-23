@@ -11,14 +11,14 @@ class InvoiceService {
                     const element = details[index];
                     const {productId,quantity,price,address,date} = element;
 
-                    let detail = new DetailInvoiceModel({productId,quantity,price,address,date});
+                    let detail = new DetailInvoiceModel({productId,quantity,price,address,date, product: productId});
                     var newDetail = await detail.save();
                     newDetailIds.push(newDetail._id);
                 }
                 
             }
             const invoice = new InvoiceModel({
-                nameInvoice,details: newDetailIds,productId,quantity,price,address,date,accountId
+                nameInvoice,details: newDetailIds,productId,quantity,price,address,date,accountId,account: accountId
             });
             await invoice.save();
             return true;
@@ -44,7 +44,7 @@ class InvoiceService {
     
     async GetInvoiceById(id) {
         try {
-            const invoice = await InvoiceModel.findById(id).exec();
+            const invoice = await InvoiceModel.findById(id).populate('account').populate({path: 'details', populate: {path: 'product'}}).exec();
             return invoice;
         } catch (e) {
             return e;
@@ -53,7 +53,7 @@ class InvoiceService {
 
     async GetAllInvoices() {
         try {
-            const invoices = await InvoiceModel.find().populate('details').exec();
+            const invoices = await InvoiceModel.find().populate('account').populate({path: 'details', populate: {path: 'product'}}).exec();
             return invoices;
         } catch (e) {
             return e;

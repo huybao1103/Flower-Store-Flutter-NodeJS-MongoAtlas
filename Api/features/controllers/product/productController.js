@@ -32,7 +32,7 @@ class ProductController {
     }
 
     async GetAllProducts(req, res) {
-        return await productService.GetAllProducts();
+        return await productService.GetAllProducts(req.ids, req.cateIds);
     }
 
     async GetProductFavorite(req, res) {
