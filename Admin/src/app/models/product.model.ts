@@ -8,4 +8,5 @@ export interface IProduct {
     includeIdForEdit?: string[];
     cateid: string;
     fav?: boolean;
+    img?: string;
 }

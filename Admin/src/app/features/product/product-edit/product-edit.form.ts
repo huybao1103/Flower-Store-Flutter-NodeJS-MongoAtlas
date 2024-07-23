@@ -37,7 +37,17 @@ export function ProductDetailFields(): FormlyFieldConfig[] {
                     }
                 },
                 {
-                    className: 'col-12',
+                    className: 'col-6',
+                    key: 'quantity',
+                    type: FORMLY_INPUT.name,
+                    props: {
+                        label: 'Số Lượng',
+                        required: true,
+                        keyFilter: KeyFilterType.int
+                    }
+                },
+                {
+                    className: 'col-6',
                     key: 'cateid',
                     type: FORMLY_SELECT.name,
                     props: {
@@ -49,7 +59,7 @@ export function ProductDetailFields(): FormlyFieldConfig[] {
                     }
                 },
                 {
-                    className: 'col-12',
+                    className: 'col-6',
                     key: 'includeIdForEdit',
                     type: FORMLY_SELECT.name,
                     props: {
@@ -67,6 +77,15 @@ export function ProductDetailFields(): FormlyFieldConfig[] {
                     type: FORMLY_INPUT.name,
                     props: {
                         label: 'Mô Tả',
+                    }
+                },
+                {
+                    className: 'col-12',
+                    key: 'img',
+                    type: FORMLY_INPUT.name,
+                    props: {
+                        label: 'Link Ảnh SP',
+                        required: true,
                     }
                 },
             ]

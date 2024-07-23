@@ -20,6 +20,7 @@ import { ConfirmationDialogService } from './service/confirmation.service';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { AccountComponent } from './account/account.component';
 import { AccountEditComponent } from './account/account-edit/account-edit.component';
+import { ImageModule } from 'primeng/image';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AccountEditComponent } from './account/account-edit/account-edit.compon
     FormsModule,
     ToastModule,
     OverlayPanelModule,
-    InputTextModule
+    InputTextModule,
+    ImageModule
 ],
   providers: [MessageService, ConfirmationService, ConfirmationDialogService]
 })
