@@ -17,6 +17,8 @@ class InvoiceService {
                 }
                 
             }
+            const i = await InvoiceModel.find().exec();
+            nameInvoice = `HD${i.length + 1}`;
             const invoice = new InvoiceModel({
                 nameInvoice,details: newDetailIds,productId,quantity,price,address,date,accountId,account: accountId
             });
