@@ -38,16 +38,6 @@ export function ProductDetailFields(): FormlyFieldConfig[] {
                 },
                 {
                     className: 'col-6',
-                    key: 'quantity',
-                    type: FORMLY_INPUT.name,
-                    props: {
-                        label: 'Số Lượng',
-                        required: true,
-                        keyFilter: KeyFilterType.int
-                    }
-                },
-                {
-                    className: 'col-6',
                     key: 'cateid',
                     type: FORMLY_SELECT.name,
                     props: {
@@ -59,7 +49,7 @@ export function ProductDetailFields(): FormlyFieldConfig[] {
                     }
                 },
                 {
-                    className: 'col-6',
+                    className: 'col-12',
                     key: 'includeIdForEdit',
                     type: FORMLY_SELECT.name,
                     props: {
