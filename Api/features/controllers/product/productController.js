@@ -9,7 +9,8 @@ class ProductController {
     }
 
     async FindProduct(req, res) {
-        return await productService.FindProduct(req.nameProduct, res);
+        const { nameProduct } = req.query;
+        return await productService.FindProduct(nameProduct, res);
     }
 
     async UpdateProduct(req, res) {
@@ -41,6 +42,21 @@ class ProductController {
     async toggleFavorite(req, res) {
         const { id, isFavorite } = req.body;
         return await productService.toggleFavorite(id, isFavorite);
+    }
+
+    async getProductsByCategory(req, res) {
+        const { categoryId } = req.params;
+        return await productService.getProductsByCategory(categoryId);
+    }
+
+    async searchFavoriteProducts(req, res) {
+        const { keyword } = req.query;
+        return await productService.searchFavoriteProducts(keyword);
+    }
+
+    async searchProductsByCategory(req, res) {
+        const { categoryId, keyword } = req.query;
+        return await productService.searchProductsByCategory(categoryId, keyword);
     }
 }
 module.exports = ProductController;
