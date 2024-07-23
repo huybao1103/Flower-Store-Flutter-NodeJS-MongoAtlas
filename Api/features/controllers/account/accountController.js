@@ -11,5 +11,17 @@ class AccountController {
     async Login(req, res) {
         return await accountService.Login(req.email, req.password, res);
     }
+
+    async GetList(res) {
+        return await accountService.GetList(res);
+    }
+
+    async GetById(req, res) {
+        return await accountService.GetById(req.params._id, res);
+    }
+
+    async delete(req, res) {
+        return await accountService.delete(req.params._id, res);
+    }
 }
 module.exports = AccountController;
