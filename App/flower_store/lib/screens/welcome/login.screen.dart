@@ -1,6 +1,8 @@
 import 'package:flower_store/services/share_pre.dart';
+import 'package:flower_store/shared/widget/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flower_store/constants/colors.dart';
 import 'package:flower_store/models/authorize/login.model.dart';
@@ -151,7 +153,6 @@ class _LoginScreenState extends State<LoginScreen> {
           if (_loginForm.currentState!.saveAndValidate()) {
             LoginModel model = LoginModel();
             model.fromJsonMapping(_loginForm.currentState!.value);
-
             try {
               var val = await authorizeService.login(model);
               debugPrint('Login response: ${val.toJson()}');
@@ -161,6 +162,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   builder: (context) => const MainPageScreen()));
             } catch (onError) {
               debugPrint('Login error: $onError');
+              Fluttertoast.showToast(
+                msg: "Sai mật khẩu hoặc email",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0
+              );
             }
           }
         },
