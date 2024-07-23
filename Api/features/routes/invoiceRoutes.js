@@ -28,10 +28,10 @@ router.post('/addnew-invoice', async (req, res) => {
             description: 'Add new Invoice.',
             schema: { $ref: '#/definitions/Invoices' }
         } 
-        #swagger.responses[200] = { description: 'New Invoices Success', schema: true }
+        #swagger.responses[200] = { description: 'New Invoices Success', schema: '#/definitions/Invoices' }
     */
     var result = await invoiceController.NewInvoice(req.body, res);
-    if(result === true) genericHttpResponse.success(res, true);
+    if(result) genericHttpResponse.success(res, result);
     else genericHttpResponse.fail(res, result);
 });
 
