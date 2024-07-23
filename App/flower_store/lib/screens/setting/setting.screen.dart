@@ -3,6 +3,9 @@ import 'package:flower_store/screens/user/history.purchase.dart';
 import 'package:flower_store/screens/welcome/login.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flower_store/services/share_pre.dart';
+import 'package:flower_store/services/sqlite_pro5.dart';
+import 'package:flower_store/models/authorize/signup.model.dart';
 
 class SettingScreen extends StatefulWidget {
   final bool isDarkMode;
@@ -19,10 +22,35 @@ class _SettingScreenState extends State<SettingScreen> {
   bool rememberMe = false;
   late bool isDarkMode;
 
+  String? userName;
+  String? avatarLink;
+
+  final SharedPreferencesService sharedPreferencesService =
+      SharedPreferencesService();
+  final SQLiteService sqliteService = SQLiteService();
+
   @override
   void initState() {
     super.initState();
     isDarkMode = widget.isDarkMode;
+    _loadUserInfo();
+  }
+
+  Future<void> _loadUserInfo() async {
+    // Load user info from SharedPreferences
+    AccountModel? account = await sharedPreferencesService.getAccountInfo();
+    if (account != null) {
+      setState(() {
+        userName = account.name;
+      });
+    }
+
+    // Load avatar link from SQLite
+    String? link = await sqliteService.getAvatarLink();
+    setState(() {
+      avatarLink = link ??
+          'https://i.pinimg.com/originals/5c/e6/ec/5ce6ec7936ed9aa8c2dd89fe540e36a1.jpg';
+    });
   }
 
   @override
@@ -89,14 +117,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 child: Column(
                   children: [
                     const Padding(padding: EdgeInsets.only(top: 10)),
-                    const ListTile(
+                    ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
+                        backgroundImage: NetworkImage(avatarLink ??
                             'https://i.pinimg.com/originals/5c/e6/ec/5ce6ec7936ed9aa8c2dd89fe540e36a1.jpg'),
                       ),
                       title: Text(
-                        'Cường',
-                        style: TextStyle(
+                        userName ?? 'User',
+                        style: const TextStyle(
                             fontFamily: 'Rubik', fontWeight: FontWeight.w400),
                       ),
                     ),
@@ -121,19 +149,23 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                           trailing: const Icon(Icons.chevron_right),
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HistoryPurchaseScreen()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    const HistoryPurchaseScreen()));
                           },
                         ),
                         ListTile(
                           title: const Text(
-                            'Đổi mật khẩu',
+                            'Quên mật khẩu',
                             style: TextStyle(
                                 fontFamily: 'Rubik',
                                 fontWeight: FontWeight.w400),
                           ),
                           trailing: const Icon(Icons.chevron_right),
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ForgotPasswordScreen()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    const ForgotPasswordScreen()));
                           },
                         ),
                         ListTile(
@@ -168,7 +200,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           contentPadding:
                               const EdgeInsets.only(right: 10, left: 15),
                           title: const Text(
-                            'Dark mode',
+                            'Chế độ tối',
                             style: TextStyle(
                                 fontFamily: 'Rubik',
                                 fontWeight: FontWeight.w400),
@@ -195,7 +227,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     Column(
                       children: [
                         const Padding(padding: EdgeInsets.only(top: 15)),
-                        
                         ListTile(
                           title: const Text(
                             'Đăng xuất',

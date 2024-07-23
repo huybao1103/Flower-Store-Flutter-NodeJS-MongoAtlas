@@ -19,13 +19,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
   ];
 
   String addressLine1 = 'Chử đồng tử';
- 
 
   void _editAddress() {
     TextEditingController line1Controller =
         TextEditingController(text: addressLine1);
-   
-    
 
     showDialog(
       context: context,
@@ -39,7 +36,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 controller: line1Controller,
                 decoration: const InputDecoration(labelText: 'Address Line 1'),
               ),
-            
             ],
           ),
           actions: [
@@ -53,7 +49,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
               onPressed: () {
                 setState(() {
                   addressLine1 = line1Controller.text;
-               
                 });
                 Navigator.of(context).pop();
               },
@@ -81,10 +76,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const MainPageScreen(
-                  isBack: true,
-                ),
-              ),
+                  builder: (context) => const MainPageScreen(
+                        currentScreen: CartPage(),
+                      )),
             );
           },
         ),

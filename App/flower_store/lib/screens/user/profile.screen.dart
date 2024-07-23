@@ -128,10 +128,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffF0F0F0),
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Container(
-          decoration: const BoxDecoration(color: tdBGColor),
+          decoration: const BoxDecoration(color: Color(0xffF0F0F0)),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: ConstrainedBox(
