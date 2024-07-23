@@ -57,5 +57,13 @@ class AccountService {
             return res.status(500).send(e);
         }
     }
+    async GetByEmail(email, res) {
+        try {
+            return await AccountModel.findOne({email: email}).exec();
+        }
+        catch(e) {
+            return res.status(500).send(e);
+        }
+    }
 }
 module.exports = AccountService;

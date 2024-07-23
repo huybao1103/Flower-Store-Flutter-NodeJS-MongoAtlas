@@ -23,5 +23,8 @@ class AccountController {
     async delete(req, res) {
         return await accountService.delete(req.params._id, res);
     }
+    async GetByEmail(req, res) {
+        return await accountService.GetByEmail(req.params.email, res);
+    }
 }
 module.exports = AccountController;
