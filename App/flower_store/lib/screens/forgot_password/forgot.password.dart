@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:flower_store/screens/forgot_password/otp.dart';
+import 'package:flower_store/services/authorize.service.dart';
+import 'package:flower_store/services/mail.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,7 +18,8 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _emailController = TextEditingController();
-
+  final authorizeService = AuthorizeService();
+  String? error;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,6 +104,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       ),
                     ),
                   ),
+                  error != null ? Center(
+                    child: Text(
+                      error!,
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        color: Colors.red,
+                        fontWeight: FontWeight.w600,
+                        
+                      ),
+                    ),
+                  ) : const SizedBox.shrink(),
                   const SizedBox(height: 32),
                   Container(
                     width: double.infinity,
@@ -107,11 +123,24 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(12))),
                     child: TextButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const VerifyCodeScreen()),
-                          );
+                          String email = _emailController.text;
+                          List<int> codes = List.generate(5, (i) => Random().nextInt(10));
+                          authorizeService.getByEmail(email)
+                          .then((val) {
+                            setState(() {
+                              error = null;
+                            });
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => VerifyCodeScreen(account: val,)),
+                            );
+                          })
+                          .catchError((onError) {
+                            setState(() {
+                              error = 'Email không tồn tại';
+                            });
+                          });
                         },
                         child: Text(
                           'Tạo mật khẩu mới',
