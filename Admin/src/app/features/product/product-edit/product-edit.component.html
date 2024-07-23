@@ -9,7 +9,11 @@
       <formly-form [model]="product" [fields]="fields" [options]="options" [form]="form"></formly-form>
     </form>
     
-    <div class="submit-section text-center">
+    <div class="pt-2 text-center">
+        <p-image [src]="product.img" alt="" width="300" class=""/>
+    </div>
+    <div class="submit-section text-center pt-2">
         <button class="btn btn-primary submit-btn"[disabled]="form.invalid" (click)="submit()">Submit</button>
     </div>
+
 </div>
