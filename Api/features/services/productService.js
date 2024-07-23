@@ -19,8 +19,7 @@ class ProductService {
 
     async FindProduct( nameProduct, res) {
         try {
-            var temp = await ProductModel.findOne({ nameProduct}).exec();
-            return await ProductModel.findOne({ nameProduct}).exec();
+            return await ProductModel.findOne({ nameProduct}).populate('inclueId').exec();
         } 
         catch(e) {
             return res.status(500).send(e); 
@@ -48,20 +47,31 @@ class ProductService {
     
     async GetProductById(id) {
         try {
-            const product = await ProductModel.findById(id).exec();
+            const product = await ProductModel.findById(id).populate('inclueId').exec();
             return product;
         } catch (e) {
             return e;
         }
     }
 
-    async GetAllProducts(ids) {
+    async GetAllProducts(ids, cateIds) {
         try {
-            const products = ids != null && ids instanceof Array
-            ? await ProductModel.find({ _id: { $in: ids }}).exec() 
-            : await ProductModel.find().exec();
-            return products;
-        } catch (e) {
+            // const products = ids != null && ids instanceof Array
+            // ? await ProductModel.find({
+            //         _id: { $in: ids },
+
+            //     }).exec() 
+            // : await ProductModel.find().exec();
+            // return products;
+            let query = {};
+
+            if(ids != null && ids instanceof Array && ids.length > 0) 
+                query._id = { $in: ids }
+            if(cateIds != null && cateIds instanceof Array && cateIds.length > 0) 
+                query.cateid = { $in: cateIds }
+
+            return await ProductModel.find(query).populate('inclueId').exec();
+        } catch (e) { 
             return e;
         }
     }

@@ -31,5 +31,31 @@ class AccountService {
         }
         return null;
     }
+
+    async GetList(res) {
+        try {
+            return await AccountModel.find().exec();
+        }
+        catch(e) {
+            return res.status(500).send(e);
+        }
+    }
+
+    async GetById(_id, res) {
+        try {
+            return await AccountModel.findById(_id).exec();
+        }
+        catch(e) {
+            return res.status(500).send(e);
+        }
+    }
+    async delete(_id, res) {
+        try {
+            return await AccountModel.findByIdAndDelete(_id).exec();
+        }
+        catch(e) {
+            return res.status(500).send(e);
+        }
+    }
 }
 module.exports = AccountService;

@@ -37,9 +37,9 @@ class CategoryService {
         }
     }
 
-    async DeleteCategory(_id) {
+    async DeleteCategory(id) {
         try {
-            await CategoryModel.findByIdAndDelete(_id).exec();
+            await CategoryModel.findByIdAndDelete(id).exec();
             return true;
         } catch (e) {
             return e;
