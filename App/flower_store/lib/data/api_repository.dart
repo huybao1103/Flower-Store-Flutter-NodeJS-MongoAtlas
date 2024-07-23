@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flower_store/models/authorize/signup.model.dart';
+import 'package:flower_store/services/https.service.dart';
 import '../models/invoice.dart';
 
 class APIRepository {
   final Dio _dio = Dio();
-  String baseUrl = "http://192.168.1.2:3000";
+  final HttpService _httpService = HttpService();
 
   APIRepository() {
-    _dio.options.baseUrl = "$baseUrl/api";
+    _dio.options.baseUrl = _httpService.headerUrl;
   }
 
   Future<List<Invoice>> getAllInvoices() async {
