@@ -18,7 +18,7 @@ class CategoryController {
     }
 
     async DeleteCategory(req, res) {
-        return await categoryService.DeleteCategory(req.params._id);
+        return await categoryService.DeleteCategory(req.params.id);
     }
 
     async GetCategoryList(req, res) {
