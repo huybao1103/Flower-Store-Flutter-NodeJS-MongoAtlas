@@ -58,5 +58,9 @@ class ProductController {
         const { categoryId, keyword } = req.query;
         return await productService.searchProductsByCategory(categoryId, keyword);
     }
+
+    async getIncludeProductByProId(req, res) {
+        return await productService.GetAllIncludeProducts(req.params.id);
+    }
 }
 module.exports = ProductController;

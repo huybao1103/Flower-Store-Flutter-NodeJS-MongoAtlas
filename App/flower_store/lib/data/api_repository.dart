@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flower_store/models/authorize/signup.model.dart';
 import 'package:flower_store/services/https.service.dart';
-import '../models/invoice.dart';
+import 'package:flower_store/models/invoice.dart';
 
 class APIRepository {
   final Dio _dio = Dio();
@@ -43,6 +45,22 @@ class APIRepository {
       return response.statusCode == 200;
     } catch (e) {
       print('Failed to update profile: $e');
+      return false;
+    }
+  }
+
+  Future<bool> addNewInvoice(Map<String, dynamic> invoiceData) async {
+    try {
+      Response response = await _dio.post(
+        '/Invoice/addnew-invoice',
+        data: jsonEncode(invoiceData),
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+        }),
+      );
+      return response.statusCode == 200;
+    } catch (e) {
+      print('Failed to add new invoice: $e');
       return false;
     }
   }

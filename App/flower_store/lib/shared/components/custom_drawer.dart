@@ -1,5 +1,6 @@
 import 'package:flower_store/assets/custom_icon.dart';
 import 'package:flower_store/constants/colors.dart';
+import 'package:flower_store/models/authorize/signup.model.dart';
 import 'package:flower_store/models/category/category.model.dart';
 import 'package:flower_store/models/menu.model.dart';
 import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
@@ -7,6 +8,8 @@ import 'package:flower_store/screens/store_product_page/category.product.dart';
 import 'package:flower_store/screens/user/history.purchase.dart';
 import 'package:flower_store/screens/user/profile.screen.dart';
 import 'package:flower_store/services/category.service.dart';
+import 'package:flower_store/services/share_pre.dart';
+import 'package:flower_store/services/sqlite_pro5.dart';
 import 'package:flower_store/shared/components/custom_widgets.dart';
 import 'package:flower_store/shared/styles/menu_style.dart';
 import 'package:flutter/material.dart';
@@ -28,13 +31,18 @@ class _CustomDrawerState extends State<CustomDrawer> {
   final CategoryService _categoryService = CategoryService();
   List<CategoryModel> productCategories = [];
 
+  final SharedPreferencesService sharedPreferencesService = SharedPreferencesService();
+  late String curName = '';
+  final SQLiteService sqliteService = SQLiteService();
+  late String? avatar;
   @override
   void initState() {
     super.initState();
     drawerHeader = widget.drawerHeader;
     _fetchCategories();
+    _loadUserInfo();
   }
-
+  
   Future<void> _fetchCategories() async {
     try {
       List<CategoryModel> categoriesList = await _categoryService.getAll();
@@ -75,7 +83,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             )
           else
             CustomSubmenu(
-              width: MediaQuery.of(context).size.width / 1.6,
+              width: MediaQuery.of(context).size.width / 1.8,
               menuItem: MenuItem.haveChildren(
                 "Sản phẩm",
                 List.generate(
@@ -122,17 +130,34 @@ class _CustomDrawerState extends State<CustomDrawer> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
-            backgroundImage:
-                AssetImage(avatarUri ?? 'assets/images/drawer_avatar.png'),
+            backgroundImage: avatar != null && avatar!.contains('https:/')
+            ? NetworkImage(avatar!)
+            : const AssetImage('assets/images/drawer_avatar.png'),
             radius: 40,
           ),
           Text(
-            name ?? "Lương Quang Huy Bảo",
+            curName ?? "Lương Quang Huy Bảo",
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _loadUserInfo() async {
+    // Load user info from SharedPreferences
+    AccountModel? account = await sharedPreferencesService.getAccountInfo();
+    if (account != null) {
+      setState(() {
+        curName = account.name;
+      });
+    }
+
+    // Load avatar link from SQLite
+    String? link = await sqliteService.getAvatarLink();
+    setState(() {
+      avatar = link;
+    });
   }
 }
 

@@ -182,7 +182,9 @@ class _CartPageState extends State<CartPage> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const CheckoutPage(),
+                        builder: (context) => CheckoutPage(
+                          cartItems: items,
+                        ),
                       ),
                     );
                   },
