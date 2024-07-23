@@ -37,6 +37,8 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
     liked = widget.product.fav ?? false;
     originalPrice = product.price;
     _scrollController.addListener(_scrollListener);
+
+    if(includeProducts.isEmpty) _getIncludeProduct();
   }
 
   @override
@@ -291,30 +293,18 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
     );
   }
 
-  List<ProductModel> includeProducts = [
-    ProductModel(
-      nameProduct: 'Orange tulips',
-      price: 100000,
-      img:
-          'https://labellarosaflowers.com/cdn/shop/products/B734817C-DE8A-4244-8F9A-76EDEC4136B62.jpg?v=1641203935&width=2200',
-      fav: false,
-      quantity: 10,
-    ),
-    ProductModel(
-      nameProduct: 'Pink roses',
-      price: 45000,
-      img:
-          'https://labellarosaflowers.com/cdn/shop/products/FullSizeRender156.jpg?v=1645196351&width=2200',
-      fav: false,
-      quantity: 10,
-    ),
-    ProductModel(
-      nameProduct: 'White daisies',
-      price: 75000,
-      img:
-          'https://product.hstatic.net/200000846175/product/z5585714112334_bcd9c83928e16e7b1f93006df9500d94-min__1__0938be19940c46b5a261fcf29ffd2a62_1024x1024.jpg',
-      fav: false,
-      quantity: 10,
-    ),
-  ];
+  List<ProductModel> includeProducts = [];
+
+  _getIncludeProduct() {
+    if(product.id != null) {
+      _productService.getIncludeProductById(product.id!)
+      .then((onValue) {
+        if(onValue.isNotEmpty) {
+          setState(() {
+            includeProducts = onValue;
+          });
+        }
+      });
+    }
+  }
 }

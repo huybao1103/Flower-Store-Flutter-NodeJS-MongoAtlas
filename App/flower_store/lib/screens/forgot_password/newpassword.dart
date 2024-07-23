@@ -192,20 +192,23 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                             account.password = newPassword;
                             _authorizeService.signup(account)
                             .then((value) {
-                              Fluttertoast.showToast(
-                                msg: "Đổi mật khẩu thành công",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: const Color.fromARGB(255, 136, 244, 140),
-                                textColor: Colors.black,
-                                fontSize: 16.0
-                              );
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()),
-                              );
+                              setState(() {
+                                error = null;
+                                Fluttertoast.showToast(
+                                  msg: "Đổi mật khẩu thành công",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: const Color.fromARGB(255, 136, 244, 140),
+                                  textColor: Colors.black,
+                                  fontSize: 16.0
+                                );
+                              });
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => const LoginScreen()),
+                              // );
                             });
                           }
                         },

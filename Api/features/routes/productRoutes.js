@@ -175,4 +175,18 @@ router.get('/search-products-by-category', async (req, res) => {
     if (result) genericHttpResponse.success(res, result);
     else genericHttpResponse.fail(res, result);
 });
+
+router.get('/get-include-product-by-product-id/:id', async (req, res) => {
+    /*  
+        #swagger.tags = ['Product']
+        #swagger.parameters['ids'] = {
+            in: 'path',
+            description: 'Get Include product by parent product id',
+        }
+        #swagger.responses[200] = { description: 'Get Include Products Success', schema: { $ref: '#/definitions/Products' } }
+    */
+    var result = await productController.getIncludeProductByProId(req, res);
+    if(result) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
+});
 module.exports = router;
