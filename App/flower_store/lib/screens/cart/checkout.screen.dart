@@ -1,28 +1,33 @@
+import 'package:flower_store/data/api_repository.dart';
 import 'package:flower_store/screens/cart/cart.screen.dart';
 import 'package:flower_store/screens/cart/paymentmethod.screen.dart';
 import 'package:flower_store/screens/mainpage/mainpage.screen.dart';
+import 'package:flower_store/services/sqlite.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:flower_store/models/cart.dart';
 
-Widget? preScreen;
+import 'package:flower_store/services/share_pre.dart';
 
 class CheckoutPage extends StatefulWidget {
-  const CheckoutPage({super.key});
+  final List<Cart> cartItems;
+
+  const CheckoutPage({super.key, required this.cartItems});
+
   @override
   State<CheckoutPage> createState() => _CheckoutPageState();
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
-  final List<Map<String, String>> items = [
-    {'name': 'sản phẩm 1', 'price': '100'},
-    {'name': 'sản phẩm 2', 'price': '100'},
-    {'name': 'sản phẩm 3', 'price': '100'},
-  ];
-
-  String addressLine1 = 'Chử đồng tử';
+  final DatabaseHelper _databaseHelper = DatabaseHelper();
+  final APIRepository _apiRepository = APIRepository();
+  final SharedPreferencesService _sharedPreferencesService =
+      SharedPreferencesService();
+  String addressLine1 = '';
+  final TextEditingController _addressController = TextEditingController();
 
   void _editAddress() {
-    TextEditingController line1Controller =
-        TextEditingController(text: addressLine1);
+    _addressController.text = addressLine1;
 
     showDialog(
       context: context,
@@ -33,8 +38,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                controller: line1Controller,
-                decoration: const InputDecoration(labelText: 'Address Line 1'),
+                controller: _addressController,
+                decoration: const InputDecoration(hintText: 'Nhập địa chỉ'),
               ),
             ],
           ),
@@ -43,16 +48,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
                 setState(() {
-                  addressLine1 = line1Controller.text;
+                  addressLine1 = _addressController.text;
                 });
                 Navigator.of(context).pop();
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
           ],
         );
@@ -61,11 +66,59 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 
   @override
+  void dispose() {
+    _addressController.dispose();
+    super.dispose();
+  }
+
+  String formatCurrency(double amount) {
+    final formatter = NumberFormat.currency(locale: 'vi_VN', symbol: 'VND');
+    return formatter.format(amount);
+  }
+
+  Future<void> _handleCheckout() async {
+    String? accountId = await _sharedPreferencesService.getAccountID();
+    if (accountId == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Account ID not found')),
+      );
+      return;
+    }
+
+    final invoiceData = {
+      "details": widget.cartItems.map((item) {
+        return {
+          "productId": item.productID,
+          "quantity": item.quantity,
+          "price": item.price,
+          "address": _addressController.text ?? _addressController.text,
+          "date": DateFormat('dd-MM-yyyy').format(DateTime.now()),
+        };
+      }).toList(),
+      "accountId": accountId,
+    };
+
+    bool success = await _apiRepository.addNewInvoice(invoiceData);
+
+    if (success) {
+      _databaseHelper.deleteProductAll();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const PaymentMethodPage(),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to create invoice')),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    int subtotal =
-        items.fold(0, (sum, item) => sum + int.parse(item['price']!));
-    int delivery = 3;
-    int total = subtotal + delivery;
+    int total = widget.cartItems
+        .fold(0, (sum, item) => sum + (item.price * item.quantity).toInt());
 
     return Scaffold(
       appBar: AppBar(
@@ -97,7 +150,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   onSelected: (bool selected) {},
                   selectedColor: Colors.pink[100],
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 ChoiceChip(
                   label: const Text('Thanh toán'),
                   selected: false,
@@ -106,7 +159,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -118,22 +171,20 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   ),
                 ),
                 TextButton(
-                  child: Text('Sửa'),
                   onPressed: _editAddress,
+                  child: const Text('Sửa'),
                 ),
               ],
             ),
             ListTile(
-              leading: Icon(Icons.location_on),
-              title: Text('$addressLine1'),
+              leading: const Icon(Icons.location_on),
+              title: Text(
+                  addressLine1.isEmpty ? 'Chưa nhập địa chỉ' : addressLine1),
             ),
-            const ListTile(
-              leading: Icon(Icons.calendar_today),
-              title: Text('Ngày'),
-            ),
-            const ListTile(
-              leading: Icon(Icons.access_time),
-              title: Text('Thời gian'),
+            ListTile(
+              leading: const Icon(Icons.calendar_today),
+              title: Text(
+                  'Ngày: ${DateFormat('dd/MM/yyyy').format(DateTime.now())}'),
             ),
             const SizedBox(height: 16),
             const Text(
@@ -143,6 +194,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Card(
               color: Colors.white,
               elevation: 4,
@@ -150,38 +204,34 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: items.length,
+                      itemCount: widget.cartItems.length,
                       itemBuilder: (context, index) {
+                        final item = widget.cartItems[index];
                         return ListTile(
-                          title: Text(items[index]['name']!),
-                          trailing: Text('\$${items[index]['price']}'),
+                          title: Text('${item.name} (${item.quantity} cái)'),
+                          trailing: Text(
+                            '${formatCurrency(item.price * item.quantity)}',
+                            style: TextStyle(fontSize: 16),
+                          ),
                         );
                       },
                     ),
                     const Divider(),
                     ListTile(
-                      title: const Text('Tổng tiền'),
-                      trailing: Text('\$$subtotal'),
-                    ),
-                    ListTile(
-                      title: const Text('Địa chỉ'),
-                      trailing: Text('\$$delivery'),
-                    ),
-                    const Divider(),
-                    ListTile(
                       title: const Text(
-                        'Total',
+                        'Tổng',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       trailing: Text(
-                        '\$$total',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        formatCurrency(total.toDouble()),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ),
                   ],
@@ -191,14 +241,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             const SizedBox(height: 16),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PaymentMethodPage(),
-                    ),
-                  );
-                },
+                onPressed: _handleCheckout,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xfff56789),
                   padding:
