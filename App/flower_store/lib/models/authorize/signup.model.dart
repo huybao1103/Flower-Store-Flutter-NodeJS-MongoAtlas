@@ -6,7 +6,7 @@ class AccountModel extends IBaseModel<AccountModel> {
   late String email;
   late String phone;
   late String password;
-  late String accountID;
+  late String? accountID;
 
   AccountModel();
 

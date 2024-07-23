@@ -32,10 +32,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
   List<CategoryModel> productCategories = [];
 
   final SharedPreferencesService sharedPreferencesService = SharedPreferencesService();
-  late String name = '';
+  late String curName = '';
   final SQLiteService sqliteService = SQLiteService();
   late String? avatar;
-
   @override
   void initState() {
     super.initState();
@@ -137,7 +136,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             radius: 40,
           ),
           Text(
-            name ?? "Lương Quang Huy Bảo",
+            curName ?? "Lương Quang Huy Bảo",
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ],
@@ -150,7 +149,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
     AccountModel? account = await sharedPreferencesService.getAccountInfo();
     if (account != null) {
       setState(() {
-        account = account;
+        curName = account.name;
       });
     }
 
