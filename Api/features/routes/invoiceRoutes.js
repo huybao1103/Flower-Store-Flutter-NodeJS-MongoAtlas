@@ -61,4 +61,18 @@ router.get('/getall-invoice', async (req, res) => {
     else genericHttpResponse.fail(res, result);
 });
 
+router.get('/get-by-accountId/:accountId', async (req, res) => {
+    /*  
+        #swagger.tags = ['Invoice']
+        #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'Get Invoice by ID.',
+        } 
+        #swagger.responses[200] = { description: 'Get Invoice Success', schema: { $ref: '#/definitions/Invoices' } }
+    */
+    var result = await invoiceController.GetInvoiceByAccountId(req, res);
+    if(result) genericHttpResponse.success(res, result);
+    else genericHttpResponse.fail(res, result);
+});
+
 module.exports = router;
