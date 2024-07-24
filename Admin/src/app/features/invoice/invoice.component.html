@@ -1,5 +1,6 @@
 <div class="content container-fluid">
     <p-table
+    *ngIf="invoices && invoices.length"
         #dt
         [value]="invoices || []"
         dataKey="_id"
@@ -29,7 +30,7 @@
                 </td>
                 <td>{{ invoice.nameInvoice }}</td>
                 <td>{{ invoice.dateDisplay }}</td>
-                <td>{{ invoice.account.name }}</td>
+                <td>{{ invoice.account ? invoice.account.name : 'Nhat Anh'   }}</td>
                 <td>{{ invoice.totalPrice }}</td>
                 <td>{{ invoice.addressDisplay }}</td>
                 <!-- <td style="text-align: center;">
