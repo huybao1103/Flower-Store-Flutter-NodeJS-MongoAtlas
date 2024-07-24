@@ -1,7 +1,11 @@
+import 'package:dio/dio.dart';
+import 'package:flower_store/services/share_pre.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/invoice.dart';
 import '../../data/api_repository.dart';
+import '../../models/authorize/signup.model.dart';
 
 class HistoryPurchaseScreen extends StatefulWidget {
   const HistoryPurchaseScreen({Key? key}) : super(key: key);
@@ -12,6 +16,8 @@ class HistoryPurchaseScreen extends StatefulWidget {
 
 class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
   final APIRepository apiRepository = APIRepository();
+  final SharedPreferencesService sharedPreferencesService =
+      SharedPreferencesService();
   List<Invoice> invoices = [];
   String selectedSortOption = 'Sắp Xếp';
   bool isLoading = true;
@@ -24,17 +30,29 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
 
   Future<void> fetchInvoices() async {
     try {
-      final fetchedInvoices = await apiRepository.getAllInvoices();
-      setState(() {
-        invoices = fetchedInvoices;
-        isLoading = false;
-      });
+      final accountId = await sharedPreferencesService.getAccountID();
+      if (accountId != null) {
+        final fetchedInvoices =
+            await apiRepository.getInvoicesByAccountId(accountId);
+        setState(() {
+          invoices = fetchedInvoices; // Assign the list of invoices
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        print('Account ID not found in SharedPreferences');
+      }
     } catch (e) {
       setState(() {
         isLoading = false;
       });
-      // Handle error
-      print('Failed to load invoices: $e');
+      //print('Failed to load invoices: $e');
+      // if (e is DioException) {
+      //   print('Dio error message: ${e.message}');
+      //   print('Dio error response: ${e.response}');
+      // }
     }
   }
 
