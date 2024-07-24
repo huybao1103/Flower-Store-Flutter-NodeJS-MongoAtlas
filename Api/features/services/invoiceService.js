@@ -62,7 +62,13 @@ class InvoiceService {
         }
     }
 
-   
-
+    async GetInvoiceByAccountId(accountId) {
+        try {
+            const invoice = await InvoiceModel.find({accountId}).populate('account').populate({path: 'details', populate: {path: 'product'}}).exec();
+            return invoice;
+        } catch (e) {
+            return e;
+        }
+    }
 }
 module.exports = InvoiceService;

@@ -25,6 +25,10 @@ class InvoiceController {
         
     }
 
-
+    async GetInvoiceByAccountId(req, res) {
+        const { accountId } = req.params;
+        return  await invoiceService.GetInvoiceByAccountId(accountId);
+        
+    }
 }
 module.exports = InvoiceController;
