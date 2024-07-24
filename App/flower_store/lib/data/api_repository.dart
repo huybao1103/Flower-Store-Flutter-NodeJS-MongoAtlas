@@ -12,6 +12,34 @@ class APIRepository {
   APIRepository() {
     _dio.options.baseUrl = _httpService.headerUrl;
   }
+  Future<List<Invoice>> getInvoicesByAccountId(String accountId) async {
+    try {
+      Response response = await _dio.get(
+        '/Invoice/get-by-accountId/$accountId',
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+        }),
+      );
+      if (response.statusCode == 200) {
+        return (response.data as List)
+            .map((invoice) => Invoice.fromJson(invoice as Map<String, dynamic>))
+            .toList();
+      } else {
+        throw Exception('Failed to load invoices: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (e is DioException) {
+        // print('Dio error type: ${e.type}');
+        // print('Dio error message: ${e.message}');
+        // if (e.response != null) {
+        //   print('Dio error response data: ${e.response!.data}');
+        //   print('Dio error response status code: ${e.response!.statusCode}');
+        //   print('Dio error response headers: ${e.response!.headers}');
+        // }
+      }
+      throw Exception('Failed to load invoices: $e');
+    }
+  }
 
   Future<List<Invoice>> getAllInvoices() async {
     try {
