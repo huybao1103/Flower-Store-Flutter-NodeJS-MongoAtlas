@@ -136,6 +136,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Thông tin'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       backgroundColor: const Color(0xffF0F0F0),
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
@@ -155,18 +164,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Center(
                       child: Column(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.only(bottom: 10, top: 10),
-                            child: Text(
-                              'Thông tin',
-                              style: TextStyle(
-                                color: Color(0xff000000),
-                                fontSize: 24,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
                           Center(
                             child: Stack(
                               children: [

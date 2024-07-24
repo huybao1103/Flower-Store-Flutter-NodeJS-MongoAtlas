@@ -27,6 +27,20 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     _fetchProducts();
   }
 
+void _sortProducts(String sortOption) {
+    setState(() {
+      if (sortOption == 'A-Z') {
+        productsFavorite.sort((a, b) => a.nameProduct.compareTo(b.nameProduct));
+      } else if (sortOption == 'Z-A') {
+        productsFavorite.sort((a, b) => b.nameProduct.compareTo(a.nameProduct));
+      } else if (sortOption == 'Giá, thấp đến cao') {
+        productsFavorite.sort((a, b) => a.price.compareTo(b.price));
+      } else if (sortOption == 'Giá, cao đến thấp') {
+        productsFavorite.sort((a, b) => b.price.compareTo(a.price));
+      }
+    });
+  }
+
   Future<void> _fetchProducts() async {
     try {
       List<ProductModel> productList = await _productService.getProductFavorite();
@@ -90,6 +104,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 child: ProductGridview(
                   products: productsFavorite,
                   title: 'Đã thích',
+                  onSortOptionChanged: _sortProducts,
                 ),
               ),
             ],

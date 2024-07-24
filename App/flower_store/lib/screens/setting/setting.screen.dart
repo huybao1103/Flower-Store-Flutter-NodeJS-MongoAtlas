@@ -1,3 +1,4 @@
+import 'package:flower_store/main.dart';
 import 'package:flower_store/screens/forgot_password/forgot.password.dart';
 import 'package:flower_store/screens/user/history.purchase.dart';
 import 'package:flower_store/screens/welcome/login.screen.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flower_store/services/share_pre.dart';
 import 'package:flower_store/services/sqlite_pro5.dart';
 import 'package:flower_store/models/authorize/signup.model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SettingScreen extends StatefulWidget {
   final bool isDarkMode;
@@ -25,15 +27,31 @@ class _SettingScreenState extends State<SettingScreen> {
   String? userName;
   String? avatarLink;
 
-  final SharedPreferencesService sharedPreferencesService =
-      SharedPreferencesService();
+  final SharedPreferencesService sharedPreferencesService = SharedPreferencesService();
   final SQLiteService sqliteService = SQLiteService();
-
+  late AccountModel curAccount = AccountModel();
   @override
   void initState() {
     super.initState();
     isDarkMode = widget.isDarkMode;
     _loadUserInfo();
+    _loadLoginInfo();
+  }
+  Future<void> _loadLoginInfo() async {
+    // Load user info from SharedPreferences
+    String? prevAccount = await sharedPreferencesService.checkPrevSaveLogin();
+    if (prevAccount != null) {
+      setState(() {
+        rememberMe = true;
+      });
+    }
+
+    // Load avatar link from SQLite
+    String? link = await sqliteService.getAvatarLink();
+    setState(() {
+      avatarLink = link ??
+          'https://i.pinimg.com/originals/5c/e6/ec/5ce6ec7936ed9aa8c2dd89fe540e36a1.jpg';
+    });
   }
 
   Future<void> _loadUserInfo() async {
@@ -42,6 +60,7 @@ class _SettingScreenState extends State<SettingScreen> {
     if (account != null) {
       setState(() {
         userName = account.name;
+        curAccount = account;
       });
     }
 
@@ -191,6 +210,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           value: rememberMe,
                           onChanged: (bool value) {
                             setState(() {
+                              sharedPreferencesService.saveLoginInfo(curAccount.accountID!, value)
+                              .then((onValue) => {});
                               rememberMe = value;
                             });
                           },
@@ -236,10 +257,12 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                           trailing: const Icon(Icons.logout),
                           onTap: () {
-                            Navigator.push(
+                            sharedPreferencesService.saveLoginInfo(curAccount.accountID!, false)
+                              .then((onValue) => {});
+                            Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginScreen()),
+                              MaterialPageRoute(builder: (context) => const MyApp()),
+                              (Route<dynamic> route) => false,
                             );
                           },
                         ),

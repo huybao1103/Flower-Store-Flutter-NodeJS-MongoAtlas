@@ -13,7 +13,7 @@ class HistoryPurchaseScreen extends StatefulWidget {
 class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
   final APIRepository apiRepository = APIRepository();
   List<Invoice> invoices = [];
-  String selectedSortOption = 'Sort By';
+  String selectedSortOption = 'Sắp Xếp';
   bool isLoading = true;
 
   @override
@@ -41,10 +41,10 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
   void sortPurchaseHistory(String criteria) {
     setState(() {
       switch (criteria) {
-        case 'Sort By':
+        case 'Sắp Xếp':
           invoices.sort((a, b) => a.id.compareTo(b.id));
           break;
-        case 'Date':
+        case 'Ngày':
           invoices.sort((a, b) {
             DateTime dateA = a.details.isNotEmpty
                 ? DateFormat('dd-MM-yyyy').parse(a.details[0].date)
@@ -55,7 +55,7 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
             return dateA.compareTo(dateB);
           });
           break;
-        case 'Price':
+        case 'Giá':
           invoices.sort((a, b) {
             int totalPriceA = a.details
                 .fold(0, (sum, item) => sum + item.price * item.quantity);
@@ -84,36 +84,18 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Lịch sử mua hàng'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       backgroundColor: const Color(0xffF0F0F0),
       body: Column(
         children: [
-          const SizedBox(height: 30),
-          Container(
-            width: double.infinity,
-            height: 60,
-            decoration: const BoxDecoration(
-              color: Color(0xffF0F0F0),
-            ),
-            child: Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.black),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const SizedBox(width: 8.0),
-                const Text(
-                  'Lịch sử mua hàng',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
           const SizedBox(height: 16.0),
           Row(
             children: [
@@ -136,9 +118,9 @@ class _HistoryPurchaseScreenState extends State<HistoryPurchaseScreen> {
                       }
                     },
                     items: <String>[
-                      'Sort By',
-                      'Date',
-                      'Price',
+                      'Sắp Xếp',
+                      'Ngày',
+                      'Giá',
                       'A-Z',
                       'Z-A',
                     ].map<DropdownMenuItem<String>>((String value) {

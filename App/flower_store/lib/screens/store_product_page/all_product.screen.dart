@@ -21,7 +21,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
   final ProductService _productService = ProductService();
   List<ProductModel> products = [];
   final TextEditingController _searchController = TextEditingController();
-  
+
   @override
   void initState() {
     super.initState();
@@ -48,6 +48,20 @@ class _AllProductScreenState extends State<AllProductScreen> {
     } catch (e) {
       print('Lỗi khi tìm kiếm sản phẩm: $e');
     }
+  }
+
+  void _sortProducts(String sortOption) {
+    setState(() {
+      if (sortOption == 'A-Z') {
+        products.sort((a, b) => a.nameProduct.compareTo(b.nameProduct));
+      } else if (sortOption == 'Z-A') {
+        products.sort((a, b) => b.nameProduct.compareTo(a.nameProduct));
+      } else if (sortOption == 'Giá, thấp đến cao') {
+        products.sort((a, b) => a.price.compareTo(b.price));
+      } else if (sortOption == 'Giá, cao đến thấp') {
+        products.sort((a, b) => b.price.compareTo(a.price));
+      }
+    });
   }
 
   @override
@@ -89,6 +103,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
               child: ProductGridview(
                 products: products,
                 title: 'Tất cả sản phẩm',
+                onSortOptionChanged: _sortProducts,
               ),
             ),
           ],
