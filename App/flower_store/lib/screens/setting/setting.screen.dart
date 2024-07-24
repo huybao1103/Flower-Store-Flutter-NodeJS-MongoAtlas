@@ -1,5 +1,6 @@
 import 'package:flower_store/main.dart';
 import 'package:flower_store/screens/forgot_password/forgot.password.dart';
+import 'package:flower_store/screens/setting/video_guide_screen.dart';
 import 'package:flower_store/screens/user/history.purchase.dart';
 import 'package:flower_store/screens/welcome/login.screen.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,11 @@ class _SettingScreenState extends State<SettingScreen> {
   String? userName;
   String? avatarLink;
 
-  final SharedPreferencesService sharedPreferencesService = SharedPreferencesService();
+  final SharedPreferencesService sharedPreferencesService =
+      SharedPreferencesService();
   final SQLiteService sqliteService = SQLiteService();
   late AccountModel curAccount = AccountModel();
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +40,7 @@ class _SettingScreenState extends State<SettingScreen> {
     _loadUserInfo();
     _loadLoginInfo();
   }
+
   Future<void> _loadLoginInfo() async {
     // Load user info from SharedPreferences
     String? prevAccount = await sharedPreferencesService.checkPrevSaveLogin();
@@ -210,8 +214,9 @@ class _SettingScreenState extends State<SettingScreen> {
                           value: rememberMe,
                           onChanged: (bool value) {
                             setState(() {
-                              sharedPreferencesService.saveLoginInfo(curAccount.accountID!, value)
-                              .then((onValue) => {});
+                              sharedPreferencesService
+                                  .saveLoginInfo(curAccount.accountID!, value)
+                                  .then((onValue) => {});
                               rememberMe = value;
                             });
                           },
@@ -232,6 +237,20 @@ class _SettingScreenState extends State<SettingScreen> {
                               isDarkMode = value;
                             });
                             widget.onThemeChanged(value);
+                          },
+                        ),
+                        ListTile(
+                          title: const Text(
+                            'Hướng dẫn sử dụng',
+                            style: TextStyle(
+                                fontFamily: 'Rubik',
+                                fontWeight: FontWeight.w400),
+                          ),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    const VideoGuideScreen()));
                           },
                         ),
                       ],
@@ -257,11 +276,13 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                           trailing: const Icon(Icons.logout),
                           onTap: () {
-                            sharedPreferencesService.saveLoginInfo(curAccount.accountID!, false)
-                              .then((onValue) => {});
+                            sharedPreferencesService
+                                .saveLoginInfo(curAccount.accountID!, false)
+                                .then((onValue) => {});
                             Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(builder: (context) => const MyApp()),
+                              MaterialPageRoute(
+                                  builder: (context) => const MyApp()),
                               (Route<dynamic> route) => false,
                             );
                           },
