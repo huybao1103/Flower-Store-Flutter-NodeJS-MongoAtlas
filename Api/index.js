@@ -23,4 +23,5 @@ app.use('/api/DetailInvoice', detailInvoiceRoutes);
 
 app.listen(port, () => {
     console.log(`Server is listening on port: http://localhost:${port}`);
+    console.log(`Click here to show Swagger UI: http://localhost:${port}/api-docs`);
 });

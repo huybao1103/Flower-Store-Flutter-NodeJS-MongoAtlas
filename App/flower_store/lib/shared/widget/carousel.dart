@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ReusableCarousel extends StatefulWidget {
@@ -12,7 +11,7 @@ class ReusableCarousel extends StatefulWidget {
 }
 
 class _ReusableCarouselState extends State<ReusableCarousel> {
-  final CarouselController _controller = CarouselController();
+  final CarouselSliderController _controller = CarouselSliderController();
   int _current = 0;
 
   @override

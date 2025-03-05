@@ -8,15 +8,15 @@ const { app } = require('./app');
 const {AccountSchemaDoc} = require('./features/models/account/account');
 const {ProductSchemaDoc} = require('./features/models/product/product');
 const {CategorySchemaDoc} = require('./features/models/category/category');
-const {InvoicetSchemaDoc} = require('./features/models/invoice/invoice');
-const {DetailInvoiceSchemaDoc} = require('./features/models/invoice/detailInvoice');
+// const {InvoicetSchemaDoc} = require('./features/models/invoice/invoice');
+// const {DetailInvoiceSchemaDoc} = require('./features/models/invoice/detailInvoice');
 
 const doc = {
     info: {
         title: 'Flower Store API',
         description: ''
     },
-    host: 'localhost:3000',
+    host: 'localhost:3000/api',
     definitions: {
         Accounts: AccountSchemaDoc,
         Login: { email: 'string', password: 'string' },
@@ -30,10 +30,7 @@ const doc = {
             idProduct: 'string' 
         },
         FindProduct: {id: 'string', nameProduct:'string'},
-        Invoice: InvoicetSchemaDoc,
         FindInvoice: {id: 'string', acountId:'string'},
-        DetailInvoice: DetailInvoiceSchemaDoc,
-        
     }
 
 };
