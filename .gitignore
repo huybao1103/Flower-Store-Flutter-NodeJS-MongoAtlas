@@ -13,3 +13,4 @@ App/.DS_Store
 /Admin/.angular
 /Admin/node_modules
 Admin/package-lock.json
+/App/flower_store/android/app/.cxx
